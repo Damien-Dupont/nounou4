@@ -1,5 +1,5 @@
 {
-  "name": "template-fullstack",
+  "name": "Nounou-et-nous---on-template-fullstack",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -13,10 +13,14 @@
     "fix": "npm --prefix ./frontend run fix && npm --prefix ./backend run fix"
   },
   "keywords": [],
-  "author": "Wild Code School",
+  "author": "Damien Dupont (template by WCS)",
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^7.0.0",
     "husky": "^7.0.0"
+  },
+  "dependencies": {
+    "joi": "^17.7.0",
+    "react-router-dom": "^6.6.1"
   }
 }
