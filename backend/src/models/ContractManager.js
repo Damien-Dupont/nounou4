@@ -3,41 +3,77 @@ const AbstractManager = require("./AbstractManager");
 class ContractManager extends AbstractManager {
   static table = "contract";
 
-  insert(startingDate) {
-    // console.log("ContractManager", starting_date);
+  insert(
+    startingDate,
+    kidId,
+    caregiver,
+    weeksPerYear,
+    mondayStart,
+    mondayEnd,
+    tuesdayStart,
+    tuesdayEnd,
+    wednesdayStart,
+    wednesdayEnd,
+    thursdayStart,
+    thursdayEnd,
+    fridayStart,
+    fridayEnd,
+    priceHour,
+    priceOverHour,
+    priceHousehold,
+    priceLongHousehold,
+    priceMeal,
+    priceSnack,
+    daysOff
+  ) {
     return this.connection.query(
-      `insert into ${this.table} (starting_date) values (?)`,
-      [startingDate]
+      `insert into ${this.table} (starting_date, kid_id, caregiver, weeks_per_year, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, price_hour, price_over_hour, price_household, price_long_household, price_meal, price_snack, days_off) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      [
+        startingDate,
+        kidId,
+        caregiver,
+        weeksPerYear,
+        mondayStart,
+        mondayEnd,
+        tuesdayStart,
+        tuesdayEnd,
+        wednesdayStart,
+        wednesdayEnd,
+        thursdayStart,
+        thursdayEnd,
+        fridayStart,
+        fridayEnd,
+        priceHour,
+        priceOverHour,
+        priceHousehold,
+        priceLongHousehold,
+        priceMeal,
+        priceSnack,
+        daysOff,
+      ]
     );
   }
 
-  findContractInformation(contractId) {
+  updateAny(contract, column, value) {
     return this.connection.query(
-      `select * from ${this.table} as C
-      INNER JOIN version as V ON C.id_contract = V.contract.id
-      INNER JOIN user_contract as UC ON C.id_contract = UC.contract_id
-      INNER JOIN user as U ON UC.user_id = U.id_user
-      INNER JOIN kid as K ON UC.kid_id = K.id_kid
-      INNER JOIN prices as P ON P.id_prices = V.prices_id
-      INNER JOIN durations as D ON D.id_durations = V.durations_id
-      INNER JOIN cycle as CY ON CY.id_cycle = D.cycle_id`,
-      [contractId]
+      `update ${this.table} set ${column} = ? where id_contract = ?`,
+      [value, contract.id]
     );
   }
 
-  updateStart(contract, startingDate) {
-    return this.connection.query(
-      `update ${this.table} set starting_date = ? where id_contract = ?`,
-      [startingDate, contract.id]
-    );
-  }
+  // updateStart(contract, startingDate) {
+  //   return this.connection.query(
+  //     `update ${this.table} set starting_date = ? where id_contract = ?`,
+  //     [startingDate, contract.id]
+  //   );
+  // }
 
-  updateEnd(contract, endingDate) {
-    return this.connection.query(
-      `update ${this.table} set ending_date = ? where id_contract = ?`,
-      [endingDate, contract.id]
-    );
-  }
+  // updateEnd(contract, endingDate) {
+  //   return this.connection.query(
+  //     `update ${this.table} set ending_date = ? where id_contract = ?`,
+  //     [endingDate, contract.id]
+  //   );
+  // }
 
   // findbyId(contract) {
   //   return this.connection

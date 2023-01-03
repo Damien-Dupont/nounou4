@@ -4,7 +4,7 @@ class AbstractManager {
     this.table = table;
   }
 
-  findById(id) {
+  find(id) {
     return this.connection.query(`select * from  ${this.table} where id = ?`, [
       id,
     ]);
