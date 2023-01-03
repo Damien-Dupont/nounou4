@@ -7,6 +7,7 @@ const itemControllers = require("./controllers/itemControllers");
 const {
   //   ProfileController,
   UserControllers,
+  KidControllers,
   //   DiplomeController,
   //   JobController,
   //   PromotionController,
@@ -18,6 +19,8 @@ router.get("/user/:id", UserControllers.read);
 // router.put("/user/:id", UserControllers.edit);
 router.post("/user", UserControllers.add);
 // router.delete("/user/:id", UserControllers.destroy);
+
+router.post("/kid", KidControllers.add);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);

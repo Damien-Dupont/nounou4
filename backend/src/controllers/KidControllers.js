@@ -75,7 +75,7 @@ class KidControllers {
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(500);
+        res.sebirthdatendStatus(500);
       });
   };
 
