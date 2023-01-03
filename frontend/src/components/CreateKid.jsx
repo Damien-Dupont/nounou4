@@ -44,7 +44,7 @@ export default function CreateKid() {
           localStorage.setItem("kidLastname", kidLastname);
           localStorage.setItem("kidFirstname", kidFirstname);
           localStorage.setItem("kidBirthdate", kidBirthdate);
-          console.log(res);
+          console.log("kid created:", res);
         });
     } catch (err) {
       console.error(err);

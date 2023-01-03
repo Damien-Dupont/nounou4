@@ -8,6 +8,7 @@ const {
   //   ProfileController,
   UserControllers,
   KidControllers,
+  ContractControllers,
   //   DiplomeController,
   //   JobController,
   //   PromotionController,
@@ -21,6 +22,8 @@ router.post("/user", UserControllers.add);
 // router.delete("/user/:id", UserControllers.destroy);
 
 router.post("/kid", KidControllers.add);
+
+router.post("/contract", ContractControllers.add);
 
 router.get("/items", itemControllers.browse);
 router.get("/items/:id", itemControllers.read);
