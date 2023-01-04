@@ -4,7 +4,7 @@ import React, { useState } from "react";
 // import CreateCycle from "../components/CreateCycle";
 import CreateParent from "../components/CreateParent";
 // import CreateKid from "../components/CreateKid";
-// import CreateContract from "../components/CreateContract";
+import CreateContract from "../components/CreateContract";
 
 import "./Home.scss";
 
@@ -71,7 +71,7 @@ export default function Home() {
         </button>
         <div className="form__content">
           <br />
-          {/* <CreateContract /> */}
+          <CreateContract />
         </div>
       </div>
 

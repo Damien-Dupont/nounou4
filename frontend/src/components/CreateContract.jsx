@@ -1,45 +1,47 @@
 /* eslint-disable no-restricted-syntax */
 import axios from "axios";
 import React, { useState } from "react";
-import DatePicker from "react-datepicker";
+// import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import TimeSelector from "./TimeSelector";
+// import TimeSelector from "./TimeSelector";
 
 export default function CreateContract() {
-  const [parentId, setParentId] = useState(null);
-  const [kidId, setKidId] = useState(null);
+  const [parentId, setParentId] = useState(undefined);
+  const [kidId, setKidId] = useState(undefined);
   const [caregiver, setCaregiver] = useState("");
-  const [startingDate, setStartingDate] = useState(new Date().now());
+
   const [weeksPerYear, setWeeksPerYear] = useState(0);
-  const [mondayStart, setMondayStart] = useState(null);
-  const [mondayEnd, setMondayEnd] = useState(null);
-  const [tuesdayStart, setTuesdayStart] = useState(null);
-  const [tuesdayEnd, setTuesdayEnd] = useState(null);
-  const [wednesdayStart, setWednesdayStart] = useState(null);
-  const [wednesdayEnd, setWednesdayEnd] = useState(null);
-  const [thursdayStart, setThursdayStart] = useState(null);
-  const [thursdayEnd, setThursdayEnd] = useState(null);
-  const [fridayStart, setFridayStart] = useState(null);
-  const [fridayEnd, setFridayEnd] = useState(null);
-  // const [priceHour, setPriceHour] = useState(0);
+  // const [startingDate, setStartingDate] = useState("");
+  // const [mondayStart, setMondayStart] = useState(undefined);
+  // const [mondayEnd, setMondayEnd] = useState(undefined);
+  // const [tuesdayStart, setTuesdayStart] = useState(undefined);
+  // const [tuesdayEnd, setTuesdayEnd] = useState(undefined);
+  // const [wednesdayStart, setWednesdayStart] = useState(undefined);
+  // const [wednesdayEnd, setWednesdayEnd] = useState(undefined);
+  // const [thursdayStart, setThursdayStart] = useState(undefined);
+  // const [thursdayEnd, setThursdayEnd] = useState(undefined);
+  // const [fridayStart, setFridayStart] = useState(undefined);
+  // const [fridayEnd, setFridayEnd] = useState(undefined);
+
+  const [priceHour, setPriceHour] = useState(0);
   // const [priceOverHour, setPriceOverHour] = useState(0);
   // const [priceHousehold, setPriceHousehold] = useState(0);
   // const [priceLongHousehold, setPriceLongHousehold] = useState(0);
   // const [priceMeal, setPriceMeal] = useState(0);
   // const [priceSnack, setPriceSnack] = useState(0);
 
-  const [mondayCare, setMondayCare] = useState(true);
-  const [tuesdayCare, setTuesdayCare] = useState(true);
-  const [wednesdayCare, setWednesdayCare] = useState(true);
-  const [thursdayCare, setThursdayCare] = useState(true);
-  const [fridayCare, setFridayCare] = useState(true);
+  // const [mondayCare, setMondayCare] = useState(true);
+  // const [tuesdayCare, setTuesdayCare] = useState(true);
+  // const [wednesdayCare, setWednesdayCare] = useState(true);
+  // const [thursdayCare, setThursdayCare] = useState(true);
+  // const [fridayCare, setFridayCare] = useState(true);
 
-  if (localStorage.getItem("kidId") !== null) {
-    setKidId(localStorage.getItem("kidId"));
-  }
-  if (localStorage.getItem("parentId") !== null) {
-    setParentId(localStorage.getItem("parentId"));
-  }
+  // if (localStorage.getItem("kidId") !== null) {
+  //   setKidId(localStorage.getItem("kidId"));
+  // }
+  // if (localStorage.getItem("parentId") !== null) {
+  //   setParentId(localStorage.getItem("parentId"));
+  // }
 
   // useEffect(() => {
   //   "parent";
@@ -52,19 +54,19 @@ export default function CreateContract() {
       const contract = {
         kidId,
         caregiver,
-        startingDate,
+        // startingDate,
         weeksPerYear,
-        mondayStart,
-        mondayEnd,
-        tuesdayStart,
-        tuesdayEnd,
-        wednesdayStart,
-        wednesdayEnd,
-        thursdayStart,
-        thursdayEnd,
-        fridayStart,
-        fridayEnd,
-        // priceHour,
+        // mondayStart,
+        // mondayEnd,
+        // tuesdayStart,
+        // tuesdayEnd,
+        // wednesdayStart,
+        // wednesdayEnd,
+        // thursdayStart,
+        // thursdayEnd,
+        // fridayStart,
+        // fridayEnd,
+        priceHour,
         // priceOverHour,
         // priceHousehold,
         // priceLongHousehold,
@@ -89,218 +91,184 @@ export default function CreateContract() {
 
   return (
     <form onSubmit={handleSubmit}>
-      {parentId === null ? (
-        <>
-          <label>
-            ID du parent:
-            <input
-              id="parentId"
-              name="parentId"
-              placeholder="vous"
-              type="text"
-              value={parentId}
-              onChange={(event) => setParentId(event.target.value)}
-            />
-          </label>
-          <br />
-        </>
-      ) : (
-        <>parent connu: {parentId}</>
-      )}
-      {kidId === null ? (
-        <>
-          <label>
-            ID de l'enfant:
-            <input
-              id="kidId"
-              name="kidId"
-              placeholder="votre enfant"
-              type="text"
-              value={kidId}
-              onChange={(event) => setKidId(event.target.value)}
-            />
-          </label>
-          <br />
-        </>
-      ) : (
-        <>enfant connu: {kidId}</>
-      )}
-      <label>
-        Nom de la nounou:
-        <input
-          id="caregiver"
-          name="caregiver"
-          placeholder="votre nounou"
-          type="text"
-          value={caregiver}
-          onChange={(event) => setCaregiver(event.target.value)}
-        />
-      </label>
-      <br />
-      Date de début:
-      <DatePicker
-        selected={startingDate}
-        onChange={(date) => setStartingDate(date)}
-      />
-      <label>
-        Nombre de semaines par an:
-        <input
-          id="WeeksPerYear"
-          name="WeeksPerYear"
-          placeholder="votre nounou"
-          type="text"
-          value={weeksPerYear}
-          onChange={(event) => setWeeksPerYear(event.target.value)}
-        />
-      </label>
-      <br />
-      Jours de garde:
+      {/* INSERT PARENT */}
       <div>
-        <div>
-          <label>
-            Lundi:
-            <input
-              type="checkbox"
-              id="mondayCare"
-              name="mondayCare"
-              onChange={setMondayCare(!mondayCare)}
-              // checked={setMondayCare(!mondayCare)}
-            />
-            {mondayCare ? (
-              <>
-                début:
-                <TimeSelector
-                  selected={mondayStart}
-                  onChange={(date) => setMondayStart(date)}
-                />
-                fin:
-                <TimeSelector
-                  selected={mondayEnd}
-                  onChange={(date) => setMondayEnd(date)}
-                />
-              </>
-            ) : null}
-          </label>
-        </div>
-        <div>
-          <label>
-            Mardi:
-            <input
-              type="checkbox"
-              id="tuesdayCare"
-              name="tuesdayCare"
-              onChange={setTuesdayCare(!tuesdayCare)}
-              // checked={setMondayCare(!mondayCare)}
-            />
-            {tuesdayCare ? (
-              <>
-                début:
-                <TimeSelector
-                  selected={tuesdayStart}
-                  onChange={(date) => setTuesdayStart(date)}
-                />
-                fin:
-                <TimeSelector
-                  selected={tuesdayEnd}
-                  onChange={(date) => setTuesdayEnd(date)}
-                />
-              </>
-            ) : null}
-          </label>
-        </div>
-        <div>
-          <label>
-            Mercredi:
-            <input
-              type="checkbox"
-              id="wednesdayCare"
-              name="wednesdayCare"
-              onChange={setWednesdayCare(!wednesdayCare)}
-              // checked={setWednesdayCare(!wednesdayCare)}
-            />
-            {wednesdayCare ? (
-              <>
-                début:
-                <TimeSelector
-                  selected={wednesdayStart}
-                  onChange={(date) => setWednesdayStart(date)}
-                />
-                fin:
-                <TimeSelector
-                  selected={wednesdayEnd}
-                  onChange={(date) => setWednesdayEnd(date)}
-                />
-              </>
-            ) : null}
-          </label>
-        </div>
-        <div>
-          <label>
-            Jeudi:
-            <input
-              type="checkbox"
-              id="thursdayCare"
-              name="thursdayCare"
-              onChange={setThursdayCare(!thursdayCare)}
-              // checked={setThursdayCare(!thursdayCare)}
-            />
-            {thursdayCare ? (
-              <>
-                début:
-                <TimeSelector
-                  selected={thursdayStart}
-                  onChange={(date) => setThursdayStart(date)}
-                />
-                fin:
-                <TimeSelector
-                  selected={thursdayEnd}
-                  onChange={(date) => setThursdayEnd(date)}
-                />
-              </>
-            ) : null}
-          </label>
-        </div>
-        <div>
-          <label>
-            Vendredi:
-            <input
-              type="checkbox"
-              id="fridayCare"
-              name="fridayCare"
-              onChange={setFridayCare(!fridayCare)}
-              // checked={setFridayCare(!fridayCare)}
-            />
-            {fridayCare ? (
-              <>
-                début:
-                <TimeSelector
-                  selected={fridayStart}
-                  onChange={(date) => setFridayStart(date)}
-                />
-                fin:
-                <TimeSelector
-                  selected={fridayEnd}
-                  onChange={(date) => setFridayEnd(date)}
-                />
-              </>
-            ) : null}
-          </label>
-        </div>
+        {parentId === undefined ? (
+          <>
+            <label>
+              ID du parent:
+              <input
+                id="parentId"
+                name="parentId"
+                placeholder="vous"
+                type="text"
+                value={parentId}
+                onChange={(event) => setParentId(event.target.value)}
+              />
+            </label>
+            <br />
+          </>
+        ) : (
+          <>parent connu: {parentId}</>
+        )}
       </div>
-      <h1>les prix:</h1>
-      <label>
-        LABEL:
-        <input
-          id="WeeksPerYear"
-          name="WeeksPerYear"
-          placeholder="votre nounou"
-          type="text"
-          value={weeksPerYear}
-          onChange={(event) => setWeeksPerYear(event.target.value)}
-        />
-      </label>
       <br />
+      {/* INSERT KID */}
+      <div>
+        {kidId === undefined ? (
+          <>
+            <label>
+              ID de l'enfant:
+              <input
+                id="kidId"
+                name="kidId"
+                placeholder="vous"
+                type="text"
+                value={kidId}
+                onChange={(event) => setKidId(event.target.value)}
+              />
+            </label>
+            <br />
+          </>
+        ) : (
+          <>enfant connu: {kidId}</>
+        )}
+      </div>
+      <br />
+      {/* INSERT CAREGIVER */}
+      <div>
+        <label>
+          Nom de la nounou:
+          <input
+            id="caregiver"
+            name="caregiver"
+            placeholder="votre nounou"
+            type="text"
+            value={caregiver}
+            onChange={(event) => setCaregiver(event.target.value)}
+          />
+        </label>
+      </div>
+      <br />
+      {/* INSERT WEEKS PER YEAR */}
+      <div>
+        <label>
+          Nombre de semaines par an:
+          <input
+            id="WeeksPerYear"
+            name="WeeksPerYear"
+            placeholder="votre nounou"
+            type="text"
+            value={weeksPerYear}
+            onChange={(event) => setWeeksPerYear(event.target.value)}
+          />
+        </label>
+        {/* INSERT PRICE PER HOUR */}
+      </div>
+      <br />
+      <div>
+        <label>
+          Prix de l'heure:
+          <input
+            id="priceHour"
+            name="priceHourr"
+            placeholder="en euros de l'heure"
+            type="text"
+            value={priceHour}
+            onChange={(event) => setPriceHour(event.target.value)}
+          />
+        </label>
+      </div>
+      <br />
+
       <input type="submit" value="Envoyer" />
     </form>
   );
 }
+
+// const [priceOverHour, setPriceOverHour] = useState(0);
+//   const [priceHousehold, setPriceHousehold] = useState(0);
+//   const [priceLongHousehold, setPriceLongHousehold] = useState(0);
+//   const [priceMeal, setPriceMeal] = useState(0);
+//   const [priceSnack, setPriceSnack] = useState(0);
+
+// function InsertMonday(
+//   dayCare,
+//   setDayCare,
+//   dayStart,
+//   dayEnd,
+//   setDayStart,
+//   setDayEnd
+// ) {
+//   return (
+//     <label>
+//       Lundi:
+//       <input
+//         type="checkbox"
+//         id="MondayCare"
+//         name="MondayCare"
+//         onChange={setDayCare(!dayCare)}
+//         // checked={setMondayCare(!mondayCare)}
+//       />
+//       {dayCare ? (
+//         <>
+//           début:
+//           <TimeSelector
+//             selected={dayStart}
+//             onChange={(date) => setDayStart(date)}
+//           />
+//           fin:
+//           <TimeSelector
+//             selected={dayEnd}
+//             onChange={(date) => setDayEnd(date)}
+//           />
+//         </>
+//       ) : null}
+//     </label>
+//   );
+// }
+
+// function InsertPriceHour(price, setPrice) {
+//   return (
+//     <label>
+//       Prix de l'heure:
+//       <input
+//         id="priceHour"
+//         name="priceHourr"
+//         placeholder="en euros de l'heure"
+//         type="text"
+//         value={price}
+//         onChange={(event) => setPrice(event.target.value)}
+//       />
+//     </label>
+//   );
+// }
+
+// // function InsertDay(day, setDayCare, setDayStart, setDayEnd) {
+// //   return (
+// //     <label>
+// //       {day}:
+// //       <input
+// //         type="checkbox"
+// //         id={`${day}Care`}
+// //         name={`${day}Care`}
+// //         onChange={setDayCare(!day)}
+// //         // checked={setMondayCare(!mondayCare)}
+// //       />
+// //       {mondayCare ? (
+// //         <>
+// //           début:
+// //           <TimeSelector
+// //             selected={mondayStart}
+// //             onChange={(date) => setMondayStart(date)}
+// //           />
+// //           fin:
+// //           <TimeSelector
+// //             selected={mondayEnd}
+// //             onChange={(date) => setMondayEnd(date)}
+// //           />
+// //         </>
+// //       ) : null}
+// //     </label>
+// //   );
+// // }
