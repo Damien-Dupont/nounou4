@@ -70,6 +70,7 @@ export default function CreateParent() {
           onChange={(event) => setUserRole(event.target.value)}
         />
       </label>
+      <br />
       <label>
         email:
         <input
@@ -81,6 +82,7 @@ export default function CreateParent() {
           onChange={(event) => setUserEmail(event.target.value)}
         />
       </label>
+      <br />
       <input type="submit" value="Envoyer" />
     </form>
   );
