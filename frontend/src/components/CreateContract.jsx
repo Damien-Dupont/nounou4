@@ -24,11 +24,11 @@ export default function CreateContract() {
   // const [fridayEnd, setFridayEnd] = useState(undefined);
 
   const [priceHour, setPriceHour] = useState(0);
-  // const [priceOverHour, setPriceOverHour] = useState(0);
-  // const [priceHousehold, setPriceHousehold] = useState(0);
-  // const [priceLongHousehold, setPriceLongHousehold] = useState(0);
-  // const [priceMeal, setPriceMeal] = useState(0);
-  // const [priceSnack, setPriceSnack] = useState(0);
+  const [priceOverHour, setPriceOverHour] = useState(0);
+  const [priceHousehold, setPriceHousehold] = useState(0);
+  const [priceLongHousehold, setPriceLongHousehold] = useState(0);
+  const [priceMeal, setPriceMeal] = useState(0);
+  const [priceSnack, setPriceSnack] = useState(0);
 
   // const [mondayCare, setMondayCare] = useState(true);
   // const [tuesdayCare, setTuesdayCare] = useState(true);
@@ -67,11 +67,11 @@ export default function CreateContract() {
         // fridayStart,
         // fridayEnd,
         priceHour,
-        // priceOverHour,
-        // priceHousehold,
-        // priceLongHousehold,
-        // priceMeal,
-        // priceSnack,
+        priceOverHour,
+        priceHousehold,
+        priceLongHousehold,
+        priceMeal,
+        priceSnack,
       };
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/contract`, {
@@ -122,7 +122,7 @@ export default function CreateContract() {
               <input
                 id="kidId"
                 name="kidId"
-                placeholder="vous"
+                placeholder="votre enfant"
                 type="text"
                 value={kidId}
                 onChange={(event) => setKidId(event.target.value)}
@@ -165,21 +165,91 @@ export default function CreateContract() {
         </label>
         {/* INSERT PRICE PER HOUR */}
       </div>
-      <br />
+      <h3>PRICES</h3>
       <div>
         <label>
           Prix de l'heure:
           <input
             id="priceHour"
-            name="priceHourr"
-            placeholder="en euros de l'heure"
-            type="text"
+            name="priceHour"
+            placeholder="0"
+            type="number"
             value={priceHour}
             onChange={(event) => setPriceHour(event.target.value)}
           />
         </label>
       </div>
       <br />
+      <div>
+        <label>
+          Prix de l'heure complémentaire:
+          <input
+            id="priceHour"
+            name="priceHourr"
+            placeholder="0"
+            type="number"
+            value={priceOverHour}
+            onChange={(event) => setPriceOverHour(event.target.value)}
+          />
+        </label>
+      </div>
+      <br />
+      <div>
+        <label>
+          Prix de l'entretien:
+          <input
+            id="priceHousehold"
+            name="priceHousehold"
+            placeholder="0"
+            type="number"
+            value={priceHousehold}
+            onChange={(event) => setPriceHousehold(event.target.value)}
+          />
+        </label>
+      </div>
+      <br />
+      <div>
+        <label>
+          Prix de l'entretien au delà de la 9e heure quotidienne:
+          <input
+            id="priceLongHousehold"
+            name="priceLongHousehold"
+            placeholder="0"
+            type="number"
+            value={priceLongHousehold}
+            onChange={(event) => setPriceLongHousehold(event.target.value)}
+          />
+        </label>
+      </div>
+      <br />
+      <div>
+        <label>
+          Prix du repas:
+          <input
+            id="priceMeal"
+            name="priceMeal"
+            placeholder="0"
+            type="number"
+            value={priceMeal}
+            onChange={(event) => setPriceMeal(event.target.value)}
+          />
+        </label>
+      </div>
+      <br />
+      <div>
+        <label>
+          Prix du goûter:
+          <input
+            id="priceSnack"
+            name="priceSnack"
+            placeholder="0"
+            type="number"
+            value={priceSnack}
+            onChange={(event) => setPriceSnack(event.target.value)}
+          />
+        </label>
+        <h3>Horaires</h3>
+      </div>
 
       <input type="submit" value="Envoyer" />
     </form>
