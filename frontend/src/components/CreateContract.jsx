@@ -3,6 +3,8 @@ import axios from "axios";
 import React, { useState } from "react";
 // import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Checkbox from "../methods/CheckBox";
+import TimeSelector from "./TimeSelector";
 // import TimeSelector from "./TimeSelector";
 
 export default function CreateContract() {
@@ -30,11 +32,19 @@ export default function CreateContract() {
   const [priceMeal, setPriceMeal] = useState(0);
   const [priceSnack, setPriceSnack] = useState(0);
 
-  // const [mondayCare, setMondayCare] = useState(true);
-  // const [tuesdayCare, setTuesdayCare] = useState(true);
-  // const [wednesdayCare, setWednesdayCare] = useState(true);
-  // const [thursdayCare, setThursdayCare] = useState(true);
-  // const [fridayCare, setFridayCare] = useState(true);
+  const { daysCare, setDaysCare } = useState({
+    monday: false,
+    tuesday: false,
+    wednesday: false,
+    thursday: false,
+    friday: false,
+  });
+
+  // const [mondayCare, setMondayCare] = useState(false);
+  // const [tuesdayCare, setTuesdayCare] = useState(false);
+  // const [wednesdayCare, setWednesdayCare] = useState(false);
+  // const [thursdayCare, setThursdayCare] = useState(false);
+  // const [fridayCare, setFridayCare] = useState(false);
 
   // if (localStorage.getItem("kidId") !== null) {
   //   setKidId(localStorage.getItem("kidId"));
@@ -248,7 +258,11 @@ export default function CreateContract() {
             onChange={(event) => setPriceSnack(event.target.value)}
           />
         </label>
-        <h3>Horaires</h3>
+      </div>
+      <h3>Horaires</h3>
+      <div className="define-hours">
+        <div>Lundi?</div>
+        <Checkbox label="garde le lundi, oui/non" />
       </div>
 
       <input type="submit" value="Envoyer" />
