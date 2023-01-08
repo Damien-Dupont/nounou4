@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import React, { useState } from "react";
-// import axios from "axios";
+import axios from "axios";
 
 export default function CreateParent() {
   const [userLastname, setUserLastname] = useState("");
@@ -8,29 +8,37 @@ export default function CreateParent() {
   const [userRole, setUserRole] = useState("parent" || "nounou" || "admin");
   const [userEmail, setUserEmail] = useState("");
 
-  // useEffect(() => {
-  //   "parent";
-  // }, [userFirstname, userLastname, userRole, userEmail]);
-
-  // const getDiplome = () => {
-  //   axios
-  //     .get(`${import.meta.env.VITE_BACKEND_URL}/diplome`, {
-  //       withCredentials: true,
-  //     })
-  //     .then((res) => {
-  //       setDiplomeData(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    // ici, vous pouvez utiliser les données du formulaire comme vous le souhaitez
     console.log(`Lastname: ${userLastname}`);
     console.log(`Firstname: ${userFirstname}`);
-    console.log(`Role: ${userRole}`);
+    console.log(`Email: ${userEmail}`);
+    try {
+      console.log("CreateParent: axios IN");
+      axios
+        .post(`${import.meta.env.VITE_BACKEND_URL}/user`, {
+          userLastname,
+          userFirstname,
+          userRole,
+          userEmail,
+        })
+        .then((res) => {
+          localStorage.setItem("userId", res.data.id);
+          localStorage.setItem("userLastname", userLastname);
+          localStorage.setItem("userFirstname", userFirstname);
+          localStorage.setItem("userRole", "parent");
+          localStorage.setItem("userEmail", userEmail);
+          console.log("user created:", res);
+        });
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setUserLastname("");
+      setUserFirstname("");
+      setUserRole("");
+      setUserEmail("");
+    }
+    console.log("CreateParent: axios OUT");
   };
 
   return (
@@ -59,7 +67,7 @@ export default function CreateParent() {
         />
       </label>
       <br />
-      <label>
+      {/* <label>
         Rôle:
         <input
           id="userRole"
@@ -70,7 +78,7 @@ export default function CreateParent() {
           onChange={(event) => setUserRole(event.target.value)}
         />
       </label>
-      <br />
+      <br /> */}
       <label>
         email:
         <input

@@ -1,0 +1,23 @@
+.fiveColumns {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 1px;
+  grid-row-gap: 0px;
+}
+
+.day1 {
+  grid-area: 1 / 1 / 2 / 2;
+}
+.day2 {
+  grid-area: 1 / 2 / 2 / 3;
+}
+.day3 {
+  grid-area: 1 / 3 / 2 / 4;
+}
+.day4 {
+  grid-area: 1 / 4 / 2 / 5;
+}
+.day5 {
+  grid-area: 1 / 5 / 2 / 6;
+}

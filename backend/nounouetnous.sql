@@ -8,22 +8,22 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema nounou-et-nous
+-- Schema nounouetnous
 -- -----------------------------------------------------
-DROP SCHEMA IF EXISTS `nounou-et-nous` ;
+DROP SCHEMA IF EXISTS `nounouetnous` ;
 
 -- -----------------------------------------------------
--- Schema nounou-et-nous
+-- Schema nounouetnous
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `nounou-et-nous` DEFAULT CHARACTER SET utf8mb4 ;
-USE `nounou-et-nous` ;
+CREATE SCHEMA IF NOT EXISTS `nounouetnous` DEFAULT CHARACTER SET utf8mb4 ;
+USE `nounouetnous` ;
 
 -- -----------------------------------------------------
--- Table `nounou-et-nous`.`role`
+-- Table `nounouetnous`.`role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nounou-et-nous`.`role` ;
+DROP TABLE IF EXISTS `nounouetnous`.`role` ;
 
-CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`role` (
+CREATE TABLE IF NOT EXISTS `nounouetnous`.`role` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `role` VARCHAR(45) NULL,
   PRIMARY KEY (`id`))
@@ -31,11 +31,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nounou-et-nous`.`user`
+-- Table `nounouetnous`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nounou-et-nous`.`user` ;
+DROP TABLE IF EXISTS `nounouetnous`.`user` ;
 
-CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`user` (
+CREATE TABLE IF NOT EXISTS `nounouetnous`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `lastname` VARCHAR(45) NULL,
   `firstname` VARCHAR(45) NULL,
@@ -46,18 +46,18 @@ CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`user` (
   INDEX `fk_user_role1_idx` (`role_id` ASC) VISIBLE,
   CONSTRAINT `fk_user_role1`
     FOREIGN KEY (`role_id`)
-    REFERENCES `nounou-et-nous`.`role` (`id`)
+    REFERENCES `nounouetnous`.`role` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nounou-et-nous`.`kid`
+-- Table `nounouetnous`.`kid`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nounou-et-nous`.`kid` ;
+DROP TABLE IF EXISTS `nounouetnous`.`kid` ;
 
-CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`kid` (
+CREATE TABLE IF NOT EXISTS `nounouetnous`.`kid` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `lastname` VARCHAR(45) NULL,
   `firstname` VARCHAR(45) NULL,
@@ -67,11 +67,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nounou-et-nous`.`contract`
+-- Table `nounouetnous`.`contract`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nounou-et-nous`.`contract` ;
+DROP TABLE IF EXISTS `nounouetnous`.`contract` ;
 
-CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`contract` (
+CREATE TABLE IF NOT EXISTS `nounouetnous`.`contract` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `kid_id` INT NOT NULL,
   `caregiver` VARCHAR(45) NULL,
@@ -100,18 +100,18 @@ CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`contract` (
   INDEX `fk_contract_kid1_idx` (`kid_id` ASC) VISIBLE,
   CONSTRAINT `fk_contract_kid1`
     FOREIGN KEY (`kid_id`)
-    REFERENCES `nounou-et-nous`.`kid` (`id`)
+    REFERENCES `nounouetnous`.`kid` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nounou-et-nous`.`user_contract`
+-- Table `nounouetnous`.`user_contract`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nounou-et-nous`.`user_contract` ;
+DROP TABLE IF EXISTS `nounouetnous`.`user_contract` ;
 
-CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`user_contract` (
+CREATE TABLE IF NOT EXISTS `nounouetnous`.`user_contract` (
   `is_main` TINYINT(1) NULL,
   `user_id` INT NOT NULL,
   `contract_id` INT NOT NULL,
@@ -119,23 +119,23 @@ CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`user_contract` (
   INDEX `fk_user_contract_contract1_idx` (`contract_id` ASC) VISIBLE,
   CONSTRAINT `fk_user_contract_user1`
     FOREIGN KEY (`user_id`)
-    REFERENCES `nounou-et-nous`.`user` (`id`)
+    REFERENCES `nounouetnous`.`user` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_user_contract_contract1`
     FOREIGN KEY (`contract_id`)
-    REFERENCES `nounou-et-nous`.`contract` (`id`)
+    REFERENCES `nounouetnous`.`contract` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nounou-et-nous`.`event`
+-- Table `nounouetnous`.`event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nounou-et-nous`.`event` ;
+DROP TABLE IF EXISTS `nounouetnous`.`event` ;
 
-CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`event` (
+CREATE TABLE IF NOT EXISTS `nounouetnous`.`event` (
   `id` INT NOT NULL,
   `type` VARCHAR(45) NULL,
   `is_paid` TINYINT(1) NULL,
@@ -144,11 +144,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nounou-et-nous`.`contract_event`
+-- Table `nounouetnous`.`contract_event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `nounou-et-nous`.`contract_event` ;
+DROP TABLE IF EXISTS `nounouetnous`.`contract_event` ;
 
-CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`contract_event` (
+CREATE TABLE IF NOT EXISTS `nounouetnous`.`contract_event` (
   `contract_id` INT NOT NULL,
   `event_id` INT NOT NULL,
   `date` DATE NULL,
@@ -157,69 +157,69 @@ CREATE TABLE IF NOT EXISTS `nounou-et-nous`.`contract_event` (
   INDEX `fk_contract_event_event1_idx` (`event_id` ASC) VISIBLE,
   CONSTRAINT `fk_contract_event_contract1`
     FOREIGN KEY (`contract_id`)
-    REFERENCES `nounou-et-nous`.`contract` (`id`)
+    REFERENCES `nounouetnous`.`contract` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_contract_event_event1`
     FOREIGN KEY (`event_id`)
-    REFERENCES `nounou-et-nous`.`event` (`id`)
+    REFERENCES `nounouetnous`.`event` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
--- Data for table `nounou-et-nous`.`role`
+-- Data for table `nounouetnous`.`role`
 
 START TRANSACTION;
-USE `nounou-et-nous`;
-INSERT INTO `nounou-et-nous`.`role` (`id`, `role`) VALUES (1, 'admin');
-INSERT INTO `nounou-et-nous`.`role` (`id`, `role`) VALUES (2, 'parent');
-INSERT INTO `nounou-et-nous`.`role` (`id`, `role`) VALUES (3, 'nounou');
+USE `nounouetnous`;
+INSERT INTO `nounouetnous`.`role` (`id`, `role`) VALUES (1, 'admin');
+INSERT INTO `nounouetnous`.`role` (`id`, `role`) VALUES (2, 'parent');
+INSERT INTO `nounouetnous`.`role` (`id`, `role`) VALUES (3, 'nounou');
 
 COMMIT;
 
--- Data for table `nounou-et-nous`.`user`
+-- Data for table `nounouetnous`.`user`
 
 START TRANSACTION;
-USE `nounou-et-nous`;
-INSERT INTO `nounou-et-nous`.`user` (`id`, `lastname`, `firstname`, `email`, `hashed_password`, `role_id`) VALUES (1, 'Dupont', 'Damien', 'damiendupont.dd@gmail.com', NULL, 2);
-INSERT INTO `nounou-et-nous`.`user` (`id`, `lastname`, `firstname`, `email`, `hashed_password`, `role_id`) VALUES (2, 'Admin', 'Admin', 'admin@admin.com', NULL, 1);
-INSERT INTO `nounou-et-nous`.`user` (`id`, `lastname`, `firstname`, `email`, `hashed_password`, `role_id`) VALUES (3, 'Parent', 'Fictif', 'parent@fictif.com', NULL, 2);
+USE `nounouetnous`;
+INSERT INTO `nounouetnous`.`user` (`id`, `lastname`, `firstname`, `email`, `hashed_password`, `role_id`) VALUES (1, 'Dupont', 'Damien', 'damiendupont.dd@gmail.com', NULL, 2);
+INSERT INTO `nounouetnous`.`user` (`id`, `lastname`, `firstname`, `email`, `hashed_password`, `role_id`) VALUES (2, 'Admin', 'Admin', 'admin@admin.com', NULL, 1);
+INSERT INTO `nounouetnous`.`user` (`id`, `lastname`, `firstname`, `email`, `hashed_password`, `role_id`) VALUES (3, 'Parent', 'Fictif', 'parent@fictif.com', NULL, 2);
 
 COMMIT;
 
--- Data for table `nounou-et-nous`.`kid`
+-- Data for table `nounouetnous`.`kid`
 
 START TRANSACTION;
-USE `nounou-et-nous`;
-INSERT INTO `nounou-et-nous`.`kid` (`id`, `lastname`, `firstname`, `birthdate`) VALUES (DEFAULT, 'Dupont', 'Margot', '2020/10/18');
-INSERT INTO `nounou-et-nous`.`kid` (`id`, `lastname`, `firstname`, `birthdate`) VALUES (DEFAULT, 'Fictif', 'Bidule', '2022/01/01');
+USE `nounouetnous`;
+INSERT INTO `nounouetnous`.`kid` (`id`, `lastname`, `firstname`, `birthdate`) VALUES (DEFAULT, 'Dupont', 'Margot', '2020/10/18');
+INSERT INTO `nounouetnous`.`kid` (`id`, `lastname`, `firstname`, `birthdate`) VALUES (DEFAULT, 'Fictif', 'Bidule', '2022/01/01');
 
 COMMIT;
 
--- Data for table `nounou-et-nous`.`contract`
+-- Data for table `nounouetnous`.`contract`
 
 START TRANSACTION;
-USE `nounou-et-nous`;
-INSERT INTO `nounou-et-nous`.`contract` (`id`, `kid_id`, `caregiver`, `starting_date`, `ending_date`, `weeks_per_year`, `monday_start`, `monday_end`, `tuesday_start`, `tuesday_end`, `wednesday_start`, `wednesday_end`, `thursday_start`, `thursday_end`, `friday_start`, `friday_end`, `price_hour`, `price_over_hour`, `price_household`, `price_long_household`, `price_meal`, `price_snack`, `days_off`, `regulation_at_end`) VALUES (DEFAULT, 1, 'Isa', '2022/09/01', NULL, 36, '7:45', '17:15', '7:45', '17:15', NULL, NULL, '7:45', '17:15', '7:45', '17:15', 4, 4, 3.39, 3.39, 3.50, 1.50, 0, NULL);
+USE `nounouetnous`;
+INSERT INTO `nounouetnous`.`contract` (`id`, `kid_id`, `caregiver`, `starting_date`, `ending_date`, `weeks_per_year`, `monday_start`, `monday_end`, `tuesday_start`, `tuesday_end`, `wednesday_start`, `wednesday_end`, `thursday_start`, `thursday_end`, `friday_start`, `friday_end`, `price_hour`, `price_over_hour`, `price_household`, `price_long_household`, `price_meal`, `price_snack`, `days_off`, `regulation_at_end`) VALUES (DEFAULT, 1, 'Isa', '2022/09/01', NULL, 36, '7:45', '17:15', '7:45', '17:15', NULL, NULL, '7:45', '17:15', '7:45', '17:15', 4, 4, 3.39, 3.39, 3.50, 1.50, 0, NULL);
 
 COMMIT;
 
--- Data for table `nounou-et-nous`.`user_contract`
+-- Data for table `nounouetnous`.`user_contract`
 
 START TRANSACTION;
-USE `nounou-et-nous`;
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (1, 'garde prévue', 1);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (2, 'garde imprévue', 1);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (3, 'heures supplémentaires', 1);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (4, 'absence nounou journée', 0);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (5, 'absence nounou heures', 0);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (6, 'absence enfant journée', 1);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (7, 'absence enfant malade', 0);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (8, 'formation nounou', 1);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (9, 'férié payé', 1);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (10, 'férié non payé', 0);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (11, 'congés payés', 1);
-INSERT INTO `nounou-et-nous`.`event`(`id`, `type`, `is_paid`) VALUES (12, 'congés sans solde', 0);
+USE `nounouetnous`;
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (1, 'garde prévue', 1);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (2, 'garde imprévue', 1);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (3, 'heures supplémentaires', 1);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (4, 'absence nounou journée', 0);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (5, 'absence nounou heures', 0);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (6, 'absence enfant journée', 1);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (7, 'absence enfant malade', 0);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (8, 'formation nounou', 1);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (9, 'férié payé', 1);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (10, 'férié non payé', 0);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (11, 'congés payés', 1);
+INSERT INTO `nounouetnous`.`event`(`id`, `type`, `is_paid`) VALUES (12, 'congés sans solde', 0);
 
 COMMIT;
 
