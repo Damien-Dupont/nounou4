@@ -2,9 +2,14 @@ const express = require("express");
 const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
-const router = require("./router");
 
 const app = express();
+
+// app.use(cors());
+
+// app.listen(8001, () => {
+//   console.log("Coucou! Server listening on port 5001");
+// });
 
 // use some application-level middlewares
 app.use(
@@ -15,14 +20,14 @@ app.use(
 );
 
 // eslint-disable-next-line func-names
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
-  );
-  next();
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested-With, Content-Type, Accept"
+//   );
+//   next();
+// });
 
 app.use(express.json());
 
@@ -33,6 +38,8 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
 // API routes
+const router = require("./router");
+
 app.use(router);
 
 // Redirect all requests to the REACT app

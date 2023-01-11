@@ -1,7 +1,5 @@
 const express = require("express");
 
-const router = express.Router();
-
 const itemControllers = require("./controllers/itemControllers");
 
 const {
@@ -14,6 +12,8 @@ const {
   //   PromotionController,
   //   MasterController,
 } = require("./controllers");
+
+const router = express.Router();
 
 router.get("/user", UserControllers.browse);
 router.get("/user/:id", UserControllers.read);

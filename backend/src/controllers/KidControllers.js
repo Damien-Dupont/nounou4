@@ -1,4 +1,4 @@
-const models = require("../old models");
+const models = require("../models");
 
 class KidControllers {
   static browse = (req, res) => {
