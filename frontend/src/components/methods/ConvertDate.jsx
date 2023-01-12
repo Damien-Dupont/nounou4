@@ -1,10 +1,14 @@
-export default function ConvertDate(date) {
-  console.log("convertDate IN", date);
+export function ConvertDate(date) {
   const month = date.$M + 1;
-  console.log("formatted date", `${date.$y}`);
-  console.log("formatted date", `${month}`);
-  console.log("formatted date", `${date.$D}`);
-  console.log("convertDate OUT", `${date.$y}-${month}-${date.$D}`);
+
   // Generate yyyy-mm-dd date string
   return `${date.$y}-${month}-${date.$D}`;
+}
+
+export function DateFromString(date) {
+  const dateArray = date.split("-");
+  const year = dateArray[0];
+  const month = dateArray[1];
+  const day = dateArray[2];
+  return { dateArray, year, month, day };
 }
