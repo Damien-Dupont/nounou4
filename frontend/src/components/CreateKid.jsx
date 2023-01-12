@@ -1,8 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 import axios from "axios";
 import React, { useState } from "react";
+
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
 import ConvertDate from "./methods/ConvertDate";
 
 export default function CreateKid() {
@@ -12,12 +14,10 @@ export default function CreateKid() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`Lastname: ${kidLastname}`);
-    console.log(`Firstname: ${kidFirstname}`);
-    console.log(`Birthdate: ${kidBirthdate}`);
+
     try {
-      console.log("CreateKid: axios IN");
       setKidBirthdate(ConvertDate(kidBirthdate));
+
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/kid`, {
           kidLastname,
@@ -29,7 +29,6 @@ export default function CreateKid() {
           localStorage.setItem("kidLastname", kidLastname);
           localStorage.setItem("kidFirstname", kidFirstname);
           localStorage.setItem("kidBirthdate", kidBirthdate);
-          console.log("kid created:", res);
         });
     } catch (err) {
       console.error(err);
@@ -38,8 +37,6 @@ export default function CreateKid() {
       setKidFirstname("");
       setKidBirthdate(Date.now());
     }
-    // ici, vous pouvez utiliser les données du formulaire comme vous le souhaitez
-    console.log("CreateKid: axios OUT");
   };
 
   return (
