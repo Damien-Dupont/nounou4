@@ -11,6 +11,7 @@ function App() {
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
         Home
+        <Coucou />
         <Home />
       </LocalizationProvider>
     </div>
@@ -18,3 +19,7 @@ function App() {
 }
 
 export default App;
+
+function Coucou() {
+  return <>coucou</>;
+}

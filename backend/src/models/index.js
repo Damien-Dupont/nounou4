@@ -1,16 +1,49 @@
 const fs = require("fs");
+const mysql = require("mysql2/promise");
 const path = require("path");
 
-const controllers = fs
+const { DB_HOST, DB_USER, DB_PASSWORD, DB_NAME } = process.env;
+
+const pool = mysql.createPool({
+  host: DB_HOST,
+  user: DB_USER,
+  password: DB_PASSWORD,
+  database: DB_NAME,
+});
+
+pool.getConnection().catch(() => {
+  console.warn(
+    "Warning:",
+    "Failed to get a DB connection.",
+    "Did you create a .env file with valid credentials?",
+    "Routes using models won't work as intended"
+  );
+});
+
+// const controllers = fs
+//   .readdirSync(__dirname)
+//   .filter((file) => file !== "ItemManager.js" && file !== "index.js")
+//   .reduce((controllerList, file) => {
+//     const key = file.slice(0, -".js".length);
+
+//     // eslint-disable-next-line global-require, import/no-dynamic-require
+//     const Controller = require(path.join(__dirname, file));
+
+//     return { ...controllerList, [key]: Controller };
+//   }, {});
+
+const models = fs
   .readdirSync(__dirname)
+  // .filter((file) => file !== "AbstractManager.js" && file !== "index.js")
   .filter((file) => file !== "index.js")
-  .reduce((controllerList, file) => {
-    const key = file.slice(0, -".js".length);
-
+  .reduce((acc, file) => {
     // eslint-disable-next-line global-require, import/no-dynamic-require
-    const Controller = require(path.join(__dirname, file));
+    const Manager = require(path.join(__dirname, file));
 
-    return { ...controllerList, [key]: Controller };
+    // eslint-disable-next-line no-param-reassign
+    acc[Manager.table] = new Manager(pool, Manager.table);
+
+    return acc;
   }, {});
 
 const handler = {
@@ -24,7 +57,7 @@ const handler = {
   },
 };
 
-module.exports = new Proxy(controllers, handler);
+module.exports = new Proxy(models, handler);
 
 // const fs = require("fs");
 // const mysql = require("mysql2/promise");

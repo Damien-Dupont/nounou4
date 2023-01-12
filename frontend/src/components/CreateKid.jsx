@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import ConvertDate from "./methods/ConvertDate";
 
 export default function CreateKid() {
   const [kidLastname, setKidLastname] = useState("");
@@ -16,6 +17,7 @@ export default function CreateKid() {
     console.log(`Birthdate: ${kidBirthdate}`);
     try {
       console.log("CreateKid: axios IN");
+      setKidBirthdate(ConvertDate(kidBirthdate));
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/kid`, {
           kidLastname,
@@ -62,6 +64,7 @@ export default function CreateKid() {
         <br />
         <br />
         <DatePicker
+          inputFormat="DD-MM-YYYY"
           label="Sa date de naissance"
           value={kidBirthdate}
           onChange={(newValue) => {

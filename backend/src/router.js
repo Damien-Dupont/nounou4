@@ -1,11 +1,17 @@
 const express = require("express");
 
+const router = express.Router();
+
+// const auth = require("./middlewares/auth");
+
+// const Kid = require("./models/Kid");
+
 const itemControllers = require("./controllers/itemControllers");
 
 const {
   //   ProfileController,
   UserControllers,
-  KidControllers,
+  KidController,
   ContractControllers,
   //   DiplomeController,
   //   JobController,
@@ -13,7 +19,25 @@ const {
   //   MasterController,
 } = require("./controllers");
 
-const router = express.Router();
+// router.post("/kiddo", (req, res, next) => {
+//   const kid = new KidControllers({
+//     firstname: req.body.firstname,
+//     lastname: req.body.lastname,
+//     birthdate: req.body.birthdate,
+//   });
+//   kid
+//     .save()
+//     .then(() => {
+//       res.status(201).json({
+//         message: "Post saved successfully!",
+//       });
+//     })
+//     .catch((error) => {
+//       res.status(400).json({
+//         error,
+//       });
+//     });
+// });
 
 router.get("/user", UserControllers.browse);
 router.get("/user/:id", UserControllers.read);
@@ -21,7 +45,7 @@ router.get("/user/:id", UserControllers.read);
 router.post("/user", UserControllers.add);
 // router.delete("/user/:id", UserControllers.destroy);
 
-router.post("/kid", KidControllers.add);
+router.post("/kid", KidController.add);
 
 router.post("/contract", ContractControllers.add);
 

@@ -1,6 +1,6 @@
 const models = require("../models");
 
-class KidControllers {
+class KidController {
   static browse = (req, res) => {
     models.kid
       .findAll()
@@ -75,7 +75,7 @@ class KidControllers {
       })
       .catch((err) => {
         console.error(err);
-        res.sebirthdatendStatus(500);
+        res.sendStatus(500);
       });
   };
 
@@ -92,4 +92,4 @@ class KidControllers {
   };
 }
 
-module.exports = KidControllers;
+module.exports = KidController;
