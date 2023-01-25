@@ -28,6 +28,7 @@
     "@mui/material": "^5.11.6",
     "axios": "^1.2.2",
     "joi": "^17.7.0",
+    "jsonwebtoken": "^9.0.0",
     "react-router-dom": "^6.6.1",
     "react-select": "^5.7.0"
   }
