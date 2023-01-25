@@ -1,6 +1,6 @@
 const express = require("express");
 
-const router = express.Router();
+// const { validateKid } = require("./middlewares/kidMiddleware");
 
 // const auth = require("./middlewares/auth");
 
@@ -10,7 +10,7 @@ const itemControllers = require("./controllers/itemControllers");
 
 const {
   //   ProfileController,
-  UserControllers,
+  UserController,
   KidController,
   ContractControllers,
   //   DiplomeController,
@@ -18,6 +18,8 @@ const {
   //   PromotionController,
   //   MasterController,
 } = require("./controllers");
+
+const router = express.Router();
 
 // router.post("/kiddo", (req, res, next) => {
 //   const kid = new KidControllers({
@@ -39,11 +41,11 @@ const {
 //     });
 // });
 
-router.get("/user", UserControllers.browse);
-router.get("/user/:id", UserControllers.read);
-// router.put("/user/:id", UserControllers.edit);
-router.post("/user", UserControllers.add);
-// router.delete("/user/:id", UserControllers.destroy);
+// router.get("/user", UserController.browse);
+// router.get("/user/:id", UserController.read);
+// router.put("/user/:id", UserController.edit);
+router.post("/user", UserController.add);
+// router.delete("/user/:id", UserController.destroy);
 
 router.post("/kid", KidController.add);
 

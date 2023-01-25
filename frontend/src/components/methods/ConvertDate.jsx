@@ -1,8 +1,8 @@
-export function ConvertDate(date) {
-  const month = date.$M + 1;
-
-  // Generate yyyy-mm-dd date string
-  return `${date.$y}-${month}-${date.$D}`;
+export default function ConvertDate(date) {
+  const month = date.$M < 9 ? `0${date.$M + 1}` : date.$M + 1;
+  const day = date.$D < 10 ? `0${date.$D}` : date.$D;
+  console.log("ConvertDate: date:", `${date.$y}-${month}-${day}`);
+  return `${date.$y}-${month}-${day}`;
 }
 
 export function DateFromString(date) {

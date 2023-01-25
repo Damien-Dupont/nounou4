@@ -65,14 +65,14 @@ class KidController {
   };
 
   static add = (req, res) => {
-    const kid = req.body;
+    const { lastname, firstname, birthdate } = req.body;
 
     // TODO validations (length, format...)
 
     models.kid
-      .insert(kid)
+      .insert(lastname, firstname, birthdate)
       .then(([result]) => {
-        res.status(201).send({ ...kid, id: result.insertId });
+        res.status(201).send({ ...req.body, id: result.insertId });
       })
       .catch((err) => {
         console.error(err);

@@ -3,17 +3,17 @@ const AbstractManager = require("./AbstractManager");
 class KidManager extends AbstractManager {
   static table = "kid";
 
-  insert(kid) {
+  insert(lastname, firstname, birthdate) {
     return this.connection.query(
       `insert into ${this.table} (lastname, firstname, birthdate) values (?, ?, ?)`,
-      [kid.lastname, kid.firstname, kid.birthdate]
+      [lastname, firstname, birthdate]
     );
   }
 
-  update(kid) {
+  update(lastname, firstname, birthdate, id) {
     return this.connection.query(
       `update ${this.table} set lastname = ?, firstname = ?, birthdate = ? where id = ?`,
-      [kid.lastname, kid.firstname, kid.birthdate, kid.id]
+      [lastname, firstname, birthdate, id]
     );
   }
 
@@ -26,9 +26,9 @@ class KidManager extends AbstractManager {
       .then((res) => res[0]);
   }
 
-  delete(kid) {
+  delete(id) {
     return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
-      kid.id,
+      id,
     ]);
   }
 }

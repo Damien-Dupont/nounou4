@@ -3,18 +3,17 @@ const AbstractManager = require("./AbstractManager");
 class UserManager extends AbstractManager {
   static table = "user";
 
-  insert(lastname, firstname, role) {
-    // console.log("UserManager", lastname, firstname, role);
+  insert(lastname, firstname, roleid) {
     return this.connection.query(
-      `insert into ${this.table} (lastname, firstname, role) values (?, ?, ?)`,
-      [lastname, firstname, role]
+      `insert into ${this.table} (lastname, firstname, role_id) values (?, ?, ?)`,
+      [lastname, firstname, roleid]
     );
   }
 
-  update(user) {
+  update(lastname, firstname, id) {
     return this.connection.query(
       `update ${this.table} set lastname = ?, firstname = ?, where id = ?`,
-      [user.lastname, user.firstname, user.id]
+      [lastname, firstname, id]
     );
   }
 
@@ -27,9 +26,9 @@ class UserManager extends AbstractManager {
       .then((res) => res[0]);
   }
 
-  // delete(user) {
+  // delete(id) {
   //   return this.connection.query(`DELETE FROM ${this.table} WHERE id = ?`, [
-  //     user.id,
+  //     id,
   //   ]);
   // }
 }

@@ -1,6 +1,6 @@
 const models = require("../models");
 
-class UserControllers {
+class UserController {
   static browse = (req, res) => {
     models.user
       .findAll()
@@ -80,4 +80,4 @@ class UserControllers {
   // };
 }
 
-module.exports = UserControllers;
+module.exports = UserController;
