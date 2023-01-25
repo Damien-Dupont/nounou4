@@ -43,6 +43,7 @@ export default function CreateParent() {
           firstname,
           roleid,
           email,
+          password,
         })
         .then((res) => {
           localStorage.setItem("userId", res.data.id);

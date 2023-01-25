@@ -5,7 +5,8 @@ const models = require("../models");
 const nope = "Vous ne disposez pas des droits nécessaires à cette opération";
 
 const validateUser = (req, res, next) => {
-  const data = { ...req.user };
+  console.log(req.body);
+  const data = { ...req.body };
   Object.keys(data).forEach((el) => {
     if (data[el] === "" || data[el] === null) delete data[el];
   });
@@ -14,6 +15,7 @@ const validateUser = (req, res, next) => {
     password: Joi.string().max(30).presence("required"),
     lastname: Joi.string().max(80).presence("required"),
     firstname: Joi.string().max(80).presence("required"),
+    roleid: Joi.number().presence("required"),
   }).validate(data, { abortEarly: false });
 
   if (!error) {

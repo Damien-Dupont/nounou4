@@ -24,13 +24,13 @@ const router = express.Router();
 
 router.get("/user", checkAuth, checkAdminRights, UserController.browse);
 router.get("/user/:id", checkAuth, decodeCookie, UserController.read);
-router.get("/kid/:id", checkAuth, decodeCookie, KidController.edit);
-router.get("/contract/:id", checkAuth, decodeCookie, ContractControllers.edit);
+// router.get("/kid/:id", checkAuth, decodeCookie, KidController.edit);
+// router.get("/contract/:id", checkAuth, decodeCookie, ContractControllers.edit);
 
-router.post("/signup", validateUser, UserController.add);
+// router.post("/signup", validateuser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
 
-router.post("/user", UserController.add);
+router.post("/user", validateUser, UserController.add);
 router.put("/user/update/:id", checkAuth, UserController.edit);
 
 router.post("/kid", KidController.add);
