@@ -34,7 +34,8 @@ export default function CreateParent() {
     console.log("CreateParent: role:", role);
     console.log("CreateParent: email:", email);
     console.log("CreateParent: password:", password);
-    const roleid = role === "parent" ? 2 : 3;
+    // const roleid = role === "parent" ? 2 : 3;
+    const roleid = 2;
     try {
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/user`, {
