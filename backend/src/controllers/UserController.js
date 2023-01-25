@@ -1,6 +1,6 @@
 const models = require("../models");
 
-class UserControllers {
+class UserController {
   static browse = (req, res) => {
     models.user
       .findAll()
@@ -52,14 +52,14 @@ class UserControllers {
   };
 
   static add = (req, res) => {
-    const user = req.body;
+    const { lastname, firstname, roleid, email } = req.body;
 
     // TODO validations (length, format...)
 
     models.user
-      .insert(user)
+      .insert(lastname, firstname, roleid, email)
       .then(([result]) => {
-        res.status(201).send({ ...user, id: result.insertId });
+        res.status(201).send({ ...req.body, id: result.insertId });
       })
       .catch((err) => {
         console.error(err);
@@ -80,4 +80,4 @@ class UserControllers {
   // };
 }
 
-module.exports = UserControllers;
+module.exports = UserController;
