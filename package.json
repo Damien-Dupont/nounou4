@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clear": "sudo lsof -i :5001 && lsof -i :3001 && kill -9 $(sudo lsof -t -i:5001) && kill -9 $(sudo lsof -t -i:3001)",
     "setup": "npm i && husky install && npm --prefix ./frontend i && npm --prefix ./backend i",
     "migrate": "cd backend/ && node migrate.js && cd ..",
     "dev": "concurrently -n front,back -c green,yellow -t \"HH:mm:ss\" -p \"{name} {time}\" \"npm --prefix ./frontend run dev\" \"npm --prefix ./backend run dev\"",
@@ -17,11 +18,16 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^7.0.0",
-    "husky": "^7.0.0"
+    "husky": "^7.0.0",
+    "sass": "^1.57.1"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/material": "^5.11.3",
+    "axios": "^1.2.2",
     "joi": "^17.7.0",
-    "react-hook-form-auto": "^1.3.14",
-    "react-router-dom": "^6.6.1"
+    "react-router-dom": "^6.6.1",
+    "react-select": "^5.7.0"
   }
 }

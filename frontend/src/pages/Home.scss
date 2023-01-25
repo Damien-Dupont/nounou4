@@ -1,0 +1,38 @@
+.form {
+  cursor: pointer;
+  width: 100vw;
+  max-width: 1280px;
+
+  &__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 0px;
+
+    svg {
+      fill: white;
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+
+  .form__content {
+    padding: 0px 0px 16px;
+    display: none;
+    width: 100%;
+  }
+
+  &__open {
+    @extend .form;
+    .form__title {
+      svg {
+        transform: rotate(180deg);
+      }
+    }
+
+    .form__content {
+      width: 100%;
+      display: block;
+    }
+  }
+}

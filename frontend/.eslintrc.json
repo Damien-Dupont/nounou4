@@ -16,15 +16,18 @@
     "sourceType": "module"
   },
   "plugins": ["react", "import"],
+
   "rules": {
     "no-console": "off",
     "no-restricted-syntax": [
       "error",
       {
-        "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(error|warn)$/]",
-        "message": "You can only call the error() and warn() functions from the console object"
+        "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+        "message": "Unexpected property on console object was called"
       }
     ],
+    "react/prop-types": "off",
+    "react/jsx-props-no-spreading": "off",
     "react/react-in-jsx-scope": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/no-unescaped-entities": "off",
