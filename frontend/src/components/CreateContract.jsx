@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-syntax */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+// import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -37,7 +38,7 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 // import Checkbox from "../methods/CheckBox";
 
 import "./stylesheets/CreateContract.scss";
-import ConvertDate from "./methods/ConvertDate";
+// import ConvertDate from "./methods/ConvertDate";
 
 const locales = ["en", "fr"];
 
@@ -104,7 +105,7 @@ export default function CreateContract() {
   const [kidList, setKidList] = useState([]);
   // const [kidLastname, setKidLastname] = useState(undefined);
   // const [kidFirstname, setKidFirstname] = useState(undefined);
-  const [kidId, setKidId] = useState(undefined);
+  const [kidId, setKidId] = useState("");
   // contract data
   const [caregiver, setCaregiver] = useState("");
   const [weeksPerYear, setWeeksPerYear] = useState(0);
@@ -132,6 +133,7 @@ export default function CreateContract() {
   const [wednesdayCare, setWednesdayCare] = useState(false);
   const [thursdayCare, setThursdayCare] = useState(false);
   const [fridayCare, setFridayCare] = useState(false);
+  // const [care, setCare] = useState([true, false, false, false, false]);
 
   const getKidList = () => {
     if (parentId !== undefined) {
@@ -165,10 +167,80 @@ export default function CreateContract() {
   //     .catch((error) => console.log("allkids", error));
   // }, [userId]);
 
+  // const periodsList = [
+  //   { en: "mondayStart", fr: "Lundi", day: 0 },
+  //   { en: "mondayEnd", fr: "Lundi", day: 0 },
+  //   { en: "tuesdayStart", fr: "Mardi", day: 2 },
+  //   { en: "tuesdayEnd", fr: "Mardi", day: 2 },
+  //   { en: "wednesdayStart", fr: "Mercredi", day: 3 },
+  //   { en: "wednesdayEnd", fr: "Mercredi", day: 3 },
+  //   { en: "thursdayStart", fr: "Jeudi", day: 4 },
+  //   { en: "thursdayEnd", fr: "Jeudi", day: 4 },
+  //   { en: "fridayStart", fr: "Vendredi", day: 5 },
+  //   { en: "fridayEnd", fr: "Vendredi", day: 5 },
+  // ];
+
+  // const handleTimeChange = (time, day) => {
+  //   switch (day) {
+  //     case "mondayStart":
+  //       setMondayStart(time);
+  //       break;
+  //     case "mondayEnd":
+  //       setMondayEnd(time);
+  //       break;
+  //     case "tuesdayStart":
+  //       setTuesdayStart(time);
+  //       break;
+  //     case "tuesdayEnd":
+  //       setTuesdayEnd(time);
+  //       break;
+  //     case "wednesdayStart":
+  //       setWednesdayStart(time);
+  //       break;
+  //     case "wednesdayEnd":
+  //       setWednesdayEnd(time);
+  //       break;
+  //     case "thursdayStart":
+  //       setThursdayStart(time);
+  //       break;
+  //     case "thursdayEnd":
+  //       setThursdayEnd(time);
+  //       break;
+  //     case "fridayStart":
+  //       setFridayStart(time);
+  //       break;
+  //     case "fridayEnd":
+  //       setFridayEnd(time);
+  //       break;
+
+  //     // case "mondayStartLundi":
+  //     //   setCare[0] = !care[0];
+  //     //   break;
+
+  //     // case "tuesdayStartMardi":
+  //     //   setCare[1] = !care[1];
+  //     //   break;
+
+  //     // case "wednesdayStartMercredi":
+  //     //   setCare[2] = !care[2];
+  //     //   break;
+
+  //     // case "thursdayStartJeudi":
+  //     //   setCare[3] = !care[3];
+  //     //   break;
+
+  //     // case "fridayStartVendredi":
+  //     //   setCare[4] = !care[4];
+  //     // break;
+
+  //     default:
+  //       console.log("error");
+  //   }
+  // };
+
   const handleSubmit = (event) => {
     // prepare data
     event.preventDefault();
-    const startDate = ConvertDate(startingDate);
     if (mondayCare === false) {
       setMondayStart(undefined);
       setMondayEnd(undefined);
@@ -189,17 +261,17 @@ export default function CreateContract() {
       setFridayStart(undefined);
       setFridayEnd(undefined);
     }
-    if (priceOverHour === 0) {
-      setPriceOverHour(priceHour);
-    }
-    if (priceLongHousehold === 0) {
-      setPriceLongHousehold(priceHousehold);
-    }
+    // if (priceOverHour === 0) {
+    //   setPriceOverHour(priceHour);
+    // }
+    // if (priceLongHousehold === 0) {
+    //   setPriceLongHousehold(priceHousehold);
+    // }
     console.log(
       "handleSubmit IN: ",
       kidId,
       caregiver,
-      startDate,
+      startingDate,
       weeksPerYear,
       mondayStart,
       mondayEnd,
@@ -243,7 +315,7 @@ export default function CreateContract() {
         priceSnack,
       };
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/contract`, {
+        .post(`${import.meta.env.VITE_BACKEND_URL}/contract/add`, {
           contract,
         })
         .then((res) => {
@@ -299,7 +371,7 @@ export default function CreateContract() {
             onChange={(event) => setKidId(event.target.value)}
           >
             {kidList.map((kid) => (
-              <MenuItem key={kid.id} value={kid.id}>
+              <MenuItem key={kid.id} value={`${kid.id}`}>
                 {kid.lastname} {kid.firstname}
               </MenuItem>
             ))}
@@ -468,6 +540,7 @@ export default function CreateContract() {
             Oui
             {mondayCare && (
               <>
+                <br />
                 <TimePicker
                   label="Lundi débute à..."
                   value={mondayStart}
@@ -476,6 +549,7 @@ export default function CreateContract() {
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
+                <br />
                 <TimePicker
                   label="Lundi termine à..."
                   value={mondayEnd}
@@ -498,16 +572,18 @@ export default function CreateContract() {
             Oui
             {tuesdayCare && (
               <>
+                <br />
                 <TimePicker
-                  label="Lundi débute à..."
+                  label="Mardi débute à..."
                   value={tuesdayStart}
                   onChange={(newValue) => {
                     setTuesdayStart(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
+                <br />
                 <TimePicker
-                  label="Lundi termine à..."
+                  label="Mardi termine à..."
                   value={tuesdayEnd}
                   onChange={(newValue) => {
                     setTuesdayEnd(newValue);
@@ -528,16 +604,18 @@ export default function CreateContract() {
             Oui
             {wednesdayCare && (
               <>
+                <br />
                 <TimePicker
-                  label="Lundi débute à..."
+                  label="Mercredi débute à..."
                   value={wednesdayStart}
                   onChange={(newValue) => {
                     setWednesdayStart(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
+                <br />
                 <TimePicker
-                  label="Lundi termine à..."
+                  label="Mercredi termine à..."
                   value={wednesdayEnd}
                   onChange={(newValue) => {
                     setWednesdayEnd(newValue);
@@ -558,16 +636,18 @@ export default function CreateContract() {
             Oui
             {thursdayCare && (
               <>
+                <br />
                 <TimePicker
-                  label="Lundi débute à..."
+                  label="Jeudi débute à..."
                   value={thursdayStart}
                   onChange={(newValue) => {
                     setThursdayStart(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
+                <br />
                 <TimePicker
-                  label="Lundi termine à..."
+                  label="Jeudi termine à..."
                   value={thursdayEnd}
                   onChange={(newValue) => {
                     setThursdayEnd(newValue);
@@ -588,16 +668,19 @@ export default function CreateContract() {
             Oui
             {fridayCare && (
               <>
+                <br />
                 <TimePicker
-                  label="Lundi débute à..."
+                  label="Vendredi débute à..."
                   value={fridayStart}
                   onChange={(newValue) => {
+                    console.log(newValue);
                     setFridayStart(newValue);
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
+                <br />
                 <TimePicker
-                  label="Lundi termine à..."
+                  label="Vendredi termine à..."
                   value={fridayEnd}
                   onChange={(newValue) => {
                     setFridayEnd(newValue);
@@ -607,6 +690,45 @@ export default function CreateContract() {
               </>
             )}
           </div>
+          {/* <div className="define-hours">
+            {periodsList.map((period) => (
+              <div key={period.en}>
+                {period.en.includes("Start") && (
+                  <>
+                    <div>{period.fr}?</div>
+                    Non{" "}
+                    <Switch
+                      // classes={switchStyles}
+                      checked={care[period.day]}
+                      // onChange={(e) =>
+                      //   handleTimeChange(e, `${period.en}+${period.fr}}`)
+                      // }
+                      onchange={() => {
+                        console.log("care", care);
+                        setCare(!care[period.day]);
+                      }}
+                    />{" "}
+                    Oui
+                  </>
+                )}
+                {care[period.day] && (
+                  <TimePicker
+                    width="100%"
+                    label={
+                      period.en.includes("Start")
+                        ? `${period.fr} débute à...`
+                        : `${period.fr} termine à...`
+                    }
+                    value=""
+                    onChange={(newValue) => {
+                      handleTimeChange(newValue, period.en);
+                    }}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                )}
+              </div>
+            ))}
+          </div>{" "} */}
         </div>
         <input type="submit" value="Envoyer" />
       </form>

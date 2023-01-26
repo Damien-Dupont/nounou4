@@ -53,12 +53,55 @@ class ContractController {
   };
 
   static add = (req, res) => {
-    const contract = req.body;
+    console.log("req", req.body.contract);
+    const {
+      startingDate,
+      kidId,
+      caregiver,
+      weeksPerYear,
+      mondayStart,
+      mondayEnd,
+      tuesdayStart,
+      tuesdayEnd,
+      wednesdayStart,
+      wednesdayEnd,
+      thursdayStart,
+      thursdayEnd,
+      fridayStart,
+      fridayEnd,
+      priceHour,
+      priceOverHour,
+      priceHousehold,
+      priceLongHousehold,
+      priceMeal,
+      priceSnack,
+    } = req.body.contract;
 
     // TODO validations (length, format...)
 
     models.contract
-      .insert(contract)
+      .insert(
+        startingDate,
+        kidId,
+        caregiver,
+        weeksPerYear,
+        mondayStart,
+        mondayEnd,
+        tuesdayStart,
+        tuesdayEnd,
+        wednesdayStart,
+        wednesdayEnd,
+        thursdayStart,
+        thursdayEnd,
+        fridayStart,
+        fridayEnd,
+        priceHour,
+        priceOverHour,
+        priceHousehold,
+        priceLongHousehold,
+        priceMeal,
+        priceSnack
+      )
       .then(([result]) => {
         res.location(`/contracts/${result.insertId}`).sendStatus(201);
         // res.status(201).send({ ...req.body, id: result.insertId });

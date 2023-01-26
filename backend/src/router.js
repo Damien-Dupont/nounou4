@@ -1,6 +1,5 @@
 const express = require("express");
 
-// const { validateKid } = require("./middlewares/kidMiddleware");
 const {
   validateUser,
   validateLogin,
@@ -10,7 +9,10 @@ const {
   // checkAdminRights,
 } = require("./middlewares/userMiddleware");
 
-// const Kid = require("./models/Kid");
+const {
+  validateContract,
+  prepareData,
+} = require("./middlewares/contractMiddleware");
 
 const {
   UserController,
@@ -37,7 +39,12 @@ router.put("/user/update/:id", checkAuth, UserController.edit);
 router.post("/kid/add", KidController.add);
 router.put("/kid/update/:id", checkAuth, KidController.edit);
 
-router.post("/contract/add", ContractController.add);
+router.post(
+  "/contract/add",
+  prepareData,
+  validateContract,
+  ContractController.add
+);
 router.put("/contract/update/:id", checkAuth, ContractController.edit);
 
 // router.get("/items", itemControllers.browse);

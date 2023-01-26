@@ -16,11 +16,9 @@ export default function CreateKid() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("CreateKid: event:", event);
 
     try {
       const birthdate = ConvertDate(kidBirthdate);
-      console.log("CreateKid: kidBirthdate:", birthdate);
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/kid/add`, {
           lastname,
