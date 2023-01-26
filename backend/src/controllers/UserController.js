@@ -1,4 +1,6 @@
 const models = require("../models");
+const { jwtSign } = require("../services/jwt");
+const { passwordHash, passwordVerify } = require("../services/password");
 
 class UserController {
   static browse = (req, res) => {
@@ -51,13 +53,14 @@ class UserController {
       });
   };
 
-  static add = (req, res) => {
+  static add = async (req, res) => {
     const { lastname, firstname, roleid, email } = req.body;
-
-    // TODO validations (length, format...)
+    console.log("pass: ", req.body);
+    const password = await passwordHash(req.body.password);
+    console.log("hash: ", password);
 
     models.user
-      .insert(lastname, firstname, roleid, email)
+      .insert(lastname, firstname, roleid, email, password)
       .then(([result]) => {
         res.status(201).send({ ...req.body, id: result.insertId });
       })
@@ -67,17 +70,49 @@ class UserController {
       });
   };
 
-  // static delete = (req, res) => {
-  //   models.user
-  //     .delete(req.params.id)
-  //     .then(() => {
-  //       res.sendStatus(204);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       res.sendStatus(500);
-  //     });
-  // };
+  static login = (req, res) => {
+    const nope = "Email ou mot de passe incorrect";
+    models.user
+      .findByEmail(req.body.email)
+      .then(async (rows) => {
+        if (rows[0] == null) {
+          res.sendStatus(401).send({ message: nope });
+        }
+        if (await passwordVerify(rows[0].password, req.body.password)) {
+          const token = jwtSign(
+            { email: rows[0].email, role: rows[0].roleid, id: rows[0].id },
+            { expiresIn: "1h" }
+          );
+          // res.send({ token });
+          delete rows[0].password;
+
+          return res
+            .cookie("access_token", token, {
+              httpOnly: true,
+              expires: new Date(Date.now() + 60 * 60 * 24),
+            })
+            .status(200)
+            .json({ ...rows[0] });
+        }
+        return res.status(401).send({ message: nope });
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500).send({ error: err.message });
+      });
+  };
+
+  static delete = (req, res) => {
+    models.user
+      .delete(req.params.id)
+      .then(() => {
+        res.sendStatus(204);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
 }
 
 module.exports = UserController;
