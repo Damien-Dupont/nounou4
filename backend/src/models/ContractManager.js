@@ -5,14 +5,15 @@ class ContractManager extends AbstractManager {
 
   insert(contract) {
     return this.connection.query(
-      `insert into ${this.table} (starting_date, kid_id, caregiver, weeks_per_year, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, price_hour, price_over_hour, price_household, price_long_household, price_meal, price_snack, days_off) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+      `insert into ${this.table} (starting_date, kid_id, caregiver, weeks_per_year, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, price_hour, price_over_hour, price_household, price_long_household, price_meal, price_snack, days_off, regulation_at_end)
+      values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         contract.startingDate,
         contract.kidId,
         contract.caregiver,
         contract.weeksPerYear,
-        contract.mondayStart,
-        contract.mondayEnd,
+        contract.mondayStart, // contract.day[0].start
+        contract.mondayEnd, // contract.day[1].end
         contract.tuesdayStart,
         contract.tuesdayEnd,
         contract.wednesdayStart,
@@ -21,13 +22,14 @@ class ContractManager extends AbstractManager {
         contract.thursdayEnd,
         contract.fridayStart,
         contract.fridayEnd,
-        contract.priceHour,
-        contract.priceOverHour,
-        contract.priceHousehold,
-        contract.priceLongHousehold,
-        contract.priceMeal,
-        contract.priceSnack,
+        contract.priceHour, // contract.price.hour
+        contract.priceOverHour, // contract.price.over
+        contract.priceHousehold, // contract.price.household
+        contract.priceLongHousehold, // contract.price.longHousehold
+        contract.priceMeal, // contract.price.meal
+        contract.priceSnack, // contract.price.snack
         contract.daysOff,
+        contract.regulationAtEnd,
       ]
     );
   }

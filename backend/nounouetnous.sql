@@ -62,7 +62,14 @@ CREATE TABLE IF NOT EXISTS `nounouetnous`.`kid` (
   `lastname` VARCHAR(45) NULL,
   `firstname` VARCHAR(45) NULL,
   `birthdate` DATE NULL,
-  PRIMARY KEY (`id`))
+  `parent` INT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `parent_idx` (`parent` ASC) VISIBLE,
+  CONSTRAINT `parent`
+    FOREIGN KEY (`parent`)
+    REFERENCES `nounouetnous`.`user` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
@@ -191,8 +198,8 @@ COMMIT;
 
 START TRANSACTION;
 USE `nounouetnous`;
-INSERT INTO `nounouetnous`.`kid` (`id`, `lastname`, `firstname`, `birthdate`) VALUES (DEFAULT, 'Dupont', 'Margot', '2020/10/18');
-INSERT INTO `nounouetnous`.`kid` (`id`, `lastname`, `firstname`, `birthdate`) VALUES (DEFAULT, 'Fictif', 'Bidule', '2022/01/01');
+INSERT INTO `nounouetnous`.`kid` (`id`, `lastname`, `firstname`, `birthdate`, `parent`) VALUES (DEFAULT, 'Dupont', 'Margot', '2020/10/18',1);
+INSERT INTO `nounouetnous`.`kid` (`id`, `lastname`, `firstname`, `birthdate`, `parent`) VALUES (DEFAULT, 'Fictif', 'Bidule', '2022/01/01',1);
 
 COMMIT;
 

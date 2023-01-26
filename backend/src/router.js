@@ -7,7 +7,7 @@ const {
   checkAuth,
   // checkAdminRights,
   decodeCookie,
-  checkAdminRights,
+  // checkAdminRights,
 } = require("./middlewares/userMiddleware");
 
 // const Kid = require("./models/Kid");
@@ -15,29 +15,30 @@ const {
 const {
   UserController,
   KidController,
-  ContractControllers,
+  ContractController,
 } = require("./controllers");
 
 const router = express.Router();
 
 // get // post // put // delete
 
-router.get("/user", checkAuth, checkAdminRights, UserController.browse);
+// router.get("/user", checkAuth, checkAdminRights, UserController.browse);
 router.get("/user/:id", checkAuth, decodeCookie, UserController.read);
-// router.get("/kid/:id", checkAuth, decodeCookie, KidController.edit);
+router.get("/kid/all", KidController.browse);
+router.get("/kid/parent/:id", KidController.browseByParent);
 // router.get("/contract/:id", checkAuth, decodeCookie, ContractControllers.edit);
 
 // router.post("/signup", validateuser, UserController.add);
 router.post("/login", validateLogin, UserController.login);
 
-router.post("/user", validateUser, UserController.add);
+router.post("/user/add", validateUser, UserController.add);
 router.put("/user/update/:id", checkAuth, UserController.edit);
 
-router.post("/kid", KidController.add);
+router.post("/kid/add", KidController.add);
 router.put("/kid/update/:id", checkAuth, KidController.edit);
 
-router.post("/contract", ContractControllers.add);
-router.put("/contract/update/:id", checkAuth, ContractControllers.edit);
+router.post("/contract/add", ContractController.add);
+router.put("/contract/update/:id", checkAuth, ContractController.edit);
 
 // router.get("/items", itemControllers.browse);
 // router.get("/items/:id", itemControllers.read);

@@ -15,8 +15,22 @@ class KidController {
 
   static browseByName = (req, res) => {
     const name = req.body;
-    models.name
+    models.kid
       .findbyName(name)
+      .then(([rows]) => {
+        res.send(rows);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
+  static browseByParent = (req, res) => {
+    console.log("browseByParent", req.body);
+    const parent = req.params.id;
+    models.kid
+      .findbyParent(parent)
       .then(([rows]) => {
         res.send(rows);
       })
