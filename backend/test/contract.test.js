@@ -32,7 +32,7 @@ describe("SILENCING CONSOLES", () => {
 describe("CONTRACT ROUTES", () => {
   const persistantData = {};
 
-  it("should create a contract", async () => {
+  it("should create a contract (ADD)", async () => {
     const res = await supertest(app)
       .post("/contract/add")
       .send(contractToCreate)
@@ -43,5 +43,31 @@ describe("CONTRACT ROUTES", () => {
     });
 
     persistantData.contract = res.body;
+  });
+
+  it("should get the contract with id 1 (GET-ONE)", async () => {
+    const res = await supertest(app)
+      .get("/contract/1")
+      .expect(200)
+      .expect("Content-Type", /json/);
+
+    contractKeys.map((prop) => {
+      expect(res.body).toHaveProperty(prop);
+    });
+  });
+
+  it(`should update the previously created contract (PUT)`, async () => {
+    await supertest(app)
+      .put(`/contract/${persistantData.contract.id}`)
+      .send({
+        caregiver: "Isabelle N.",
+      })
+      .expect(204);
+
+    const res = await supertest(app).get(
+      `/contract/${persistantData.contract.id}`
+    );
+
+    expect(res.body).toHaveProperty("caregiver", "Isabelle N.");
   });
 });

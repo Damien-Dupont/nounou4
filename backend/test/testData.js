@@ -1,3 +1,29 @@
+const userKeys = [
+  "id",
+  "lastname",
+  "firstname",
+  "role_id",
+  "email",
+  "hashed_password",
+];
+
+const userToCreate = {
+  lastname: "Durand",
+  firstname: "Jean",
+  role_id: 1,
+  email: "j.dupont@email.com",
+  password: "password",
+};
+
+const kidToCreate = {
+  lastname: "Dupont",
+  firstname: "Jean",
+  birthdate: "2010-01-01",
+  parent: 1,
+};
+
+const kidKeys = ["id", "lastname", "firstname", "birthdate", "parent"];
+
 const contractKeys = [
   "id",
   "startingDate",
@@ -45,4 +71,11 @@ const contractToCreate = {
   priceSnack: 1.5,
 };
 
-module.exports = { contractToCreate, contractKeys };
+module.exports = {
+  contractToCreate,
+  contractKeys,
+  userToCreate,
+  userKeys,
+  kidToCreate,
+  kidKeys,
+};
