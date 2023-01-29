@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
+    "test": "NODE_ENV=test jest",
     "migrate": "node migrate.js",
     "start": "node index.js",
     "lint": "echo '----- Checking Backend...' && npx prettier --debug-check . && eslint --ext .js . && echo '----- Done!'",
@@ -42,6 +43,9 @@
     "eslint-plugin-import": "^2.25.4",
     "eslint-plugin-prettier": "^4.0.0",
     "nodemon": "^2.0.15",
-    "prettier": "2.5.1"
+    "prettier": "2.5.1",
+    "supertest": "^6.3.3",
+    "jest": "^29.4.1",
+    "babel-jest": "^29.4.0"
   }
 }

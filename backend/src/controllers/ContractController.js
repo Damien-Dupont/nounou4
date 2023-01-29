@@ -54,54 +54,56 @@ class ContractController {
 
   static add = (req, res) => {
     console.log("req", req.body.contract);
-    const {
-      startingDate,
-      kidId,
-      caregiver,
-      weeksPerYear,
-      mondayStart,
-      mondayEnd,
-      tuesdayStart,
-      tuesdayEnd,
-      wednesdayStart,
-      wednesdayEnd,
-      thursdayStart,
-      thursdayEnd,
-      fridayStart,
-      fridayEnd,
-      priceHour,
-      priceOverHour,
-      priceHousehold,
-      priceLongHousehold,
-      priceMeal,
-      priceSnack,
-    } = req.body.contract;
+    // const {
+    //   startingDate,
+    //   kidId,
+    //   caregiver,
+    //   weeksPerYear,
+    //   mondayStart,
+    //   mondayEnd,
+    //   tuesdayStart,
+    //   tuesdayEnd,
+    //   wednesdayStart,
+    //   wednesdayEnd,
+    //   thursdayStart,
+    //   thursdayEnd,
+    //   fridayStart,
+    //   fridayEnd,
+    //   priceHour,
+    //   priceOverHour,
+    //   priceHousehold,
+    //   priceLongHousehold,
+    //   priceMeal,
+    //   priceSnack,
+    // } = req.body.contract;
+    const { contract } = req.body;
 
     // TODO validations (length, format...)
 
     models.contract
-      .insert(
-        startingDate,
-        kidId,
-        caregiver,
-        weeksPerYear,
-        mondayStart,
-        mondayEnd,
-        tuesdayStart,
-        tuesdayEnd,
-        wednesdayStart,
-        wednesdayEnd,
-        thursdayStart,
-        thursdayEnd,
-        fridayStart,
-        fridayEnd,
-        priceHour,
-        priceOverHour,
-        priceHousehold,
-        priceLongHousehold,
-        priceMeal,
-        priceSnack
-      )
+      // .insert(
+      //   startingDate,
+      //   kidId,
+      //   caregiver,
+      //   weeksPerYear,
+      //   mondayStart,
+      //   mondayEnd,
+      //   tuesdayStart,
+      //   tuesdayEnd,
+      //   wednesdayStart,
+      //   wednesdayEnd,
+      //   thursdayStart,
+      //   thursdayEnd,
+      //   fridayStart,
+      //   fridayEnd,
+      //   priceHour,
+      //   priceOverHour,
+      //   priceHousehold,
+      //   priceLongHousehold,
+      //   priceMeal,
+      //   priceSnack
+      // )
+      .insert(contract)
       .then(([result]) => {
         res.location(`/contracts/${result.insertId}`).sendStatus(201);
         // res.status(201).send({ ...req.body, id: result.insertId });
