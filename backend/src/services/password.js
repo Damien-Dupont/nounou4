@@ -8,7 +8,6 @@ const hashingOptions = {
 };
 
 async function passwordHash(password) {
-  console.log("hashing");
   return argon2.hash(password, hashingOptions);
 }
 

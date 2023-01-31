@@ -1,4 +1,6 @@
-const usersRouter = require("express").Router();
+const express = require("express");
+
+const usersRouter = express.Router();
 
 const {
   validateLogin,

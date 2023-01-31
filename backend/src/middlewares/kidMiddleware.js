@@ -1,18 +1,13 @@
 const Joi = require("joi");
-// const jwt = require("jsonwebtoken");
-// const models = require("../models");
-
-// const nope = "Vous ne disposez pas des droits nécessaires à cette opération";
+// const { stringPattern } = require("./regexPatterns");
 
 const validateKid = (req, res, next) => {
-  const data = { ...req.profile };
-  Object.keys(data).forEach((el) => {
-    if (data[el] === "" || data[el] === null) delete data[el];
-  });
+  const data = { ...req.body };
   const { error } = Joi.object({
     lastname: Joi.string().max(80).presence("required"),
-    firstname: Joi.string().max(80).presence("required"),
-    birthdate: Joi.date().max("now").presence("required"),
+    firstname: Joi.string().max(80),
+    birthdate: Joi.string().max(11).presence("required"),
+    parentId: Joi.number().integer().min(1).presence("required"),
   }).validate(data, { abortEarly: false });
 
   if (!error) {

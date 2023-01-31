@@ -3,10 +3,10 @@ const AbstractManager = require("./AbstractManager");
 class UserManager extends AbstractManager {
   static table = "user";
 
-  insert(lastname, firstname, roleid, email, password) {
+  insert(lastname, firstname, roleId, email, password) {
     return this.connection.query(
       `insert into ${this.table} (lastname, firstname, role_id, email, hashed_password) values (?, ?, ?, ?, ?)`,
-      [lastname, firstname, roleid, email, password]
+      [lastname, firstname, roleId, email, password]
     );
   }
 

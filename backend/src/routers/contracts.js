@@ -1,8 +1,10 @@
-const contractsRouter = require("express").Router();
+const express = require("express");
+
+const contractsRouter = express.Router();
 
 const {
-  validateContract,
   prepareData,
+  validateContract,
 } = require("../middlewares/contractMiddleware");
 
 const {

@@ -6,8 +6,9 @@ const path = require("path");
 const cors = require("cors");
 
 const contractsRouter = require("./routers/contracts");
-// const usersRouter = require('./routes/users')
-const router = require("./router");
+const kidsRouter = require("./routers/kids");
+const usersRouter = require("./routers/users");
+// const router = require("./--router.--js");
 
 const app = express();
 app.use(express.json());
@@ -35,8 +36,9 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.static(path.join(__dirname, "..", "..", "frontend", "dist")));
 
 // API routes
-app.use(router);
-app.use(`/contract/add`, contractsRouter);
+app.use(usersRouter);
+app.use(contractsRouter);
+app.use(kidsRouter);
 
 // Redirect all requests to the REACT app
 const reactIndexFile = path.join(

@@ -1,28 +1,21 @@
-const userKeys = [
-  "id",
-  "lastname",
-  "firstname",
-  "role_id",
-  "email",
-  "hashed_password",
-];
+const userKeys = ["id", "lastname", "firstname", "roleId", "email", "password"];
 
 const userToCreate = {
   lastname: "Durand",
   firstname: "Jean",
-  role_id: 1,
+  roleId: 2,
   email: "j.dupont@email.com",
   password: "password",
 };
 
-const kidToCreate = {
-  lastname: "Dupont",
-  firstname: "Jean",
-  birthdate: "2010-01-01",
-  parent: 1,
-};
+const kidKeys = ["id", "lastname", "firstname", "birthdate", "parentId"];
 
-const kidKeys = ["id", "lastname", "firstname", "birthdate", "parent"];
+const kidToCreate = {
+  firstname: "kid",
+  lastname: "enfant",
+  birthdate: "1970-01-01",
+  parentId: 1,
+};
 
 const contractKeys = [
   "id",

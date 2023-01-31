@@ -1,10 +1,8 @@
-/* eslint-disable no-restricted-syntax */
-import axios from "axios";
 import React, { useState } from "react";
+import axios from "axios";
 
 import TextField from "@mui/material/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
 import { Box } from "@mui/material";
 import ConvertDate from "./methods/ConvertDate";
 
@@ -12,26 +10,27 @@ export default function CreateKid() {
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [kidBirthdate, setKidBirthdate] = useState(Date.now());
-  const parent = localStorage.getItem("userId");
+  const parentId = localStorage.getItem("userId");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
     try {
       const birthdate = ConvertDate(kidBirthdate);
+      console.log("birthdate", kidBirthdate, " => ", birthdate);
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/kid/add`, {
           lastname,
           firstname,
           birthdate,
-          parent,
+          parentId,
         })
         .then((res) => {
           localStorage.setItem("kidId", res.data.id);
           localStorage.setItem("kidLastname", lastname);
           localStorage.setItem("kidFirstname", firstname);
           localStorage.setItem("kidBirthdate", kidBirthdate);
-          localStorage.setItem("kidParent", parent);
+          localStorage.setItem("kidParentId", parentId);
           console.log("Kid Created:", res);
         });
     } catch (err) {

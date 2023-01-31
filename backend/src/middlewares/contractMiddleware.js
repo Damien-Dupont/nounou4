@@ -1,23 +1,10 @@
 // eslint-disable-next-line import/no-import-module-exports
-// import moment from "moment";
-
 const Joi = require("joi");
-
-// const convertTime = (date) => {
-//   return `${date.getHours()}:${date.getMinutes()}`;
-// };
-
-// const convertDate = (date) => {
-//   return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
-// };
+// const { stringPattern, timePattern } = require("./regexPatterns");
 
 const prepareData = (req, res, next) => {
-  console.log("prepareData");
-  const data = { ...req.body.contract };
-  //   Object.keys(data).forEach((el) => {
-  //     if (data[el] === "" || data[el] === null) delete data[el];
-  //   });
-  //   data.startingDate = data.startingDate;
+  console.log("prepareData IN", req.body);
+  const data = { ...req.body };
   data.priceHour = parseFloat(data.priceHour).toFixed(2);
   data.priceOverHour =
     data.priceOverHour === 0
@@ -31,59 +18,43 @@ const prepareData = (req, res, next) => {
   data.priceMeal = parseFloat(data.priceMeal).toFixed(2);
   data.priceSnack = parseFloat(data.priceSnack).toFixed(2);
   data.weeksPerYear = parseInt(data.weeksPerYear, 10);
-  //
-  //   if (data.mondayStart !== undefined) {
-  //     data.mondayStart = convertTime(data.mondayStart);
-  //     data.mondayEnd = convertTime(data.mondayEnd);
-  //   }
-  //   if (data.tuesdayStart !== undefined) {
-  //     data.tuesdayStart = convertTime(data.tuesdayStart);
-  //     data.tuesdayEnd = convertTime(data.tuesdayEnd);
-  //   }
-  //   if (data.wednesdayStart !== undefined) {
-  //     data.wednesdayStart = convertTime(data.wednesdayStart);
-  //     data.wednesdayEnd = convertTime(data.wednesdayEnd);
-  //   }
-  //   if (data.thursdayStart !== undefined) {
-  //     data.thursdayStart = convertTime(data.thursdayStart);
-  //     data.thursdayEnd = convertTime(data.thursdayEnd);
-  //   }
-  //   if (data.fridayStart !== undefined) {
-  //     data.fridayStart = convertTime(data.fridayStart);
-  //     data.fridayEnd = convertTime(data.fridayEnd);
-  //   }
-  //
-  req.body.contract = data;
+  req.body = data;
+  console.log("prepareData OUT", req.body);
   next();
 };
 
 const validateContract = (req, res, next) => {
-  const data = { ...req.body.contract };
+  const timePattern = /^(([0-1]{0,1}[0-9])|(2[0-3])):[0-5]{0,1}[0-9]:(00)$/;
+  // const stringPattern = /[a-zA-Z -]+/g;
+  const data = { ...req.body };
   console.log("validateContract", data);
   Object.keys(data).forEach((el) => {
     if (data[el] === "" || data[el] === null) delete data[el];
   });
   const { error } = Joi.object({
-    kidId: Joi.number().presence("required"),
+    kidId: Joi.number().integer().min(1).presence("required"),
     caregiver: Joi.string().max(80).presence("required"),
-    priceHour: Joi.number().presence("required"),
-    priceOverHour: Joi.number().presence("required"),
-    priceHousehold: Joi.number().presence("required"),
-    priceLongHousehold: Joi.number().presence("required"),
-    priceMeal: Joi.number().presence("required"),
-    priceSnack: Joi.number().presence("required"),
-    startingDate: Joi.date().presence("required"),
-    weeksPerYear: Joi.number().presence("required"),
-    mondayStart: Joi.date(),
-    mondayEnd: Joi.date(),
-    tuesdayStart: Joi.date(),
-    tuesdayEnd: Joi.date(),
-    wednesdayStart: Joi.date(),
-    wednesdayEnd: Joi.date(),
-    thursdayStart: Joi.date(),
-    thursdayEnd: Joi.date(),
-    fridayStart: Joi.date(),
-    fridayEnd: Joi.date(),
+    priceHour: Joi.number().sign("positive").presence("required").not(0),
+    priceOverHour: Joi.number().sign("positive").presence("required").not(0),
+    priceHousehold: Joi.number().sign("positive").presence("required").not(0),
+    priceLongHousehold: Joi.number()
+      .sign("positive")
+      .presence("required")
+      .not(0),
+    priceMeal: Joi.number().sign("positive").presence("required").not(0),
+    priceSnack: Joi.number().sign("positive").presence("required").not(0),
+    startingDate: Joi.date().iso().presence("required"),
+    weeksPerYear: Joi.number().sign("positive").presence("required"),
+    mondayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
+    mondayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
+    tuesdayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
+    tuesdayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
+    wednesdayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
+    wednesdayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
+    thursdayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
+    thursdayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
+    fridayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
+    fridayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
   }).validate(data, { abortEarly: false });
 
   if (!error) {

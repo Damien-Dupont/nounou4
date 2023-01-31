@@ -12,12 +12,12 @@ const pool = mysql.createPool({
 });
 
 pool.getConnection().catch(() => {
-  console.warn(
-    "Warning:",
-    "Failed to get a DB connection.",
-    "Did you create a .env file with valid credentials?",
-    "Routes using models won't work as intended"
-  );
+  // console.warn(
+  //   "Warning:",
+  //   "Failed to get a DB connection.",
+  //   "Did you create a .env file with valid credentials?",
+  //   "Routes using models won't work as intended"
+  // );
 });
 
 // const controllers = fs
