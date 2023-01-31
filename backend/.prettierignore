@@ -1,0 +1,18 @@
+# Ignore artifacts:
+build
+coverage/
+jest-stare/
+
+# Ignore OS generated files:
+.DS_Store
+
+# Ignore node_modules:
+node_modules
+
+# Ignore yarn:
+yarn.lock
+
+# Ignore VS Code:
+.vscode
+
+*.html

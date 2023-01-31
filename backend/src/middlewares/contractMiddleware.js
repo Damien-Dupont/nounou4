@@ -24,7 +24,7 @@ const prepareData = (req, res, next) => {
 };
 
 const validateContract = (req, res, next) => {
-  const timePattern = /^(([0-1]{0,1}[0-9])|(2[0-3])):[0-5]{0,1}[0-9]:(00)$/;
+  // const timePattern = /^(([0-1]{0,1}[0-9])|(2[0-3])):[0-5]{0,1}[0-9]:(00)$/;
   // const stringPattern = /[a-zA-Z -]+/g;
   const data = { ...req.body };
   console.log("validateContract", data);
@@ -45,16 +45,16 @@ const validateContract = (req, res, next) => {
     priceSnack: Joi.number().sign("positive").presence("required").not(0),
     startingDate: Joi.date().iso().presence("required"),
     weeksPerYear: Joi.number().sign("positive").presence("required"),
-    mondayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
-    mondayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
-    tuesdayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
-    tuesdayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
-    wednesdayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
-    wednesdayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
-    thursdayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
-    thursdayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
-    fridayStart: [Joi.string().pattern(new RegExp(timePattern)), null],
-    fridayEnd: [Joi.string().pattern(new RegExp(timePattern)), null],
+    mondayStart: [Joi.string().iso(), null],
+    mondayEnd: [Joi.string().iso(), null],
+    tuesdayStart: [Joi.string().iso(), null],
+    tuesdayEnd: [Joi.string().iso(), null],
+    wednesdayStart: [Joi.string().iso(), null],
+    wednesdayEnd: [Joi.string().iso(), null],
+    thursdayStart: [Joi.string().iso(), null],
+    thursdayEnd: [Joi.string().iso(), null],
+    fridayStart: [Joi.string().iso(), null],
+    fridayEnd: [Joi.string().iso(), null],
   }).validate(data, { abortEarly: false });
 
   if (!error) {
