@@ -1,5 +1,5 @@
+// user
 const userKeys = ["id", "lastname", "firstname", "roleId", "email", "password"];
-
 const userToCreate = {
   lastname: "Durand",
   firstname: "Jean",
@@ -8,8 +8,8 @@ const userToCreate = {
   password: "password",
 };
 
+// kid
 const kidKeys = ["id", "lastname", "firstname", "birthdate", "parent"];
-
 const kidToCreate = {
   firstname: "kid",
   lastname: "enfant",
@@ -17,6 +17,7 @@ const kidToCreate = {
   parent: 1,
 };
 
+// contract
 const contractKeys = [
   "id",
   "startingDate",
@@ -40,7 +41,6 @@ const contractKeys = [
   "priceMeal",
   "priceSnack",
 ];
-
 const contractToCreate = {
   kidId: 1,
   caregiver: "Nounou Isa",
@@ -64,7 +64,17 @@ const contractToCreate = {
   priceSnack: 1.5,
 };
 
+// user contract
+const userContractKeys = ["isMain", "userId", "contractId"];
+const userContractToCreate = {
+  isMain: true,
+  userId: 1,
+  contractId: 1,
+};
+
 module.exports = {
+  userContractKeys,
+  userContractToCreate,
   contractToCreate,
   contractKeys,
   userToCreate,
