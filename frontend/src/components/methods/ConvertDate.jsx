@@ -5,10 +5,19 @@ export default function ConvertDate(date) {
   return `${date.$y}-${month}-${day}`;
 }
 
-export function DateFromString(date) {
-  const dateArray = date.split("-");
-  const year = dateArray[0];
-  const month = dateArray[1];
-  const day = dateArray[2];
-  return { dateArray, year, month, day };
+export function ConvertTime(date) {
+  const hour = date.$H < 10 ? `0${date.$H}` : date.$H;
+  const minute = date.$m < 10 ? `0${date.$m}` : date.$m;
+  console.log("ConvertHour: heure:", `${hour}:${minute}`);
+  return `${hour}:${minute}:00`;
 }
+
+// function DateFromString(date) {
+//   const dateArray = date.split("-");
+//   const year = dateArray[0];
+//   const month = dateArray[1];
+//   const day = dateArray[2];
+//   return { dateArray, year, month, day };
+// }
+
+// export { ConvertDate, ConvertTime };

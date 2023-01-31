@@ -12,25 +12,26 @@ export default function CreateKid() {
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [kidBirthdate, setKidBirthdate] = useState(Date.now());
+  const parent = localStorage.getItem("userId");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("CreateKid: event:", event);
 
     try {
       const birthdate = ConvertDate(kidBirthdate);
-      console.log("CreateKid: kidBirthdate:", birthdate);
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/kid`, {
+        .post(`${import.meta.env.VITE_BACKEND_URL}/kid/add`, {
           lastname,
           firstname,
           birthdate,
+          parent,
         })
         .then((res) => {
           localStorage.setItem("kidId", res.data.id);
-          localStorage.setItem("lastname", lastname);
-          localStorage.setItem("firstname", firstname);
+          localStorage.setItem("kidLastname", lastname);
+          localStorage.setItem("kidFirstname", firstname);
           localStorage.setItem("kidBirthdate", kidBirthdate);
+          localStorage.setItem("kidParent", parent);
           console.log("Kid Created:", res);
         });
     } catch (err) {
@@ -52,6 +53,7 @@ export default function CreateKid() {
       <div>L'enfant</div>
       <TextField
         margin="normal"
+        variant="filled"
         sx={{ width: 300 }}
         id="lastname"
         label="Son nom"
@@ -61,6 +63,7 @@ export default function CreateKid() {
       />
       <TextField
         margin="normal"
+        variant="filled"
         sx={{ width: 300 }}
         id="firstname"
         label="Son prénom"
@@ -72,6 +75,8 @@ export default function CreateKid() {
       <br />
       <DatePicker
         inputFormat="DD-MM-YYYY"
+        margin="normal"
+        variant="filled"
         label="Sa date de naissance"
         value={kidBirthdate}
         onChange={(newValue) => {

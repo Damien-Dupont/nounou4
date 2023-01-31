@@ -38,7 +38,7 @@ export default function CreateParent() {
     const roleid = 2;
     try {
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/user`, {
+        .post(`${import.meta.env.VITE_BACKEND_URL}/user/add`, {
           lastname,
           firstname,
           roleid,
@@ -104,8 +104,9 @@ export default function CreateParent() {
       {/* <form onSubmit={handleSubmit}> */}
       <div>Vous, le parent</div>
       <TextField
-        margin="normal"
         sx={{ width: 300 }}
+        margin="normal"
+        variant="filled"
         id="lastname"
         label="Votre nom"
         size="small"
@@ -114,6 +115,7 @@ export default function CreateParent() {
       />
       <TextField
         margin="normal"
+        variant="filled"
         sx={{ width: 300 }}
         id="firstname"
         label="Votre prénom"
@@ -124,6 +126,7 @@ export default function CreateParent() {
       <br />
       <TextField
         margin="normal"
+        variant="filled"
         sx={{ width: 300 }}
         id="email"
         label="Votre email"
@@ -134,6 +137,7 @@ export default function CreateParent() {
 
       <TextField
         margin="normal"
+        variant="filled"
         sx={{ width: 300 }}
         id="password"
         label="Votre mot de passe"
@@ -167,6 +171,7 @@ export default function CreateParent() {
       <br />
       <TextField
         margin="normal"
+        variant="filled"
         sx={{ width: 300 }}
         error={passwordError}
         id="passwordConfirm"
