@@ -5,17 +5,15 @@ const models = require("../models");
 const nope = "Vous ne disposez pas des droits nécessaires à cette opération";
 
 const validateUser = (req, res, next) => {
-  console.log(req.body);
   const data = { ...req.body };
-  Object.keys(data).forEach((el) => {
-    if (data[el] === "" || data[el] === null) delete data[el];
-  });
+  // const stringPattern = /[a-zA-Z -]+/g;
+
   const { error } = Joi.object({
-    email: Joi.string().max(255).presence("required"),
-    password: Joi.string().max(30).presence("required"),
+    email: Joi.string().email().max(255).presence("required"),
+    password: Joi.string().max(50).min(8).presence("required"),
     lastname: Joi.string().max(80).presence("required"),
     firstname: Joi.string().max(80).presence("required"),
-    roleid: Joi.number().presence("required"),
+    roleId: Joi.number().integer().max(3).presence("required"),
   }).validate(data, { abortEarly: false });
 
   if (!error) {

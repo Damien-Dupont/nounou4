@@ -54,13 +54,13 @@ class UserController {
   };
 
   static add = async (req, res) => {
-    const { lastname, firstname, roleid, email } = req.body;
+    const { lastname, firstname, roleId, email } = req.body;
     const password = await passwordHash(req.body.password);
 
     models.user
-      .insert(lastname, firstname, roleid, email, password)
-      .then(([result]) => {
-        res.status(201).send({ ...req.body, id: result.insertId });
+      .insert(lastname, firstname, roleId, email, password)
+      .then((result) => {
+        res.status(201).json({ ...req.body, id: result[0].insertId });
       })
       .catch((err) => {
         console.error(err);
@@ -78,7 +78,7 @@ class UserController {
         }
         if (await passwordVerify(rows[0].password, req.body.password)) {
           const token = jwtSign(
-            { email: rows[0].email, role: rows[0].roleid, id: rows[0].id },
+            { email: rows[0].email, role: rows[0].roleId, id: rows[0].id },
             { expiresIn: "1h" }
           );
           // res.send({ token });

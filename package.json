@@ -1,9 +1,10 @@
 {
-  "name": "Nounou-et-nous---on-template-fullstack",
+  "name": "Nounou-et-nous",
   "version": "1.0.0",
-  "description": "",
+  "description": "---on-template-fullstack",
   "main": "index.js",
   "scripts": {
+    "test": "NODE_ENV=test jest",
     "clear": "sudo lsof -i :5001 && lsof -i :3001 && kill -9 $(sudo lsof -t -i:5001) && kill -9 $(sudo lsof -t -i:3001)",
     "setup": "npm i && husky install && npm --prefix ./frontend i && npm --prefix ./backend i",
     "migrate": "cd backend/ && node migrate.js && cd ..",
@@ -22,7 +23,9 @@
     "babel-jest": "^29.4.0",
     "concurrently": "^7.0.0",
     "husky": "^7.0.0",
-    "sass": "^1.57.1"
+    "jest": "^29.4.1",
+    "sass": "^1.57.1",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -30,6 +33,7 @@
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.6",
     "axios": "^1.2.2",
+    "jest-stare": "^2.4.1",
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",

@@ -53,7 +53,6 @@ class ContractController {
   };
 
   static add = (req, res) => {
-    console.log("req", req.body.contract);
     const {
       startingDate,
       kidId,
@@ -75,9 +74,7 @@ class ContractController {
       priceLongHousehold,
       priceMeal,
       priceSnack,
-    } = req.body.contract;
-
-    // TODO validations (length, format...)
+    } = req.body;
 
     models.contract
       .insert(
@@ -102,9 +99,8 @@ class ContractController {
         priceMeal,
         priceSnack
       )
-      .then(([result]) => {
-        res.location(`/contracts/${result.insertId}`).sendStatus(201);
-        // res.status(201).send({ ...req.body, id: result.insertId });
+      .then((result) => {
+        res.status(201).json({ ...req.body, id: result[0].insertId });
       })
       .catch((err) => {
         console.error(err);

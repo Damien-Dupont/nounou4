@@ -261,62 +261,32 @@ export default function CreateContract() {
       setFridayStart(undefined);
       setFridayEnd(undefined);
     }
-    // if (priceOverHour === 0) {
-    //   setPriceOverHour(priceHour);
-    // }
-    // if (priceLongHousehold === 0) {
-    //   setPriceLongHousehold(priceHousehold);
-    // }
-    console.log(
-      "handleSubmit IN: ",
-      kidId,
-      caregiver,
-      startingDate,
-      weeksPerYear,
-      mondayStart,
-      mondayEnd,
-      tuesdayStart,
-      tuesdayEnd,
-      wednesdayStart,
-      wednesdayEnd,
-      thursdayStart,
-      thursdayEnd,
-      fridayStart,
-      fridayEnd,
-      priceHour,
-      priceOverHour,
-      priceHousehold,
-      priceLongHousehold,
-      priceMeal,
-      priceSnack
-    );
-    // debugger;
+
+    // TODO: check if dayEnd > dayStart * 5
+
     try {
-      const contract = {
-        kidId,
-        caregiver,
-        startingDate,
-        weeksPerYear,
-        mondayStart,
-        mondayEnd,
-        tuesdayStart,
-        tuesdayEnd,
-        wednesdayStart,
-        wednesdayEnd,
-        thursdayStart,
-        thursdayEnd,
-        fridayStart,
-        fridayEnd,
-        priceHour,
-        priceOverHour,
-        priceHousehold,
-        priceLongHousehold,
-        priceMeal,
-        priceSnack,
-      };
       axios
         .post(`${import.meta.env.VITE_BACKEND_URL}/contract/add`, {
-          contract,
+          kidId,
+          caregiver,
+          startingDate,
+          weeksPerYear,
+          mondayStart,
+          mondayEnd,
+          tuesdayStart,
+          tuesdayEnd,
+          wednesdayStart,
+          wednesdayEnd,
+          thursdayStart,
+          thursdayEnd,
+          fridayStart,
+          fridayEnd,
+          priceHour,
+          priceOverHour,
+          priceHousehold,
+          priceLongHousehold,
+          priceMeal,
+          priceSnack,
         })
         .then((res) => {
           localStorage.setItem("contractId", res.data.id);
