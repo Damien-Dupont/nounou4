@@ -2,55 +2,55 @@ const models = require("../models");
 // const { jwtSign } = require("../services/jwt");
 
 class ContractController {
-  static browse = (req, res) => {
-    models.contract
-      .findAll()
-      .then(([rows]) => {
-        res.send(rows);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
+  // static browse = (req, res) => {
+  //   models.contract
+  //     .findAll()
+  //     .then(([rows]) => {
+  //       res.send(rows);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       res.sendStatus(500);
+  //     });
+  // };
 
-  static read = (req, res) => {
-    models.contract
-      .find(req.params.id)
-      .then(([rows]) => {
-        if (rows[0] == null) {
-          res.sendStatus(404);
-        } else {
-          res.send(rows[0]);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
+  // static read = (req, res) => {
+  //   models.contract
+  //     .find(req.params.id)
+  //     .then(([rows]) => {
+  //       if (rows[0] == null) {
+  //         res.sendStatus(404);
+  //       } else {
+  //         res.send(rows[0]);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       res.sendStatus(500);
+  //     });
+  // };
 
-  static edit = (req, res) => {
-    const contract = req.body;
+  // static edit = (req, res) => {
+  //   const contract = req.body;
 
-    // TODO validations (length, format...)
+  //   // TODO validations (length, format...)
 
-    contract.id = parseInt(req.params.id, 10);
+  //   contract.id = parseInt(req.params.id, 10);
 
-    models.contract
-      .update(contract)
-      .then(([result]) => {
-        if (result.affectedRows === 0) {
-          res.sendStatus(404);
-        } else {
-          res.sendStatus(204);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
+  //   models.contract
+  //     .update(contract)
+  //     .then(([result]) => {
+  //       if (result.affectedRows === 0) {
+  //         res.sendStatus(404);
+  //       } else {
+  //         res.sendStatus(204);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       res.sendStatus(500);
+  //     });
+  // };
 
   static add = (req, res) => {
     const {
@@ -104,25 +104,25 @@ class ContractController {
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(500);
+        res.sendStatus(501);
       });
   };
 
-  static delete = (req, res) => {
-    models.contract
-      .delete(req.params.id)
-      .then(([result]) => {
-        if (result.affectedRows === 0) {
-          res.sendStatus(404);
-        } else {
-          res.sendStatus(204);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
+  // static delete = (req, res) => {
+  //   models.contract
+  //     .delete(req.params.id)
+  //     .then(([result]) => {
+  //       if (result.affectedRows === 0) {
+  //         res.sendStatus(404);
+  //       } else {
+  //         res.sendStatus(204);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       res.sendStatus(500);
+  //     });
+  // };
 }
 
 module.exports = ContractController;

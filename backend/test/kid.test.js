@@ -4,6 +4,8 @@ const supertest = require("supertest");
 const app = require("../src/app");
 const { kidToCreate, kidKeys } = require("./testData");
 
+// jest.useFakeTimers();
+
 // describe("SILENCING CONSOLES", () => {
 //   let consoleSpy;
 
@@ -46,16 +48,32 @@ describe("KID ROUTES", () => {
     persistantData.kid = res.body;
   });
 
-  // it("should get the user with id 1 (GET-ONE)", async () => {
-  //   const res = await supertest(app)
-  //     .get("/user/1")
-  //     .expect(200)
-  //     .expect("Content-Type", /json/);
+  it("should get the kid with previously created id (GET-ONE)", async () => {
+    const res = await supertest(app)
+      .get(`/kid/${persistantData.kid.id}`)
+      .expect(200)
+      .expect("Content-Type", /json/);
 
-  //   userKeys.map((prop) => {
-  //     expect(res.body).toHaveProperty(prop);
-  //   });
-  // });
+    kidKeys.map((prop) => {
+      expect(res.body).toHaveProperty(prop);
+    });
+  });
+
+  it("should get the kids from parent 1 (BrowseByParent)", async () => {
+    const res = await supertest(app)
+      .get("/kid/parent/1")
+      .expect(200)
+      .expect("Content-Type", /json/);
+
+    expect(Array.isArray(res.body)).toBe(true);
+
+    res.body.forEach((kid) => {
+      expect(kid).toHaveProperty("parent", 1);
+      kidKeys.map((prop) => {
+        expect(kid).toHaveProperty(prop);
+      });
+    });
+  });
 
   // it(`should update the previously created user (PUT)`, async () => {
   //   await supertest(app)
@@ -71,4 +89,8 @@ describe("KID ROUTES", () => {
 
   //   expect(res.body).toHaveProperty("caregiver", "Isabelle N.");
   // });
+
+  it("should delete previously created kid (DELETE)", async () => {
+    await supertest(app).delete(`/kid/${persistantData.kid.id}`).expect(204);
+  });
 });

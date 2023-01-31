@@ -3,10 +3,10 @@ const AbstractManager = require("./AbstractManager");
 class KidManager extends AbstractManager {
   static table = "kid";
 
-  insert(lastname, firstname, birthdate, parentId) {
+  insert(lastname, firstname, birthdate, parent) {
     return this.connection.query(
       `insert into ${this.table} (lastname, firstname, birthdate, parent) values (?, ?, ?, ?)`,
-      [lastname, firstname, birthdate, parentId]
+      [lastname, firstname, birthdate, parent]
     );
   }
 
@@ -22,7 +22,7 @@ class KidManager extends AbstractManager {
       `select * from ${this.table} where parent = ? ORDER BY birthdate ASC`,
       [parentId]
     );
-    // .then((res) => res[0]);
+    // .then((res) => console.log("res", res));
   }
 
   findbyName(name) {

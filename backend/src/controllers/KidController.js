@@ -27,10 +27,9 @@ class KidController {
   };
 
   static browseByParent = (req, res) => {
-    console.log("browseByParent", req.body);
-    const parent = req.params.id;
+    const parentId = req.params.id;
     models.kid
-      .findbyParent(parent)
+      .findbyParent(parentId)
       .then(([rows]) => {
         res.send(rows);
       })
@@ -79,10 +78,10 @@ class KidController {
   };
 
   static add = (req, res) => {
-    const { lastname, firstname, birthdate, parentId } = req.body;
+    const { lastname, firstname, birthdate, parent } = req.body;
 
     models.kid
-      .insert(lastname, firstname, birthdate, parentId)
+      .insert(lastname, firstname, birthdate, parent)
       .then((result) => {
         res.status(201).send({ ...req.body, id: result[0].insertId });
       })

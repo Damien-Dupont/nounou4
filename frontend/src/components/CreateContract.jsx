@@ -1,7 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import moment from "moment";
 
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -212,27 +211,6 @@ export default function CreateContract() {
   //     case "fridayEnd":
   //       setFridayEnd(time);
   //       break;
-
-  //     // case "mondayStartLundi":
-  //     //   setCare[0] = !care[0];
-  //     //   break;
-
-  //     // case "tuesdayStartMardi":
-  //     //   setCare[1] = !care[1];
-  //     //   break;
-
-  //     // case "wednesdayStartMercredi":
-  //     //   setCare[2] = !care[2];
-  //     //   break;
-
-  //     // case "thursdayStartJeudi":
-  //     //   setCare[3] = !care[3];
-  //     //   break;
-
-  //     // case "fridayStartVendredi":
-  //     //   setCare[4] = !care[4];
-  //     // break;
-
   //     default:
   //       console.log("error");
   //   }

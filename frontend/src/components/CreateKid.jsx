@@ -10,7 +10,7 @@ export default function CreateKid() {
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
   const [kidBirthdate, setKidBirthdate] = useState(Date.now());
-  const parentId = localStorage.getItem("userId");
+  const parent = localStorage.getItem("userId");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -23,14 +23,14 @@ export default function CreateKid() {
           lastname,
           firstname,
           birthdate,
-          parentId,
+          parent,
         })
         .then((res) => {
           localStorage.setItem("kidId", res.data.id);
           localStorage.setItem("kidLastname", lastname);
           localStorage.setItem("kidFirstname", firstname);
           localStorage.setItem("kidBirthdate", kidBirthdate);
-          localStorage.setItem("kidParentId", parentId);
+          localStorage.setItem("kidParent", parent);
           console.log("Kid Created:", res);
         });
     } catch (err) {
