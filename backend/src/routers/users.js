@@ -16,6 +16,6 @@ usersRouter.get("/user/:id", checkAuth, decodeCookie, UserController.read);
 usersRouter.post("/login", validateLogin, UserController.login);
 usersRouter.post("/user/add", validateUser, UserController.add);
 
-usersRouter.put("/user/update/:id", checkAuth, UserController.edit);
+// usersRouter.put("/user/update/:id", checkAuth, UserController.edit);
 
 module.exports = usersRouter;

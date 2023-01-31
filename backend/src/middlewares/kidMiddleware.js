@@ -7,7 +7,7 @@ const validateKid = (req, res, next) => {
     lastname: Joi.string().max(80).presence("required"),
     firstname: Joi.string().max(80),
     birthdate: Joi.string().max(11).presence("required"),
-    parentId: Joi.number().integer().min(1).presence("required"),
+    parent: Joi.number().integer().min(1).presence("required"),
   }).validate(data, { abortEarly: false });
 
   if (!error) {

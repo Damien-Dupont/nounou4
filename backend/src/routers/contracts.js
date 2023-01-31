@@ -7,21 +7,21 @@ const {
   validateContract,
 } = require("../middlewares/contractMiddleware");
 
-const {
-  checkAuth,
-  // checkAdminRights,
-  decodeCookie,
-  // checkAdminRights,
-} = require("../middlewares/userMiddleware");
+// const {
+//   checkAuth,
+//   // checkAdminRights,
+//   // decodeCookie,
+//   // checkAdminRights,
+// } = require("../middlewares/userMiddleware");
 
 const { ContractController } = require("../controllers");
 
-contractsRouter.get(
-  "/contract/:id",
-  checkAuth,
-  decodeCookie,
-  ContractController.read
-);
+// contractsRouter.get(
+//   "/contract/:id",
+//   checkAuth,
+//   decodeCookie,
+//   ContractController.read
+// );
 
 contractsRouter.post(
   "/contract/add",
@@ -30,6 +30,6 @@ contractsRouter.post(
   ContractController.add
 );
 
-contractsRouter.put("/contract/update/:id", checkAuth, ContractController.edit);
+// contractsRouter.put("/contract/update/:id", checkAuth, ContractController.edit);
 
 module.exports = contractsRouter;

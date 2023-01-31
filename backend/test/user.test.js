@@ -4,6 +4,8 @@ const supertest = require("supertest");
 const app = require("../src/app");
 const { userToCreate, userKeys } = require("./testData");
 
+// jest.useFakeTimers();
+
 describe("SILENCING CONSOLES", () => {
   let consoleSpy;
 
