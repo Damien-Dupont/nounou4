@@ -136,133 +136,156 @@
     }
 
     .declare {
-      opacity: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(6, 1fr);
+      grid-column-gap: 3px;
+      align-items: center;
+      justify-content: space-between;
       height: 160px;
       width: 100%;
       background-color: #efefef;
-      // background-color: aquamarine;
-      display: flex;
-      flex-direction: column;
 
-      &__title {
-        height: 35px;
-        width: 100%;
+      span.value {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 6px;
+        height: 20px;
+        width: 50px;
+        color: #efefef;
+        font-size: 14px;
+        line-height: 17px;
+        background-color: #d60093;
       }
 
-      &__element {
+      .total {
+        // display: flex;
+        // align-items: center;
+        // justify-content: center;
+        border-radius: 6px;
+        height: 70px;
+        width: 100%;
+        background-color: #f27200;
+        color: #0e000d;
+        font-weight: 600;
+
+        p {
+          margin-bottom: 5px;
+        }
+
+        span {
+          color: #f9f9f9;
+        }
+      }
+
+      div.left,
+      div.right {
+        font-size: 10px;
+        height: 25px;
         display: flex;
         flex-direction: row;
         align-items: center;
         justify-content: space-between;
-
-        &__left {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: space-between;
-        }
-
-        &__right {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: space-between;
-
-          &__salary {
-            border-radius: 6px;
-            height: 69px;
-            width: 149px;
-            background-color: #f27200;
-            color: #0e000d;
-            p:nth-child(2) {
-              color: #f9f9f9;
-            }
-          }
-
-          &__short {
-            width: 160px;
-          }
-        }
-
-        &__label {
-          height: 20px;
-          width: 100px;
-          text-align: center;
-          vertical-align: middle;
-          font-size: 16px;
-          font-family: Inter;
-          line-height: auto;
-          color: #000000;
-        }
-
-        &__value {
-          height: 20px;
-          width: 50px;
-          text-align: center;
-          vertical-align: middle;
-          font-size: 16px;
-          font-family: Inter;
-          line-height: auto;
-          color: #000000;
-        }
       }
-      &__value {
-        text-align: center;
-        vertical-align: middle;
+
+      &__title {
+        grid-area: 1 / 1 / 2 / 4;
         font-size: 16px;
-        font-family: Inter;
-        line-height: auto;
-        color: #000000;
+        line-height: 19px;
+        height: 35px;
+        width: 100%;
       }
 
-      .declare-_value {
-        border-radius: 6px;
-        height: 20px;
-        width: 50px;
+      &__hours {
+        grid-area: 2 / 1 / 3 / 2;
+      }
+      &__daysPerMonth {
+        grid-area: 3 / 1 / 4 / 2;
+      }
+      &__overhours {
+        grid-area: 4 / 1 / 5 / 2;
+      }
+      &__priceHour {
+        grid-area: 5 / 1 / 6 / 2;
+      }
+      &__daysoff {
+        grid-area: 6 / 1 / 7 / 2;
+      }
+      &__salary {
+        grid-area: 2 / 2 / 5 / 3;
+      }
+      &__household {
+        grid-area: 5 / 2 / 6 / 3;
+      }
+      &__meal {
+        grid-area: 6 / 2 / 7 / 3;
+      }
 
-        background-color: #d60093;
+      &__short {
+        width: 160px;
       }
     }
+
+    //   &__value {
+    //     height: 20px;
+    //     width: 50px;
+    //     text-align: center;
+    //     vertical-align: middle;
+    //     font-size: 16px;
+    //     font-family: Inter;
+    //     line-height: auto;
+    //     color: #000000;
+    //   }
+    // }
+    // &__value {
+    //   text-align: center;
+    //   vertical-align: middle;
+    //   font-size: 16px;
+    //   font-family: Inter;
+    //   line-height: auto;
+    //   color: #000000;
+    // }
   }
-}
 
-.text-5-4 {
-  text-align: center;
-  vertical-align: middle;
-  font-size: 14px;
-  font-family: Inter;
-  line-height: auto;
+  .text-5-4 {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    font-family: Inter;
+    line-height: auto;
 
-  color: #f9f9f9;
-}
-.events-add-button {
-  border-radius: 6px;
-  height: 28px;
-  width: 159px;
-  background-color: #efefef;
-  border: 1px solid #1870c7;
-}
+    color: #f9f9f9;
+  }
+  .events-add-button {
+    border-radius: 6px;
+    height: 28px;
+    width: 159px;
+    background-color: #efefef;
+    border: 1px solid #1870c7;
+  }
 
-.text-5-8 {
-  text-align: center;
-  vertical-align: middle;
-  font-size: 14px;
-  font-family: Inter;
-  line-height: auto;
-  color: #f9f9f9;
-}
+  .text-5-8 {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    font-family: Inter;
+    line-height: auto;
+    color: #f9f9f9;
+  }
 
-.text-6-0 {
-  text-align: center;
-  vertical-align: middle;
-  font-size: 12px;
+  .text-6-0 {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 12px;
 
-  font-family: Inter;
-  line-height: auto;
-  color: #ffffff;
-}
+    font-family: Inter;
+    line-height: auto;
+    color: #ffffff;
+  }
 
-.img-7-0 {
-  height: 49px;
-  width: 54px;
+  .img-7-0 {
+    height: 49px;
+    width: 54px;
+  }
 }

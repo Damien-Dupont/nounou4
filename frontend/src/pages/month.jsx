@@ -16,12 +16,34 @@ function camelCase(string) {
 export default function MonthPage() {
   const now = new Date();
 
+  const [daysOfMonth, setDaysOfMonth] = useState([]);
   const [currentYear, setCurrentYear] = useState(now.getFullYear());
   const [currentMonth, setCurrentMonth] = useState(now.getMonth());
   const [longMonth, setLongMonth] = useState();
-  const [daysOfMonth, setDaysOfMonth] = useState([]);
+
+  console.log("daysOfMonth", daysOfMonth);
 
   // TODO: push des cases vides , autant que nécessaires pour ajuster le premier jour du mois
+
+  const populateDaysOfMonth = () => {
+    const daysInCurrentMonth = new Date(
+      currentYear,
+      currentMonth + 1,
+      0
+    ).getDate();
+    const daysTemp = [];
+    for (let i = 1; i <= daysInCurrentMonth; i++) {
+      const date = new Date(currentYear, currentMonth, i);
+      const dayStr = date.toLocaleString("Fr-fr", { weekday: "long" });
+      daysTemp.push({
+        dayNumber: i,
+        dayString: dayStr,
+        care:
+          dayStr !== "samedi" && dayStr !== "dimanche" && dayStr !== "mercredi",
+      });
+    }
+    setDaysOfMonth(daysTemp);
+  };
 
   const daysLabel = [
     "Lundi",
@@ -62,34 +84,18 @@ export default function MonthPage() {
         )
       )
     );
-
-    const daysInCurrentMonth = new Date(
-      currentYear,
-      currentMonth + 1,
-      0
-    ).getDate();
-    console.log("monthLength", daysInCurrentMonth);
-    const populateDaysOfMonth = () => {
-      const daysTemp = [];
-      for (let i = 1; i <= daysInCurrentMonth; i++) {
-        const date = new Date(currentYear, currentMonth, i);
-        const dayStr = date.toLocaleString("Fr-fr", { weekday: "long" });
-        daysTemp.push({
-          dayNumber: i,
-          dayString: dayStr,
-          care:
-            dayStr !== "samedi" &&
-            dayStr !== "dimanche" &&
-            dayStr !== "mercredi",
-        });
-      }
-      setDaysOfMonth(daysTemp);
-      console.log("daysTemp", daysTemp);
-    };
     populateDaysOfMonth();
   }, [currentMonth]);
-  console.log("daysOfMonth", daysOfMonth);
 
+  const heuresNormales = 1;
+  const joursMensualises = 2;
+  const heuresComplementaires = 3;
+  const salaireHoraire = 4;
+  const joursConges = 5;
+
+  const salaireNet = 6;
+  const entretien = 7;
+  const repas = 8;
   return (
     <div className="background">
       <div className="header">
@@ -119,204 +125,197 @@ export default function MonthPage() {
               <div className="days__label">{day}</div>
             ))}
           </div>
-          <div className="calendar">
-            {/* {daysOfMonth.map((day) => (
+          {/* <div className="calendar">
+            {daysOfMonth.map((day) => (
               <div className={`calendar__care__${day.care}`}>{day.day}</div>
-            ))} */}
-            {/* <div className="paper-declare__calendar">
-            <div className="paper-declare__calendar__lign">
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2">1</p>
+            ))}
+            <div className="paper-declare__calendar">
+              <div className="paper-declare__calendar__lign">
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2">1</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3">2</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-4">3</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-5">4</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-6">5</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-7">6</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-8">7</p>
+                </div>
               </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3">2</p>
+              <div className="paper-declare__calendar__lign">
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-9">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-0">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-1">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-2">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-3">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-4">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-5">29</p>
+                </div>
               </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-4">3</p>
+              <div className="paper-declare__calendar__lign">
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-6">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-7">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-8">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-1-9">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-0">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-1">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-2">29</p>
+                </div>
               </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-5">4</p>
+              <div className="paper-declare__calendar__lign">
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-3">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-4">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-5">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-6">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-7">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-8">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-2-9">29</p>
+                </div>
               </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-6">5</p>
+              <div className="paper-declare__calendar__lign">
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-0">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-1">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-2">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-3">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-4">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-5">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-6">29</p>
+                </div>
               </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-7">6</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-8">7</p>
-              </div>
-            </div>
-            <div className="paper-declare__calendar__lign">
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-9">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-0">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-1">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-2">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-3">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-4">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-5">29</p>
-              </div>
-            </div>
-            <div className="paper-declare__calendar__lign">
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-6">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-7">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-8">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-1-9">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-0">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-1">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-2">29</p>
-              </div>
-            </div>
-            <div className="paper-declare__calendar__lign">
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-3">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-4">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-5">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-6">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-7">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-8">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-2-9">29</p>
-              </div>
-            </div>
-            <div className="paper-declare__calendar__lign">
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-0">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-1">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-2">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-3">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-4">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-5">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-6">29</p>
-              </div>
-            </div>
-            <div className="paper-declare__calendar__lign">
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-7">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-8">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-3-9">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-4-0">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-4-1">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-4-2">29</p>
-              </div>
-              <div className="paper-declare__calendar__lign__day">
-                <p className="text-4-3">29</p>
+              <div className="paper-declare__calendar__lign">
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-7">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-8">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-3-9">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-4-0">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-4-1">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-4-2">29</p>
+                </div>
+                <div className="paper-declare__calendar__lign__day">
+                  <p className="text-4-3">29</p>
+                </div>
               </div>
             </div>
           </div> */}
-            {/* <button type="submit" className="events-add-button">
-            <p className="text-4-4">Ajouter un évènement</p>
-          </button>
-          <p className="text-4-5">Pas d’évènements ce mois-ci.</p> */}
-            <div className="declare">
-              <p className="declare__title">À déclarer ce mois-ci :</p>
-              <div className="declare__element">
-                <div className="declare__element__left">
-                  <div className="declare__value">
-                    <p className="declare__value">2,5 J</p>
-                  </div>
-                  <p className="text-5-1">Jours de congés acquis</p>
-                </div>
-                <div className="declare__element__left">
-                  <div className="declare__value">
-                    <p className="declare__value">4,00 €</p>
-                  </div>
-                  <p className="text-5-3">Salaire Horaire</p>
-                </div>
-                <div className="declare__element__left">
-                  <div className="declare__value">
-                    <p className="declare__value">0 J</p>
-                  </div>
-                  <p className="text-5-5">Heures complémentaires</p>
-                </div>
-                <div className="declare__element__left">
-                  <div className="declare__value">
-                    <p className="declare__value">10 J</p>
-                  </div>
-                  <p className="text-5-7">Jours mensualisés</p>
-                </div>
-                <div className="declare__element__left">
-                  <div className="declare__value">
-                    <p className="declare__value">101 h</p>
-                  </div>
-                  <p className="text-5-9">Heures normales</p>
-                </div>
-                <div className="declare__element__right__salary">
-                  <p>Salaire Net Total:</p>
-                  <p>361,78 €</p>
-                </div>
-                <div className="declare__element__right__short">
-                  <div className="declare__value">
-                    <p className="text-4-8">65,00 €</p>
-                  </div>
-                  <p className="text-4-9">Indemnités de repas</p>
-                </div>
-                <div className="declare__element__right__short">
-                  <div className="declare__value">
-                    <p className="text-6-0">33,90 €</p>
-                  </div>
-                  <p className="text-6-1">Indemnités entretien</p>
-                </div>
-              </div>
+          <div className="paper__events">
+            <p className="text-4-5">Pas d’évènements ce mois-ci.</p>
+            <button type="submit" className="events-add-button">
+              <p className="text-4-4">Ajouter un évènement</p>
+            </button>
+          </div>
+          <div className="declare">
+            <p className="declare__title">À déclarer ce mois-ci :</p>
+            <div className="declare__hours left">
+              <p>Heures normales</p>
+              <span className="declare__hours value">{heuresNormales} h</span>
+            </div>
+            <div className="declare__daysPerMonth left">
+              <p>Jours mensualisés</p>
+              <span className="declare__daysPerMonth value">
+                {joursMensualises} J
+              </span>
+            </div>
+            <div className="declare__overhours left">
+              <p>Heures complémentaires</p>
+              <span className="declare__overhours value">
+                {heuresComplementaires} h
+              </span>
+            </div>
+            <div className="declare__priceHour left">
+              <p>Salaire Horaire</p>
+              <span className="declare__priceHour value">
+                {salaireHoraire} €
+              </span>
+            </div>
+            <div className="declare__daysoff left">
+              <p>Jours de congés acquis</p>
+              <span className="declare__daysoff value">{joursConges} J</span>
+            </div>
+
+            <div className="declare__salary total">
+              <p>Salaire Net Total:</p>
+              <span className="declare__salary total">{salaireNet} €</span>
+            </div>
+            <div className="declare__household right">
+              Indemnités entretien
+              <span className="declare__household value">{entretien} €</span>
+            </div>
+            <div className="declare__meal right">
+              <p>Indemnités de repas</p>
+              <span className="declare__meal value">{repas} €</span>
             </div>
           </div>
         </div>
