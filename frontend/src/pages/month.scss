@@ -1,29 +1,120 @@
-.page--background {
-  height: 765px;
-  width: 459px;
-  background-color: #ffffff;
+@font-face {
+  font-family: "dumontCursive";
+  src: url("../assets/cursive-dumont-webfont.woff2") format("woff2"),
+    url("../assets/cursive-dumont-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.background {
+  background: no-repeat url(../assets/purpleOrangeBack.svg);
+}
+
+.header {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  vertical-align: center;
+  font-size: 36px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: auto;
+  color: #000000;
+
+  &__logo {
+    align-items: left;
+    height: 50px;
+    width: 50px;
+    margin: 10px;
+  }
+
+  &__month {
+    font-family: "dumontCursive";
+    height: 73px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    vertical-align: center;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 70px 0 0;
+  }
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 10px;
+}
+
+.item {
+  background-color: lightgray;
+  border: 1px solid gray;
+  padding: 10px;
+  text-align: center;
 }
 
 .allframe {
-  height: 765px;
-  width: 459px;
+  // height: 765px;
+  // width: 459px;
 
-  .paper-declare {
-    height: 652px;
-    width: 368px;
+  .paper {
+    margin: 0 45px 40px 45px;
+    border-radius: 6px;
+    background-color: rgba(#f0f0f0, 0.7);
 
-    &__paperback {
-      opacity: 0.699999988079071;
-      height: 652px;
-      width: 368px;
-      background-color: #efefef;
+    .days {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: row;
+      text-align: center;
+      align-items: center;
+      width: 100%;
+      height: 28px;
+
+      &__label {
+        border-radius: 6px;
+        height: 28px;
+        width: 50px;
+        // opacity: 100%;
+        background-color: #fff;
+        border: 1px solid #0e000d;
+
+        font-size: 10px;
+        line-height: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-family: Arial, Helvetica, sans-serif;
+        color: #0e000d;
+      }
     }
 
-    &__calendar {
-      height: 314px;
-      width: 368px;
+    .calendar {
+      // height: 314px;
+      // width: 368px;
       background-color: rgba(51, 51, 51, 0);
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      // grid-gap: 10px;
 
+      &__care {
+        border-radius: 6px;
+        padding: 1px;
+        text-align: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+
+        &__true {
+          background-color: #d60093;
+        }
+
+        &__false {
+          background-color: #f27200;
+        }
+      }
       &___lign {
         height: 50px;
         width: 362px;
@@ -41,6 +132,95 @@
             background-color: #f27200;
           }
         }
+      }
+    }
+
+    .declare {
+      opacity: 1;
+      height: 160px;
+      width: 100%;
+      background-color: #efefef;
+      // background-color: aquamarine;
+      display: flex;
+      flex-direction: column;
+
+      &__title {
+        height: 35px;
+        width: 100%;
+      }
+
+      &__element {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        &__left {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        &__right {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+
+          &__salary {
+            border-radius: 6px;
+            height: 69px;
+            width: 149px;
+            background-color: #f27200;
+            color: #0e000d;
+            p:nth-child(2) {
+              color: #f9f9f9;
+            }
+          }
+
+          &__short {
+            width: 160px;
+          }
+        }
+
+        &__label {
+          height: 20px;
+          width: 100px;
+          text-align: center;
+          vertical-align: middle;
+          font-size: 16px;
+          font-family: Inter;
+          line-height: auto;
+          color: #000000;
+        }
+
+        &__value {
+          height: 20px;
+          width: 50px;
+          text-align: center;
+          vertical-align: middle;
+          font-size: 16px;
+          font-family: Inter;
+          line-height: auto;
+          color: #000000;
+        }
+      }
+      &__value {
+        text-align: center;
+        vertical-align: middle;
+        font-size: 16px;
+        font-family: Inter;
+        line-height: auto;
+        color: #000000;
+      }
+
+      .declare-_value {
+        border-radius: 6px;
+        height: 20px;
+        width: 50px;
+
+        background-color: #d60093;
       }
     }
   }
@@ -62,45 +242,6 @@
   background-color: #efefef;
   border: 1px solid #1870c7;
 }
-.declare {
-  height: 160px;
-  width: 368px;
-  background-color: #efefef;
-
-  &__value {
-    text-align: center;
-    vertical-align: middle;
-    font-size: 16px;
-    font-family: Inter;
-    line-height: auto;
-    color: #000000;
-  }
-}
-
-.declare-_salary {
-  border-radius: 6px;
-  height: 69px;
-  width: 149px;
-  background-color: #f27200;
-  border: 1px solid rgba(0, 0, 0, 0);
-}
-
-.declare-_value {
-  border-radius: 6px;
-  height: 20px;
-  width: 50px;
-
-  background-color: #d60093;
-}
-
-.declare__element {
-  height: 20px;
-  width: 184px;
-
-  &___short {
-    width: 160px;
-  }
-}
 
 .text-5-8 {
   text-align: center;
@@ -121,45 +262,6 @@
   color: #ffffff;
 }
 
-.day-_label {
-  border-radius: 6px;
-  height: 28px;
-  width: 50px;
-
-  background-color: #efefef;
-}
-
-.rectangle-1 {
-  border-radius: 6px;
-  height: 28px;
-  width: 50px;
-  background-color: #efefef;
-
-  border: 1px solid #555555;
-}
-
-.header {
-  height: 73px;
-  width: 459px;
-
-  &__logo {
-    height: 73px;
-    width: 73px;
-  }
-}
-.text-6-9 {
-  text-align: center;
-  vertical-align: top;
-  font-size: 36px;
-  font-family: Homemade Apple;
-  line-height: auto;
-  color: #000000;
-}
-.month--next {
-  transform: rotate(-90deg);
-  height: 39px;
-  width: 39px;
-}
 .img-7-0 {
   height: 49px;
   width: 54px;
