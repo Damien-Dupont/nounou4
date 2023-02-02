@@ -26,7 +26,12 @@ class ContractManager extends AbstractManager {
     priceSnack
   ) {
     return this.connection.query(
-      `insert into ${this.table} (starting_date, kid_id, caregiver, weeks_per_year, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, price_hour, price_over_hour, price_household, price_long_household, price_meal, price_snack)
+      `INSERT INTO ${this.table} (starting_date, kid_id, caregiver,
+        weeks_per_year, monday_start, monday_end, tuesday_start,
+        tuesday_end, wednesday_start, wednesday_end, thursday_start,
+        thursday_end, friday_start, friday_end, price_hour,
+        price_over_hour, price_household, price_long_household,
+        price_meal, price_snack)
       values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         startingDate,
@@ -53,12 +58,12 @@ class ContractManager extends AbstractManager {
     );
   }
 
-  updateAny(contract, column, value) {
-    return this.connection.query(
-      `update ${this.table} set ${column} = ? where id_contract = ?`,
-      [value, contract.id]
-    );
-  }
+  // updateAny(contract, column, value) {
+  //   return this.connection.query(
+  //     `update ${this.table} set ${column} = ? where id_contract = ?`,
+  //     [value, contract.id]
+  //   );
+  // }
 
   // updateStart(contract, startingDate) {
   //   return this.connection.query(

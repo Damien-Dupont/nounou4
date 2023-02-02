@@ -65,11 +65,11 @@ const contractToCreate = {
 };
 
 // user contract
-const userContractKeys = ["isMain", "userId", "contractId"];
+const userContractKeys = ["isMain", "user", "contract"];
 const userContractToCreate = {
-  isMain: true,
-  userId: 1,
-  contractId: 1,
+  isMain: 1,
+  user: 3,
+  contract: 4,
 };
 
 module.exports = {

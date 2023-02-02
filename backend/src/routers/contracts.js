@@ -1,27 +1,11 @@
 const express = require("express");
 
 const contractsRouter = express.Router();
-
+const { ContractController } = require("../controllers");
 const {
   prepareData,
   validateContract,
 } = require("../middlewares/contractMiddleware");
-
-// const {
-//   checkAuth,
-//   // checkAdminRights,
-//   // decodeCookie,
-//   // checkAdminRights,
-// } = require("../middlewares/userMiddleware");
-
-const { ContractController } = require("../controllers");
-
-// contractsRouter.get(
-//   "/contract/:id",
-//   checkAuth,
-//   decodeCookie,
-//   ContractController.read
-// );
 
 contractsRouter.post(
   "/contract/add",
@@ -29,7 +13,19 @@ contractsRouter.post(
   validateContract,
   ContractController.add
 );
+module.exports = contractsRouter;
+
+// const {
+//   checkAuth,
+//   // checkAdminRights,
+//   // decodeCookie,
+//   // checkAdminRights,
+// } = require("../middlewares/userMiddleware");
+// contractsRouter.get(
+//   "/contract/:id",
+//   checkAuth,
+//   decodeCookie,
+//   ContractController.read
+// );
 
 // contractsRouter.put("/contract/update/:id", checkAuth, ContractController.edit);
-
-module.exports = contractsRouter;
