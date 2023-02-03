@@ -89,6 +89,12 @@ export function LocalizedDatePicker() {
 }
 
 export default function CreateContract() {
+  // // dev data
+  // localStorage.setItem("userId", 1);
+  // localStorage.setItem("lastname", "Dup0nt");
+  // localStorage.setItem("firstname", "Dam1en");
+  // localStorage.setItem("role", "parent");
+  // localStorage.setItem("email", "mon email");
   // user data
   const userId = localStorage.getItem("userId") || undefined;
   const userLastname = localStorage.getItem("lastname") || undefined;
@@ -151,38 +157,38 @@ export default function CreateContract() {
     getKidList();
   }, []);
 
-  useEffect(() => {
-    // if (
-    //   mondayStart >= mondayEnd ||
-    //   tuesdayStart >= tuesdayEnd ||
-    //   wednesdayStart >= wednesdayEnd ||
-    //   thursdayStart >= thursdayEnd ||
-    //   (fridayStart >= fridayEnd &&
-    //     !(
-    //       mondayStart === undefined &&
-    //       tuesdayStart === undefined &&
-    //       wednesdayStart === undefined &&
-    //       thursdayStart === undefined &&
-    //       fridayStart === undefined
-    //     ))
-    // ) {
-    //   alert(
-    //     "Les horaires de fin doivent être supérieurs aux horaires de début"
-    //   );
-    //   debugger;
-    // }
-  }, [
-    mondayStart,
-    mondayEnd,
-    tuesdayStart,
-    tuesdayEnd,
-    wednesdayStart,
-    wednesdayEnd,
-    thursdayStart,
-    thursdayEnd,
-    fridayStart,
-    fridayEnd,
-  ]);
+  // useEffect(() => {
+  //   if (
+  //     mondayStart >= mondayEnd ||
+  //     tuesdayStart >= tuesdayEnd ||
+  //     wednesdayStart >= wednesdayEnd ||
+  //     thursdayStart >= thursdayEnd ||
+  //     (fridayStart >= fridayEnd &&
+  //       !(
+  //         mondayStart === undefined &&
+  //         tuesdayStart === undefined &&
+  //         wednesdayStart === undefined &&
+  //         thursdayStart === undefined &&
+  //         fridayStart === undefined
+  //       ))
+  //   ) {
+  //     alert(
+  //       "Les horaires de fin doivent être supérieurs aux horaires de début"
+  //     );
+  //     debugger;
+  //   }
+  // }, [
+  //   mondayStart,
+  //   mondayEnd,
+  //   tuesdayStart,
+  //   tuesdayEnd,
+  //   wednesdayStart,
+  //   wednesdayEnd,
+  //   thursdayStart,
+  //   thursdayEnd,
+  //   fridayStart,
+  //   fridayEnd,
+  // ]);
 
   // useEffect(() => {
   //   const url = `${import.meta.env.VITE_BACKEND_URL}/kid/all`;
@@ -246,24 +252,24 @@ export default function CreateContract() {
     // prepare data
     event.preventDefault();
     if (mondayCare === false) {
-      setMondayStart(null);
-      setMondayEnd(null);
+      setMondayStart(undefined);
+      setMondayEnd(undefined);
     }
     if (tuesdayCare === false) {
-      setTuesdayStart(null);
-      setTuesdayEnd(null);
+      setTuesdayStart(undefined);
+      setTuesdayEnd(undefined);
     }
     if (wednesdayCare === false) {
-      setWednesdayStart(null);
-      setWednesdayEnd(null);
+      setWednesdayStart(undefined);
+      setWednesdayEnd(undefined);
     }
     if (thursdayCare === false) {
-      setThursdayStart(null);
-      setThursdayEnd(null);
+      setThursdayStart(undefined);
+      setThursdayEnd(undefined);
     }
     if (fridayCare === false) {
-      setFridayStart(null);
-      setFridayEnd(null);
+      setFridayStart(undefined);
+      setFridayEnd(undefined);
     }
 
     // if (

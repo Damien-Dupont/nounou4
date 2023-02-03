@@ -31,28 +31,28 @@ const validateContract = (req, res, next) => {
   });
   const { error } = Joi.object({
     kidId: Joi.number().integer().min(1).presence("required"),
-    // caregiver: Joi.string().max(80).presence("required"),
-    // priceHour: Joi.number().sign("positive").presence("required").not(0),
-    // priceOverHour: Joi.number().sign("positive").presence("required").not(0),
-    // priceHousehold: Joi.number().sign("positive").presence("required").not(0),
-    // priceLongHousehold: Joi.number()
-    //   .sign("positive")
-    //   .presence("required")
-    //   .not(0),
-    // priceMeal: Joi.number().sign("positive").presence("required").not(0),
-    // priceSnack: Joi.number().sign("positive").presence("required").not(0),
-    // startingDate: Joi.date().iso().presence("required"),
-    // weeksPerYear: Joi.number().sign("positive").presence("required"),
-    // mondayStart: [Joi.string().iso(), null],
-    // mondayEnd: [Joi.string().iso(), null],
-    // tuesdayStart: [Joi.string().iso(), null],
-    // tuesdayEnd: [Joi.string().iso(), null],
-    // wednesdayStart: [Joi.string().iso(), null],
-    // wednesdayEnd: [Joi.string().iso(), null],
-    // thursdayStart: [Joi.string().iso(), null],
-    // thursdayEnd: [Joi.string().iso(), null],
-    // fridayStart: [Joi.string().iso(), null],
-    // fridayEnd: [Joi.string().iso(), null],
+    caregiver: Joi.string().max(80).presence("required"),
+    priceHour: Joi.number().sign("positive").presence("required").not(0),
+    priceOverHour: Joi.number().sign("positive").presence("required").not(0),
+    priceHousehold: Joi.number().sign("positive").presence("required").not(0),
+    priceLongHousehold: Joi.number()
+      .sign("positive")
+      .presence("required")
+      .not(0),
+    priceMeal: Joi.number().sign("positive").presence("required").not(0),
+    priceSnack: Joi.number().sign("positive").presence("required").not(0),
+    startingDate: Joi.date().iso().presence("required"),
+    weeksPerYear: Joi.number().sign("positive").presence("required"),
+    mondayStart: [Joi.string().iso(), null],
+    mondayEnd: [Joi.string().iso(), null],
+    tuesdayStart: [Joi.string().iso(), null],
+    tuesdayEnd: [Joi.string().iso(), null],
+    wednesdayStart: [Joi.string().iso(), null],
+    wednesdayEnd: [Joi.string().iso(), null],
+    thursdayStart: [Joi.string().iso(), null],
+    thursdayEnd: [Joi.string().iso(), null],
+    fridayStart: [Joi.string().iso(), null],
+    fridayEnd: [Joi.string().iso(), null],
   }).validate(data, { abortEarly: false });
   console.log("fin du middleware validateContract");
   if (!error) {
