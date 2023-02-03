@@ -104,7 +104,7 @@ class ContractController {
       })
       .catch((err) => {
         console.error(err);
-        res.sendStatus(501);
+        res.sendStatus(500);
       });
   };
 

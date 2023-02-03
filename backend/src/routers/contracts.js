@@ -4,6 +4,7 @@ const contractsRouter = express.Router();
 const {
   prepareData,
   validateContract,
+  convertDateAndTime,
 } = require("../middlewares/contractMiddleware");
 
 const { ContractController } = require("../controllers");
@@ -12,6 +13,7 @@ contractsRouter.post(
   "/contract/add",
   prepareData,
   validateContract,
+  convertDateAndTime,
   ContractController.add
 );
 module.exports = contractsRouter;
