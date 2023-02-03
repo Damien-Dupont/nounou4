@@ -89,12 +89,6 @@ export function LocalizedDatePicker() {
 }
 
 export default function CreateContract() {
-  // dev data
-  localStorage.setItem("userId", 1);
-  localStorage.setItem("lastname", "Dup0nt");
-  localStorage.setItem("firstname", "Dam1en");
-  localStorage.setItem("role", "parent");
-  localStorage.setItem("email", "mon email");
   // user data
   const userId = localStorage.getItem("userId") || undefined;
   const userLastname = localStorage.getItem("lastname") || undefined;
@@ -102,10 +96,8 @@ export default function CreateContract() {
   const [parentId, setParentId] = useState(userId);
   // kid data
   const [kidList, setKidList] = useState([]);
-  // const [kidLastname, setKidLastname] = useState(undefined);
-  // const [kidFirstname, setKidFirstname] = useState(undefined);
   const [kidId, setKidId] = useState("");
-  // contract data
+  // contract data - about time
   const [caregiver, setCaregiver] = useState("");
   const [weeksPerYear, setWeeksPerYear] = useState(0);
   const [startingDate, setStartingDate] = useState(Date.now());
@@ -119,22 +111,23 @@ export default function CreateContract() {
   const [thursdayEnd, setThursdayEnd] = useState(undefined);
   const [fridayStart, setFridayStart] = useState(undefined);
   const [fridayEnd, setFridayEnd] = useState(undefined);
-
+  // contract data - about prices
   const [priceHour, setPriceHour] = useState(0);
   const [priceOverHour, setPriceOverHour] = useState(0);
   const [priceHousehold, setPriceHousehold] = useState(0);
   const [priceLongHousehold, setPriceLongHousehold] = useState(0);
   const [priceMeal, setPriceMeal] = useState(0);
   const [priceSnack, setPriceSnack] = useState(0);
-
+  // contract data - about days (true or false)
   const [mondayCare, setMondayCare] = useState(false);
   const [tuesdayCare, setTuesdayCare] = useState(false);
   const [wednesdayCare, setWednesdayCare] = useState(false);
   const [thursdayCare, setThursdayCare] = useState(false);
   const [fridayCare, setFridayCare] = useState(false);
-  // const [care, setCare] = useState([true, false, false, false, false]);
-
-  const getKidList = () => {
+  // contract validation page by page
+  // const [pageCompleted, setPageCompleted] = useState([false, false, false]);
+  // const [nextPageText, setNextPageText] = useState("Suivant");
+  function getKidList() {
     if (parentId !== undefined) {
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/kid/parent/${parentId}`)
@@ -145,7 +138,7 @@ export default function CreateContract() {
           console.log(error);
         });
     }
-  };
+  }
 
   // const selectKid = (event) => {
   //   console.log("selectKid IN, event: ", event);
@@ -157,6 +150,39 @@ export default function CreateContract() {
   useEffect(() => {
     getKidList();
   }, []);
+
+  useEffect(() => {
+    // if (
+    //   mondayStart >= mondayEnd ||
+    //   tuesdayStart >= tuesdayEnd ||
+    //   wednesdayStart >= wednesdayEnd ||
+    //   thursdayStart >= thursdayEnd ||
+    //   (fridayStart >= fridayEnd &&
+    //     !(
+    //       mondayStart === undefined &&
+    //       tuesdayStart === undefined &&
+    //       wednesdayStart === undefined &&
+    //       thursdayStart === undefined &&
+    //       fridayStart === undefined
+    //     ))
+    // ) {
+    //   alert(
+    //     "Les horaires de fin doivent être supérieurs aux horaires de début"
+    //   );
+    //   debugger;
+    // }
+  }, [
+    mondayStart,
+    mondayEnd,
+    tuesdayStart,
+    tuesdayEnd,
+    wednesdayStart,
+    wednesdayEnd,
+    thursdayStart,
+    thursdayEnd,
+    fridayStart,
+    fridayEnd,
+  ]);
 
   // useEffect(() => {
   //   const url = `${import.meta.env.VITE_BACKEND_URL}/kid/all`;
@@ -220,25 +246,45 @@ export default function CreateContract() {
     // prepare data
     event.preventDefault();
     if (mondayCare === false) {
-      setMondayStart(undefined);
-      setMondayEnd(undefined);
+      setMondayStart(null);
+      setMondayEnd(null);
     }
     if (tuesdayCare === false) {
-      setTuesdayStart(undefined);
-      setTuesdayEnd(undefined);
+      setTuesdayStart(null);
+      setTuesdayEnd(null);
     }
     if (wednesdayCare === false) {
-      setWednesdayStart(undefined);
-      setWednesdayEnd(undefined);
+      setWednesdayStart(null);
+      setWednesdayEnd(null);
     }
     if (thursdayCare === false) {
-      setThursdayStart(undefined);
-      setThursdayEnd(undefined);
+      setThursdayStart(null);
+      setThursdayEnd(null);
     }
     if (fridayCare === false) {
-      setFridayStart(undefined);
-      setFridayEnd(undefined);
+      setFridayStart(null);
+      setFridayEnd(null);
     }
+
+    // if (
+    //   mondayStart >= mondayEnd ||
+    //   tuesdayStart >= tuesdayEnd ||
+    //   wednesdayStart >= wednesdayEnd ||
+    //   thursdayStart >= thursdayEnd ||
+    //   (fridayStart >= fridayEnd &&
+    //     !(
+    //       mondayStart === undefined &&
+    //       tuesdayStart === undefined &&
+    //       wednesdayStart === undefined &&
+    //       thursdayStart === undefined &&
+    //       fridayStart === undefined
+    //     ))
+    // ) {
+    //   alert(
+    //     "Les horaires de fin doivent être supérieurs aux horaires de début"
+    //   );
+    //   debugger;
+    // }
 
     // TODO: check if dayEnd > dayStart * 5
 
@@ -478,17 +524,16 @@ export default function CreateContract() {
         <h3>Horaires</h3>
         <div className="fiveColumns">
           <div className="day1 define-hours">
-            <div>Lundi ?</div>
-            Non{" "}
+            <div>Lundi</div>
+            {/* Non */}
             <Switch
               // classes={switchStyles}
               checked={mondayCare}
               onChange={(e) => setMondayCare(e.target.checked)}
             />{" "}
-            Oui
+            {/* Oui */}
             {mondayCare && (
               <>
-                <br />
                 <TimePicker
                   label="Lundi débute à..."
                   value={mondayStart}
@@ -497,7 +542,6 @@ export default function CreateContract() {
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
-                <br />
                 <TimePicker
                   label="Lundi termine à..."
                   value={mondayEnd}

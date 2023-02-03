@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#root {
+  min-height: 100vh;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -14,6 +18,7 @@ code {
 
 .App {
   text-align: center;
+  min-height: 100vh;
 }
 
 .App-logo {

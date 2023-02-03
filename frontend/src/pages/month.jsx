@@ -273,7 +273,7 @@ export default function MonthPage() {
           <div className="paper__events">
             <p className="text-4-5">Pas d’évènements ce mois-ci.</p>
             <button type="submit" className="events-add-button">
-              <p className="text-4-4">Ajouter un évènement</p>
+              Ajouter un évènement
             </button>
           </div>
           <div className="declare">
@@ -314,7 +314,7 @@ export default function MonthPage() {
               <span className="declare__household value">{entretien} €</span>
             </div>
             <div className="declare__meal right">
-              <p>Indemnités de repas</p>
+              Indemnités de repas
               <span className="declare__meal value">{repas} €</span>
             </div>
           </div>

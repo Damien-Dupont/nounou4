@@ -3,7 +3,7 @@ const Joi = require("joi");
 // const { stringPattern, timePattern } = require("./regexPatterns");
 
 const prepareData = (req, res, next) => {
-  console.log("prepareData IN", req.body);
+  console.log("début du middleware prepareData");
   const data = { ...req.body };
   data.priceHour = parseFloat(data.priceHour).toFixed(2);
   data.priceOverHour =
@@ -19,49 +19,47 @@ const prepareData = (req, res, next) => {
   data.priceSnack = parseFloat(data.priceSnack).toFixed(2);
   data.weeksPerYear = parseInt(data.weeksPerYear, 10);
   req.body = data;
-  console.log("prepareData OUT", req.body);
+  console.log("fin du middleware prepareData");
   next();
 };
 
 const validateContract = (req, res, next) => {
-  // const timePattern = /^(([0-1]{0,1}[0-9])|(2[0-3])):[0-5]{0,1}[0-9]:(00)$/;
-  // const stringPattern = /[a-zA-Z -]+/g;
+  console.log("début du middleware validateContract", req.body);
   const data = { ...req.body };
-  console.log("validateContract", data);
   Object.keys(data).forEach((el) => {
     if (data[el] === "" || data[el] === null) delete data[el];
   });
   const { error } = Joi.object({
     kidId: Joi.number().integer().min(1).presence("required"),
-    caregiver: Joi.string().max(80).presence("required"),
-    priceHour: Joi.number().sign("positive").presence("required").not(0),
-    priceOverHour: Joi.number().sign("positive").presence("required").not(0),
-    priceHousehold: Joi.number().sign("positive").presence("required").not(0),
-    priceLongHousehold: Joi.number()
-      .sign("positive")
-      .presence("required")
-      .not(0),
-    priceMeal: Joi.number().sign("positive").presence("required").not(0),
-    priceSnack: Joi.number().sign("positive").presence("required").not(0),
-    startingDate: Joi.date().iso().presence("required"),
-    weeksPerYear: Joi.number().sign("positive").presence("required"),
-    mondayStart: [Joi.string().iso(), null],
-    mondayEnd: [Joi.string().iso(), null],
-    tuesdayStart: [Joi.string().iso(), null],
-    tuesdayEnd: [Joi.string().iso(), null],
-    wednesdayStart: [Joi.string().iso(), null],
-    wednesdayEnd: [Joi.string().iso(), null],
-    thursdayStart: [Joi.string().iso(), null],
-    thursdayEnd: [Joi.string().iso(), null],
-    fridayStart: [Joi.string().iso(), null],
-    fridayEnd: [Joi.string().iso(), null],
+    // caregiver: Joi.string().max(80).presence("required"),
+    // priceHour: Joi.number().sign("positive").presence("required").not(0),
+    // priceOverHour: Joi.number().sign("positive").presence("required").not(0),
+    // priceHousehold: Joi.number().sign("positive").presence("required").not(0),
+    // priceLongHousehold: Joi.number()
+    //   .sign("positive")
+    //   .presence("required")
+    //   .not(0),
+    // priceMeal: Joi.number().sign("positive").presence("required").not(0),
+    // priceSnack: Joi.number().sign("positive").presence("required").not(0),
+    // startingDate: Joi.date().iso().presence("required"),
+    // weeksPerYear: Joi.number().sign("positive").presence("required"),
+    // mondayStart: [Joi.string().iso(), null],
+    // mondayEnd: [Joi.string().iso(), null],
+    // tuesdayStart: [Joi.string().iso(), null],
+    // tuesdayEnd: [Joi.string().iso(), null],
+    // wednesdayStart: [Joi.string().iso(), null],
+    // wednesdayEnd: [Joi.string().iso(), null],
+    // thursdayStart: [Joi.string().iso(), null],
+    // thursdayEnd: [Joi.string().iso(), null],
+    // fridayStart: [Joi.string().iso(), null],
+    // fridayEnd: [Joi.string().iso(), null],
   }).validate(data, { abortEarly: false });
-
+  console.log("fin du middleware validateContract");
   if (!error) {
-    console.log("validation ok");
+    console.log("validateContract ok");
     next();
   } else {
-    console.log("validation no", error);
+    console.log("validateContract error");
     res.status(400).json(error);
   }
 };
