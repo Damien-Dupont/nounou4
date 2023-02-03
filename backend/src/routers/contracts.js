@@ -1,11 +1,12 @@
 const express = require("express");
 
 const contractsRouter = express.Router();
-const { ContractController } = require("../controllers");
 const {
   prepareData,
   validateContract,
 } = require("../middlewares/contractMiddleware");
+
+const { ContractController } = require("../controllers");
 
 contractsRouter.post(
   "/contract/add",

@@ -26,12 +26,7 @@ class ContractManager extends AbstractManager {
     priceSnack
   ) {
     return this.connection.query(
-      `INSERT INTO ${this.table} (starting_date, kid_id, caregiver,
-        weeks_per_year, monday_start, monday_end, tuesday_start,
-        tuesday_end, wednesday_start, wednesday_end, thursday_start,
-        thursday_end, friday_start, friday_end, price_hour,
-        price_over_hour, price_household, price_long_household,
-        price_meal, price_snack)
+      `insert into ${this.table} (starting_date, kid_id, caregiver, weeks_per_year, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, price_hour, price_over_hour, price_household, price_long_household, price_meal, price_snack)
       values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         startingDate,

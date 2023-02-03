@@ -7,6 +7,14 @@ const { contractToCreate, contractKeys } = require("./testData");
 describe("CONTRACT ROUTES", () => {
   const persistantData = {};
 
+  // let consoleSpy;
+
+  // beforeEach(() => {
+  //   if (typeof consoleSpy === "function") {
+  //     consoleSpy.mockRestore();
+  //   }
+  // });
+
   it("should create a contract (ADD)", async () => {
     const res = await supertest(app)
       .post("/contract/add")
