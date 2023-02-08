@@ -31,6 +31,27 @@ describe("SILENCING CONSOLES", () => {
   });
 });
 
+describe("SQL INJECTION LOOPHOLE", () => {
+  it("should reject a sql injection", async () => {
+    const maliciousUserToCreate = {
+      lastname: `1' OR 1=1;--`,
+      firstname: `1' OR 1=1;--`,
+      roleId: 1,
+      email: `1' OR 1=1;--`,
+      password: `1' OR 1=1;--`,
+    };
+    await supertest(app)
+      .post("/user/add")
+      .send(maliciousUserToCreate)
+      .expect(400)
+      .expect("Content-Type", /json/)
+      // eslint-disable-next-line func-names
+      .then(function (response) {
+        expect(response.body.data).toBe(undefined);
+      });
+  });
+});
+
 describe("USER ROUTES", () => {
   const persistantData = {};
 
