@@ -12,6 +12,6 @@ const { UserContractController } = require("../controllers");
 // );
 
 userContractsRouter.post("/usercontract/add", UserContractController.add);
-userContractsRouter.delete("/usercontract/:id", UserContractController.delete);
+// userContractsRouter.delete("/usercontract/:id", UserContractController.delete);
 
 module.exports = userContractsRouter;

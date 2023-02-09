@@ -13,21 +13,34 @@ class UserContractController {
   //     });
   // };
 
-  // static read = (req, res) => {
-  //   models.user
-  //     .find(req.params.id)
-  //     .then(([rows]) => {
-  //       if (rows[0] == null) {
-  //         res.sendStatus(404);
-  //       } else {
-  //         res.send(rows[0]);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //       res.sendStatus(500);
-  //     });
-  // };
+  static browseByParent = (req, res) => {
+    const parentId = req.params.id;
+    models.userContract
+      .findbyParent(parentId)
+      .then(([rows]) => {
+        res.send(rows);
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
+
+  static read = (req, res) => {
+    models.userContract
+      .find(req.params.id)
+      .then(([rows]) => {
+        if (rows[0] == null) {
+          res.sendStatus(404);
+        } else {
+          res.send(rows[0]);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        res.sendStatus(500);
+      });
+  };
 
   // static edit = (req, res) => {
   //   const user = req.body;
@@ -52,7 +65,7 @@ class UserContractController {
   // };
 
   static add = (req, res) => {
-    const { contract, user, isMain } = req.body;
+    const { isMain, user, contract } = req.body;
 
     models.userContract
       .insert(isMain, user, contract)
@@ -60,6 +73,7 @@ class UserContractController {
         res.status(201).send({ ...req.body, id: result[0].insertId });
       })
       .catch((err) => {
+        console.log("coucou", err);
         console.error(err);
         res.sendStatus(500);
       });

@@ -67,7 +67,7 @@ const contractToCreate = {
 // user contract
 const userContractKeys = ["isMain", "user", "contract"];
 const userContractToCreate = {
-  isMain: 1,
+  // isMain: true,
   user: 3,
   contract: 4,
 };

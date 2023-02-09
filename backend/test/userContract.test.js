@@ -11,6 +11,8 @@ describe("USER-CONTRACT ROUTES", () => {
   const persistantData = {};
 
   it("should create a user-contract (ADD)", async () => {
+    const logSpy = jest.spyOn(global.console, "log");
+
     const res = await supertest(app)
       .post("/usercontract/add")
       .send(userContractToCreate)
@@ -20,7 +22,7 @@ describe("USER-CONTRACT ROUTES", () => {
     userContractKeys.map((prop) => {
       expect(res.body).toHaveProperty(prop);
     });
-
+    logSpy.mockRestore();
     persistantData.userContract = res.body;
   });
 
