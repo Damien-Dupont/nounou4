@@ -69,11 +69,11 @@ class UserContractController {
 
     models.userContract
       .insert(isMain, user, contract)
-      .then((result) => {
-        res.status(201).send({ ...req.body, id: result[0].insertId });
+      .then(() => {
+        // is result an array of objects ?
+        res.status(201);
       })
       .catch((err) => {
-        console.log("coucou", err);
         console.error(err);
         res.sendStatus(500);
       });

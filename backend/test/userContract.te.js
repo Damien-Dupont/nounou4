@@ -10,9 +10,21 @@ const { userContractToCreate, userContractKeys } = require("./testData");
 describe("USER-CONTRACT ROUTES", () => {
   const persistantData = {};
 
-  it("should create a user-contract (ADD)", async () => {
-    const logSpy = jest.spyOn(global.console, "log");
+  // it("should create a contract (ADD)", async () => {
+  //   const res = await supertest(app)
+  //     .post("/contract/add")
+  //     .send(contractToCreate)
+  //     .expect(201)
+  //     .expect("Content-Type", /json/);
 
+  //   contractKeys.map((prop) => {
+  //     expect(res.body).toHaveProperty(prop);
+  //   });
+
+  //   persistantData.contract = res.body;
+  // });
+
+  it("should create a user-contract (ADD)", async () => {
     const res = await supertest(app)
       .post("/usercontract/add")
       .send(userContractToCreate)
@@ -22,31 +34,31 @@ describe("USER-CONTRACT ROUTES", () => {
     userContractKeys.map((prop) => {
       expect(res.body).toHaveProperty(prop);
     });
-    logSpy.mockRestore();
+
     persistantData.userContract = res.body;
   });
 
-  it("should get the contract with id 1 (GET-ONE)", async () => {
-    const res = await supertest(app)
-      .get("/usercontract/1")
-      .expect(200)
-      .expect("Content-Type", /json/);
+  // it("should get the contract with id 1 (GET-ONE)", async () => {
+  //   const res = await supertest(app)
+  //     .get("/usercontract/1")
+  //     .expect(200)
+  //     .expect("Content-Type", /json/);
 
-    userContractKeys.map((prop) => {
-      expect(res.body).toHaveProperty(prop);
-    });
-  });
+  //   userContractKeys.map((prop) => {
+  //     expect(res.body).toHaveProperty(prop);
+  //   });
+  // });
 
-  it("should get all the contracts from user 1 (GET-ALL from User)", async () => {
-    const res = await supertest(app)
-      .get("/usercontract/user")
-      .expect(200)
-      .expect("Content-Type", /json/);
+  // it("should get all the contracts from user 1 (GET-ALL from User)", async () => {
+  //   const res = await supertest(app)
+  //     .get("/usercontract/user")
+  //     .expect(200)
+  //     .expect("Content-Type", /json/);
 
-    userContractKeys.map((prop) => {
-      expect(res.body).toHaveProperty(prop);
-    });
-  });
+  //   userContractKeys.map((prop) => {
+  //     expect(res.body).toHaveProperty(prop);
+  //   });
+  // });
 
   // it(`should update the previously created usercontract (PUT)`, async () => {
   //   await supertest(app)

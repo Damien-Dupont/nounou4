@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import CreateParent from "../components/CreateParent";
 import CreateKid from "../components/CreateKid";
 import CreateContract from "../components/CreateContract";
+import CreateUserContract from "../components/CreateuserContract";
 
 import "./Home.scss";
 
@@ -39,6 +40,15 @@ export default function Home() {
   // };
   return (
     <>
+      <HorizontalLine />
+
+      <div className="form__open">
+        <div className="form__content">
+          <br />
+          <CreateUserContract />
+        </div>
+      </div>
+
       <HorizontalLine />
 
       <div className={isOpenKid ? "form__open" : "form"}>

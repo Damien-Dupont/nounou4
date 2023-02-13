@@ -67,9 +67,9 @@ const contractToCreate = {
 // user contract
 const userContractKeys = ["isMain", "user", "contract"];
 const userContractToCreate = {
-  // isMain: true,
-  user: 3,
-  contract: 4,
+  isMain: 1,
+  user: 214,
+  contract: 14,
 };
 
 module.exports = {

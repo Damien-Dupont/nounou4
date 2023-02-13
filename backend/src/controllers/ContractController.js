@@ -52,7 +52,7 @@ class ContractController {
   //     });
   // };
 
-  static add = (req, res) => {
+  static add = async (req, res) => {
     const {
       startingDate,
       kidId,
@@ -75,8 +75,9 @@ class ContractController {
       priceMeal,
       priceSnack,
     } = req.body;
+    // const { isMain, userId } = req.body;
 
-    models.contract
+    await models.contract
       .insert(
         startingDate,
         kidId,
@@ -101,12 +102,78 @@ class ContractController {
       )
       .then((result) => {
         res.status(201).json({ ...req.body, id: result[0].insertId });
+        // return result[0].insertId;
       })
       .catch((err) => {
         console.error(err);
         res.sendStatus(500);
       });
+    return { req };
+    // const userContract = await models.userContract.insert(isMain, userId, contract.id)
+    // .then((result) => {
+    //   res.status(201).json({ ...req.body, id: result[0].insertId });
+    //   // return result[0].insertId;
+    // });
   };
+  // const createContract = async () => {
+  //   const {
+  //     startingDate,
+  //     kidId,
+  //     caregiver,
+  //     weeksPerYear,
+  //     mondayStart,
+  //     mondayEnd,
+  //     tuesdayStart,
+  //     tuesdayEnd,
+  //     wednesdayStart,
+  //     wednesdayEnd,
+  //     thursdayStart,
+  //     thursdayEnd,
+  //     fridayStart,
+  //     fridayEnd,
+  //     priceHour,
+  //     priceOverHour,
+  //     priceHousehold,
+  //     priceLongHousehold,
+  //     priceMeal,
+  //     priceSnack,
+  //   } = req.body;
+  //   const { isMain, userId } = req.body;
+
+  //   const contractId = await models.contract
+  //     .insert(
+  //       startingDate,
+  //       kidId,
+  //       caregiver,
+  //       weeksPerYear,
+  //       mondayStart,
+  //       mondayEnd,
+  //       tuesdayStart,
+  //       tuesdayEnd,
+  //       wednesdayStart,
+  //       wednesdayEnd,
+  //       thursdayStart,
+  //       thursdayEnd,
+  //       fridayStart,
+  //       fridayEnd,
+  //       priceHour,
+  //       priceOverHour,
+  //       priceHousehold,
+  //       priceLongHousehold,
+  //       priceMeal,
+  //       priceSnack
+  //     )
+  //     .then((result) => {
+  //       res.status(201).json({ ...req.body, id: result[0].insertId });
+  //       return result[0].insertId;
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       res.sendStatus(500);
+  //     });
+
+  //   await models.userContract.insert(isMain, userId, contractId);
+  // };
 
   // static delete = (req, res) => {
   //   models.contract
