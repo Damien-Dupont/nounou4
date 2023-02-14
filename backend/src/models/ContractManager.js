@@ -4,9 +4,9 @@ class ContractManager extends AbstractManager {
   static table = "contract";
 
   insert(
-    startingDate,
     kidId,
     caregiver,
+    startingDate,
     weeksPerYear,
     mondayStart,
     mondayEnd,
@@ -53,12 +53,19 @@ class ContractManager extends AbstractManager {
     );
   }
 
-  updateAny(contract, column, value) {
+  bind(isMain, userId, contractId) {
     return this.connection.query(
-      `update ${this.table} set ${column} = ? where id_contract = ?`,
-      [value, contract.id]
+      `INSERT INTO user_contract (is_main, user_id, contract_id) values (?, ?, ?)`,
+      [isMain, userId, contractId]
     );
   }
+
+  // updateAny(contract, column, value) {
+  //   return this.connection.query(
+  //     `update ${this.table} set ${column} = ? where id_contract = ?`,
+  //     [value, contract.id]
+  //   );
+  // }
 
   // updateStart(contract, startingDate) {
   //   return this.connection.query(

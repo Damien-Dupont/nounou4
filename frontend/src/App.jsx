@@ -1,5 +1,5 @@
 // import dayjs from "dayjs";
-// import { useContext } from "react";
+import React from "react";
 // import { Routes } from "react-router-dom"; // npm i -S react-router-dom
 
 import "dayjs/locale/fr";
@@ -8,6 +8,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
 // import ExportContextUser from "./contexts/UserContext";
 
+import MonthPage from "./pages/Month";
 import Home from "./pages/Home";
 import "./App.css";
 
@@ -16,9 +17,8 @@ function App() {
   return (
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
-        Home
-        <br />
         {/* <Coucou /> */}
+        <MonthPage />
         <Home />
         {/* <Routes> */}
         {/* </Routes> */}

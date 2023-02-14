@@ -1,9 +1,8 @@
-// eslint-disable-next-line import/no-import-module-exports
+/* eslint-disable prefer-destructuring */
 const Joi = require("joi");
-// const { stringPattern, timePattern } = require("./regexPatterns");
 
 const prepareData = (req, res, next) => {
-  console.log("prepareData IN", req.body);
+  // console.log("début du middleware prepareData");
   const data = { ...req.body };
   data.priceHour = parseFloat(data.priceHour).toFixed(2);
   data.priceOverHour =
@@ -19,18 +18,29 @@ const prepareData = (req, res, next) => {
   data.priceSnack = parseFloat(data.priceSnack).toFixed(2);
   data.weeksPerYear = parseInt(data.weeksPerYear, 10);
   req.body = data;
-  console.log("prepareData OUT", req.body);
+  // console.log("fin du middleware prepareData");
+  next();
+};
+
+const convertDateAndTime = (req, res, next) => {
+  const data = { ...req.body };
+  // console.log("début du middleware convertDateAndTime");
+  Object.keys(data).forEach((el) => {
+    if (el.includes("day")) {
+      data[el] = data[el].split("T")[1].split(".")[0];
+    }
+    if (el.includes("Date")) {
+      data[el] = data[el].split("T")[0];
+    }
+  });
+  req.body = data;
+  // console.log("fin du middleware convertDateAndTime", req.body);
   next();
 };
 
 const validateContract = (req, res, next) => {
-  // const timePattern = /^(([0-1]{0,1}[0-9])|(2[0-3])):[0-5]{0,1}[0-9]:(00)$/;
-  // const stringPattern = /[a-zA-Z -]+/g;
   const data = { ...req.body };
-  console.log("validateContract", data);
-  Object.keys(data).forEach((el) => {
-    if (data[el] === "" || data[el] === null) delete data[el];
-  });
+
   const { error } = Joi.object({
     kidId: Joi.number().integer().min(1).presence("required"),
     caregiver: Joi.string().max(80).presence("required"),
@@ -45,23 +55,23 @@ const validateContract = (req, res, next) => {
     priceSnack: Joi.number().sign("positive").presence("required").not(0),
     startingDate: Joi.date().iso().presence("required"),
     weeksPerYear: Joi.number().sign("positive").presence("required"),
-    mondayStart: [Joi.string().iso(), null],
-    mondayEnd: [Joi.string().iso(), null],
-    tuesdayStart: [Joi.string().iso(), null],
-    tuesdayEnd: [Joi.string().iso(), null],
-    wednesdayStart: [Joi.string().iso(), null],
-    wednesdayEnd: [Joi.string().iso(), null],
-    thursdayStart: [Joi.string().iso(), null],
-    thursdayEnd: [Joi.string().iso(), null],
-    fridayStart: [Joi.string().iso(), null],
-    fridayEnd: [Joi.string().iso(), null],
+    mondayStart: [Joi.date().iso(), null],
+    mondayEnd: [Joi.date().iso(), null],
+    tuesdayStart: [Joi.date().iso(), null],
+    tuesdayEnd: [Joi.date().iso(), null],
+    wednesdayStart: [Joi.date().iso(), null],
+    wednesdayEnd: [Joi.date().iso(), null],
+    thursdayStart: [Joi.date().iso(), null],
+    thursdayEnd: [Joi.date().iso(), null],
+    fridayStart: [Joi.date().iso(), null],
+    fridayEnd: [Joi.date().iso(), null],
+    isMain: Joi.boolean().presence("required"),
+    userId: Joi.number().integer().min(1).presence("required"),
   }).validate(data, { abortEarly: false });
-
   if (!error) {
-    console.log("validation ok");
+    // res.status(200);
     next();
   } else {
-    console.log("validation no", error);
     res.status(400).json(error);
   }
 };
@@ -149,6 +159,7 @@ const validateContract = (req, res, next) => {
 module.exports = {
   validateContract,
   prepareData,
+  convertDateAndTime,
   //   validateLogin,
   //   validateContractUpdate,
   //   checkAuth,

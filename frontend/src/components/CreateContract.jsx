@@ -88,13 +88,30 @@ export function LocalizedDatePicker() {
   );
 }
 
+// const addContractToUser = async (contractId, userId, isMain) => {
+//   try {
+//     const response = await axios.post(
+//       `${import.meta.env.VITE_BACKEND_URL}/contract/bind`,
+//       {
+//         isMain: isMain ? 1 : 0,
+//         userId,
+//         contractId,
+//       }
+//     );
+//     return response.data;
+//   } catch (err) {
+//     console.error(err);
+//     return null;
+//   }
+// };
+
 export default function CreateContract() {
-  // dev data
-  localStorage.setItem("userId", 1);
-  localStorage.setItem("lastname", "Dup0nt");
-  localStorage.setItem("firstname", "Dam1en");
-  localStorage.setItem("role", "parent");
-  localStorage.setItem("email", "mon email");
+  // // dev data
+  // localStorage.setItem("userId", 1);
+  // localStorage.setItem("lastname", "Dup0nt");
+  // localStorage.setItem("firstname", "Dam1en");
+  // localStorage.setItem("role", "parent");
+  // localStorage.setItem("email", "mon email");
   // user data
   const userId = localStorage.getItem("userId") || undefined;
   const userLastname = localStorage.getItem("lastname") || undefined;
@@ -102,10 +119,9 @@ export default function CreateContract() {
   const [parentId, setParentId] = useState(userId);
   // kid data
   const [kidList, setKidList] = useState([]);
-  // const [kidLastname, setKidLastname] = useState(undefined);
-  // const [kidFirstname, setKidFirstname] = useState(undefined);
   const [kidId, setKidId] = useState("");
-  // contract data
+  const [isMain, setIsMain] = useState(true);
+  // contract data - about time
   const [caregiver, setCaregiver] = useState("");
   const [weeksPerYear, setWeeksPerYear] = useState(0);
   const [startingDate, setStartingDate] = useState(Date.now());
@@ -119,22 +135,24 @@ export default function CreateContract() {
   const [thursdayEnd, setThursdayEnd] = useState(undefined);
   const [fridayStart, setFridayStart] = useState(undefined);
   const [fridayEnd, setFridayEnd] = useState(undefined);
-
+  // contract data - about prices
   const [priceHour, setPriceHour] = useState(0);
   const [priceOverHour, setPriceOverHour] = useState(0);
   const [priceHousehold, setPriceHousehold] = useState(0);
   const [priceLongHousehold, setPriceLongHousehold] = useState(0);
   const [priceMeal, setPriceMeal] = useState(0);
   const [priceSnack, setPriceSnack] = useState(0);
-
+  // contract data - about days (true or false)
   const [mondayCare, setMondayCare] = useState(false);
   const [tuesdayCare, setTuesdayCare] = useState(false);
   const [wednesdayCare, setWednesdayCare] = useState(false);
   const [thursdayCare, setThursdayCare] = useState(false);
   const [fridayCare, setFridayCare] = useState(false);
-  // const [care, setCare] = useState([true, false, false, false, false]);
-
-  const getKidList = () => {
+  // contract validation page by page
+  const [isSumitting, setIsSumitting] = useState(false);
+  // const [pageCompleted, setPageCompleted] = useState([false, false, false]);
+  // const [nextPageText, setNextPageText] = useState("Suivant");
+  function getKidList() {
     if (parentId !== undefined) {
       axios
         .get(`${import.meta.env.VITE_BACKEND_URL}/kid/parent/${parentId}`)
@@ -145,7 +163,7 @@ export default function CreateContract() {
           console.log(error);
         });
     }
-  };
+  }
 
   // const selectKid = (event) => {
   //   console.log("selectKid IN, event: ", event);
@@ -158,123 +176,97 @@ export default function CreateContract() {
     getKidList();
   }, []);
 
-  // useEffect(() => {
-  //   const url = `${import.meta.env.VITE_BACKEND_URL}/kid/all`;
-  //   axios
-  //     .get(url)
-  //     .then((response) => console.log("allKidList: ", response.data))
-  //     .catch((error) => console.log("allkids", error));
-  // }, [userId]);
-
-  // const periodsList = [
-  //   { en: "mondayStart", fr: "Lundi", day: 0 },
-  //   { en: "mondayEnd", fr: "Lundi", day: 0 },
-  //   { en: "tuesdayStart", fr: "Mardi", day: 2 },
-  //   { en: "tuesdayEnd", fr: "Mardi", day: 2 },
-  //   { en: "wednesdayStart", fr: "Mercredi", day: 3 },
-  //   { en: "wednesdayEnd", fr: "Mercredi", day: 3 },
-  //   { en: "thursdayStart", fr: "Jeudi", day: 4 },
-  //   { en: "thursdayEnd", fr: "Jeudi", day: 4 },
-  //   { en: "fridayStart", fr: "Vendredi", day: 5 },
-  //   { en: "fridayEnd", fr: "Vendredi", day: 5 },
-  // ];
-
-  // const handleTimeChange = (time, day) => {
-  //   switch (day) {
-  //     case "mondayStart":
-  //       setMondayStart(time);
-  //       break;
-  //     case "mondayEnd":
-  //       setMondayEnd(time);
-  //       break;
-  //     case "tuesdayStart":
-  //       setTuesdayStart(time);
-  //       break;
-  //     case "tuesdayEnd":
-  //       setTuesdayEnd(time);
-  //       break;
-  //     case "wednesdayStart":
-  //       setWednesdayStart(time);
-  //       break;
-  //     case "wednesdayEnd":
-  //       setWednesdayEnd(time);
-  //       break;
-  //     case "thursdayStart":
-  //       setThursdayStart(time);
-  //       break;
-  //     case "thursdayEnd":
-  //       setThursdayEnd(time);
-  //       break;
-  //     case "fridayStart":
-  //       setFridayStart(time);
-  //       break;
-  //     case "fridayEnd":
-  //       setFridayEnd(time);
-  //       break;
-  //     default:
-  //       console.log("error");
-  //   }
-  // };
-
   const handleSubmit = (event) => {
-    // prepare data
     event.preventDefault();
-    if (mondayCare === false) {
-      setMondayStart(undefined);
-      setMondayEnd(undefined);
-    }
-    if (tuesdayCare === false) {
-      setTuesdayStart(undefined);
-      setTuesdayEnd(undefined);
-    }
-    if (wednesdayCare === false) {
-      setWednesdayStart(undefined);
-      setWednesdayEnd(undefined);
-    }
-    if (thursdayCare === false) {
-      setThursdayStart(undefined);
-      setThursdayEnd(undefined);
-    }
-    if (fridayCare === false) {
-      setFridayStart(undefined);
-      setFridayEnd(undefined);
-    }
 
-    // TODO: check if dayEnd > dayStart * 5
+    if (isSumitting) return;
+    setIsSumitting(true);
 
-    try {
-      axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/contract/add`, {
-          kidId,
-          caregiver,
-          startingDate,
-          weeksPerYear,
-          mondayStart,
-          mondayEnd,
-          tuesdayStart,
-          tuesdayEnd,
-          wednesdayStart,
-          wednesdayEnd,
-          thursdayStart,
-          thursdayEnd,
-          fridayStart,
-          fridayEnd,
-          priceHour,
-          priceOverHour,
-          priceHousehold,
-          priceLongHousehold,
-          priceMeal,
-          priceSnack,
-        })
-        .then((res) => {
-          localStorage.setItem("contractId", res.data.id);
-          console.log("Contract created:", res);
-        });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      console.log("CreateContract: axios OUT");
+    const days = [
+      { name: "Monday", start: mondayStart, end: mondayEnd, care: mondayCare },
+      {
+        name: "Tuesday",
+        start: tuesdayStart,
+        end: tuesdayEnd,
+        care: tuesdayCare,
+      },
+      {
+        name: "Wednesday",
+        start: wednesdayStart,
+        end: wednesdayEnd,
+        care: wednesdayCare,
+      },
+      {
+        name: "Thursday",
+        start: thursdayStart,
+        end: thursdayEnd,
+        care: thursdayCare,
+      },
+      { name: "Friday", start: fridayStart, end: fridayEnd, care: fridayCare },
+    ];
+
+    for (const day of days) {
+      if (!day.care) {
+        day.start = undefined;
+        day.end = undefined;
+      }
+      if (
+        day.end <= day.start ||
+        (day.end === undefined && day.start !== undefined)
+      ) {
+        throw new Error(
+          `${day.name} end time cannot be earlier than start time`
+        );
+      }
     }
+    let postContractCount = 0;
+    const postContract = async () => {
+      postContractCount++;
+      if (postContractCount > 1) {
+        throw new Error("Tried to create 2 contracts at once");
+      }
+      try {
+        const contractResponse = await axios.post(
+          `${import.meta.env.VITE_BACKEND_URL}/contract/add`,
+          {
+            kidId,
+            caregiver,
+            startingDate,
+            weeksPerYear,
+            mondayStart: days[0].start,
+            mondayEnd: days[0].end,
+            tuesdayStart: days[1].start,
+            tuesdayEnd: days[1].end,
+            wednesdayStart: days[2].start,
+            wednesdayEnd: days[2].end,
+            thursdayStart: days[3].start,
+            thursdayEnd: days[3].end,
+            fridayStart: days[4].start,
+            fridayEnd: days[4].end,
+            priceHour,
+            priceOverHour,
+            priceHousehold,
+            priceLongHousehold,
+            priceMeal,
+            priceSnack,
+            isMain,
+            userId,
+          }
+        );
+
+        const contractId = contractResponse.data.id;
+
+        // await addContractToUser(contractId, userId, isMain);
+        return contractId;
+      } catch (err) {
+        console.error(err);
+        return null;
+      } finally {
+        setIsSumitting(false);
+      }
+    };
+
+    localStorage.setItem("contractId", postContract());
   };
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
@@ -352,6 +344,13 @@ export default function CreateContract() {
             renderInput={(params) => <TextField {...params} />}
           />
         </div>
+        Contrat principal ?
+        <Switch
+          // classes={switchStyles}
+          checked={isMain}
+          onChange={(e) => setIsMain(e.target.checked)}
+        />{" "}
+        {isMain ? "Oui" : "Non"}
         <br />
         {/* INSERT WEEKS PER YEAR */}
         <div>
@@ -478,17 +477,16 @@ export default function CreateContract() {
         <h3>Horaires</h3>
         <div className="fiveColumns">
           <div className="day1 define-hours">
-            <div>Lundi ?</div>
-            Non{" "}
+            <div>Lundi</div>
+            {/* Non */}
             <Switch
               // classes={switchStyles}
               checked={mondayCare}
               onChange={(e) => setMondayCare(e.target.checked)}
             />{" "}
-            Oui
+            {/* Oui */}
             {mondayCare && (
               <>
-                <br />
                 <TimePicker
                   label="Lundi débute à..."
                   value={mondayStart}
@@ -497,7 +495,6 @@ export default function CreateContract() {
                   }}
                   renderInput={(params) => <TextField {...params} />}
                 />
-                <br />
                 <TimePicker
                   label="Lundi termine à..."
                   value={mondayEnd}
@@ -678,7 +675,9 @@ export default function CreateContract() {
             ))}
           </div>{" "} */}
         </div>
-        <input type="submit" value="Envoyer" />
+        <button type="submit" value="Envoyer" disabled={isSumitting}>
+          {isSumitting ? "En attente" : "Enregistrer"}
+        </button>
       </form>
     </LocalizationProvider>
   );
