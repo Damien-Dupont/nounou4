@@ -7,19 +7,17 @@ const {
   convertDateAndTime,
 } = require("../middlewares/contractMiddleware");
 
-const {
-  ContractController,
-  UserContractController,
-} = require("../controllers");
+const { ContractController } = require("../controllers");
 
 contractsRouter.post(
   "/contract/add",
   prepareData,
   validateContract,
   convertDateAndTime,
-  ContractController.add,
-  UserContractController.add
+  ContractController.add
 );
+
+contractsRouter.post("/contract/bind", ContractController.bind);
 module.exports = contractsRouter;
 
 // const {

@@ -1,12 +1,12 @@
 const AbstractManager = require("./AbstractManager");
 
-class UserContractManager extends AbstractManager {
+class UsercontractManager extends AbstractManager {
   static table = "user_contract";
 
-  insert(isMain, user, contract) {
+  insert(isMain, userId, contractId) {
     return this.connection.query(
       `INSERT INTO ${this.table} (is_main, user_id, contract_id) values (?, ?, ?)`,
-      [isMain, user, contract]
+      [isMain, userId, contractId]
     );
   }
 
@@ -33,4 +33,4 @@ class UserContractManager extends AbstractManager {
   }
 }
 
-module.exports = UserContractManager;
+module.exports = UsercontractManager;

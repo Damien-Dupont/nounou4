@@ -4,7 +4,7 @@ const supertest = require("supertest");
 const app = require("../src/app");
 const {
   ContractController,
-  UserContractController,
+  UsercontractController,
   UserController,
 } = require("../src/controllers");
 const {
@@ -23,7 +23,7 @@ describe("USER-CONTRACT ROUTES", () => {
   beforeEach(async () => {
     await ContractController.sync({ force: true });
     await UserController.sync({ force: true });
-    await UserContractController.sync({ force: true });
+    await UsercontractController.sync({ force: true });
   });
 
   // it("should create a contract and a user-contract (ADD)", async () => {

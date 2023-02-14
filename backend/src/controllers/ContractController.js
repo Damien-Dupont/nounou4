@@ -53,32 +53,32 @@ class ContractController {
   // };
 
   static add = async (req, res) => {
-    const {
-      kidId,
-      caregiver,
-      startingDate,
-      weeksPerYear,
-      mondayStart,
-      mondayEnd,
-      tuesdayStart,
-      tuesdayEnd,
-      wednesdayStart,
-      wednesdayEnd,
-      thursdayStart,
-      thursdayEnd,
-      fridayStart,
-      fridayEnd,
-      priceHour,
-      priceOverHour,
-      priceHousehold,
-      priceLongHousehold,
-      priceMeal,
-      priceSnack,
-    } = req.body;
-    // const { isMain, userId } = req.body;
-    console.log("add/input", req.body);
-    await models.contract
-      .insert(
+    try {
+      const {
+        kidId,
+        caregiver,
+        startingDate,
+        weeksPerYear,
+        mondayStart,
+        mondayEnd,
+        tuesdayStart,
+        tuesdayEnd,
+        wednesdayStart,
+        wednesdayEnd,
+        thursdayStart,
+        thursdayEnd,
+        fridayStart,
+        fridayEnd,
+        priceHour,
+        priceOverHour,
+        priceHousehold,
+        priceLongHousehold,
+        priceMeal,
+        priceSnack,
+        isMain,
+        userId,
+      } = req.body;
+      const newContract = await models.contract.insert(
         kidId,
         caregiver,
         startingDate,
@@ -99,23 +99,17 @@ class ContractController {
         priceLongHousehold,
         priceMeal,
         priceSnack
-      )
-      .then((result) => {
-        res.status(201).json({ ...req.body, id: result[0].insertId });
-        console.log("output", req.body);
-        debugger;
-        // return result[0].insertId;
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
+      );
+      const contractId = newContract[0].insertId;
+      await Promise.resolve(models.contract.bind(isMain, userId, contractId));
+
+      res.status(201).json({ ...req.body, id: newContract[0].insertId });
+      // return result[0].insertId;
+    } catch (err) {
+      console.error(err);
+      res.sendStatus(500);
+    }
     return { req };
-    // const userContract = await models.userContract.insert(isMain, userId, contract.id)
-    // .then((result) => {
-    //   res.status(201).json({ ...req.body, id: result[0].insertId });
-    //   // return result[0].insertId;
-    // });
   };
   // const createContract = async () => {
   //   const {

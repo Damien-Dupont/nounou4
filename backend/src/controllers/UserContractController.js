@@ -1,6 +1,6 @@
 const models = require("../models");
 
-class UserContractController {
+class UsercontractController {
   // static browse = (req, res) => {
   //   models.user
   //     .findAll()
@@ -15,7 +15,7 @@ class UserContractController {
 
   static browseByParent = (req, res) => {
     const parentId = req.params.id;
-    models.userContract
+    models.usercontract
       .findbyParent(parentId)
       .then(([rows]) => {
         res.send(rows);
@@ -27,7 +27,7 @@ class UserContractController {
   };
 
   static read = (req, res) => {
-    models.userContract
+    models.usercontract
       .find(req.params.id)
       .then(([rows]) => {
         if (rows[0] == null) {
@@ -64,23 +64,23 @@ class UserContractController {
   //     });
   // };
 
-  static add = (req, res) => {
-    const { isMain, user, contract } = req.body;
+  // static add = async (req, res) => {
+  //   const { isMain, userId, contractId } = req.body;
 
-    models.userContract
-      .insert(isMain, user, contract)
-      .then(() => {
-        // is result an array of objects ?
-        res.status(201);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.sendStatus(500);
-      });
-  };
+  //   await models.usercontract
+  //     .insert(isMain, userId, contractId)
+  //     .then(() => {
+  //       // is result an array of objects ?
+  //       res.status(201);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //       res.sendStatus(500);
+  //     });
+  // };
 
   static delete = (req, res) => {
-    models.userContract
+    models.usercontract
       .delete(req.params.id)
       .then(() => {
         res.sendStatus(204);
@@ -92,4 +92,4 @@ class UserContractController {
   };
 }
 
-module.exports = UserContractController;
+module.exports = UsercontractController;

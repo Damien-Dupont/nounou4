@@ -2,7 +2,7 @@
 const Joi = require("joi");
 
 const prepareData = (req, res, next) => {
-  console.log("début du middleware prepareData");
+  // console.log("début du middleware prepareData");
   const data = { ...req.body };
   data.priceHour = parseFloat(data.priceHour).toFixed(2);
   data.priceOverHour =
@@ -18,36 +18,29 @@ const prepareData = (req, res, next) => {
   data.priceSnack = parseFloat(data.priceSnack).toFixed(2);
   data.weeksPerYear = parseInt(data.weeksPerYear, 10);
   req.body = data;
-  console.log("fin du middleware prepareData");
+  // console.log("fin du middleware prepareData");
   next();
 };
 
 const convertDateAndTime = (req, res, next) => {
   const data = { ...req.body };
-  console.log("début du middleware convertDateAndTime");
+  // console.log("début du middleware convertDateAndTime");
   Object.keys(data).forEach((el) => {
-    console.log(el, data[el]);
     if (el.includes("day")) {
       data[el] = data[el].split("T")[1].split(".")[0];
-      console.log(el, data[el]);
     }
     if (el.includes("Date")) {
       data[el] = data[el].split("T")[0];
-      console.log(el, data[el]);
     }
   });
   req.body = data;
-  console.log("fin du middleware convertDateAndTime", req.body);
+  // console.log("fin du middleware convertDateAndTime", req.body);
   next();
 };
 
 const validateContract = (req, res, next) => {
-  console.log("début du middleware validateContract");
   const data = { ...req.body };
-  // Object.keys(data).forEach((el) => {
-  //   if (data[el] === "" || data[el] === null) delete data[el];
-  // });
-  console.log("data", data);
+
   const { error } = Joi.object({
     kidId: Joi.number().integer().min(1).presence("required"),
     caregiver: Joi.string().max(80).presence("required"),
@@ -72,16 +65,13 @@ const validateContract = (req, res, next) => {
     thursdayEnd: [Joi.date().iso(), null],
     fridayStart: [Joi.date().iso(), null],
     fridayEnd: [Joi.date().iso(), null],
-    // isMain: Joi.boolean().presence("required"),
+    isMain: Joi.boolean().presence("required"),
+    userId: Joi.number().integer().min(1).presence("required"),
   }).validate(data, { abortEarly: false });
-  console.log("fin du middleware validateContract");
-  console.log("error", error);
   if (!error) {
-    console.log("validateContract ok");
     // res.status(200);
     next();
   } else {
-    console.log("validateContract error");
     res.status(400).json(error);
   }
 };
