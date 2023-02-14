@@ -1,8 +1,8 @@
 const express = require("express");
 
-const usercontractsRouter = express.Router();
+const userContractsRouter = express.Router();
 
-const { UsercontractController } = require("../controllers");
+const { UserContractController } = require("../controllers");
 
 // contractsRouter.get(
 //   "/contract/:id",
@@ -11,7 +11,7 @@ const { UsercontractController } = require("../controllers");
 //   ContractController.read
 // );
 
-usercontractsRouter.post("/usercontract/add", UsercontractController.add);
+userContractsRouter.post("/usercontract/add", UserContractController.add);
 // userContractsRouter.delete("/usercontract/:id", UserContractController.delete);
 
-module.exports = usercontractsRouter;
+module.exports = userContractsRouter;

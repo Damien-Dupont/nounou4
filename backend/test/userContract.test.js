@@ -2,13 +2,38 @@
 const supertest = require("supertest");
 
 const app = require("../src/app");
-const { userContractToCreate, userContractKeys } = require("./testData");
+const {
+  ContractController,
+  UserContractController,
+  UserController,
+} = require("../src/controllers");
+const {
+  userContractToCreate,
+  userContractKeys,
+  // userCreated,
+  // contractKeys,
+  // contractToCreate,
+} = require("./testData");
 
 // // jest.useFakeTimers();
 // jest.setTimeout(10000);
 
 describe("USER-CONTRACT ROUTES", () => {
   const persistantData = {};
+  beforeEach(async () => {
+    await ContractController.sync({ force: true });
+    await UserController.sync({ force: true });
+    await UserContractController.sync({ force: true });
+  });
+
+  // it("should create a contract and a user-contract (ADD)", async () => {
+  //   const user = userCreated;
+
+  //   const resContract = await supertest(app)
+  //     .post("/contract/add")
+  //     .send(contractToCreate)
+  //     .expect(201)
+  //     .expect("Content-Type", /json/);
 
   // it("should create a contract (ADD)", async () => {
   //   const res = await supertest(app)

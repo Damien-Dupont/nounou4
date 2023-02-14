@@ -103,6 +103,7 @@ export default function CreateContract() {
   // kid data
   const [kidList, setKidList] = useState([]);
   const [kidId, setKidId] = useState("");
+  const [isMain, setIsMain] = useState(true);
   // contract data - about time
   const [caregiver, setCaregiver] = useState("");
   const [weeksPerYear, setWeeksPerYear] = useState(0);
@@ -317,6 +318,7 @@ export default function CreateContract() {
           priceLongHousehold,
           priceMeal,
           priceSnack,
+          // isMain,
         })
         .then((res) => {
           localStorage.setItem("contractId", res.data.id);
@@ -404,6 +406,13 @@ export default function CreateContract() {
             renderInput={(params) => <TextField {...params} />}
           />
         </div>
+        Contrat principal ?
+        <Switch
+          // classes={switchStyles}
+          checked={isMain}
+          onChange={(e) => setIsMain(e.target.checked)}
+        />{" "}
+        {isMain ? "Oui" : "Non"}
         <br />
         {/* INSERT WEEKS PER YEAR */}
         <div>

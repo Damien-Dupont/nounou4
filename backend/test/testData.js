@@ -8,6 +8,8 @@ const userToCreate = {
   password: "password",
 };
 
+const userCreated = { id: 3 };
+
 // kid
 const kidKeys = ["id", "lastname", "firstname", "birthdate", "parent"];
 const kidToCreate = {
@@ -81,4 +83,5 @@ module.exports = {
   userKeys,
   kidToCreate,
   kidKeys,
+  userCreated,
 };

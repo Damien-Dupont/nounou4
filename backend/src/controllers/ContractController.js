@@ -54,9 +54,9 @@ class ContractController {
 
   static add = async (req, res) => {
     const {
-      startingDate,
       kidId,
       caregiver,
+      startingDate,
       weeksPerYear,
       mondayStart,
       mondayEnd,
@@ -76,12 +76,12 @@ class ContractController {
       priceSnack,
     } = req.body;
     // const { isMain, userId } = req.body;
-
+    console.log("add/input", req.body);
     await models.contract
       .insert(
-        startingDate,
         kidId,
         caregiver,
+        startingDate,
         weeksPerYear,
         mondayStart,
         mondayEnd,
@@ -102,6 +102,8 @@ class ContractController {
       )
       .then((result) => {
         res.status(201).json({ ...req.body, id: result[0].insertId });
+        console.log("output", req.body);
+        debugger;
         // return result[0].insertId;
       })
       .catch((err) => {

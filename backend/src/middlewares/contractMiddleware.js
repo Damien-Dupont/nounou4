@@ -24,16 +24,21 @@ const prepareData = (req, res, next) => {
 
 const convertDateAndTime = (req, res, next) => {
   const data = { ...req.body };
+  console.log("début du middleware convertDateAndTime");
   Object.keys(data).forEach((el) => {
+    console.log(el, data[el]);
     if (el.includes("day")) {
       data[el] = data[el].split("T")[1].split(".")[0];
+      console.log(el, data[el]);
     }
     if (el.includes("Date")) {
       data[el] = data[el].split("T")[0];
+      console.log(el, data[el]);
     }
-    req.body = data;
-    next();
   });
+  req.body = data;
+  console.log("fin du middleware convertDateAndTime", req.body);
+  next();
 };
 
 const validateContract = (req, res, next) => {
@@ -67,6 +72,7 @@ const validateContract = (req, res, next) => {
     thursdayEnd: [Joi.date().iso(), null],
     fridayStart: [Joi.date().iso(), null],
     fridayEnd: [Joi.date().iso(), null],
+    // isMain: Joi.boolean().presence("required"),
   }).validate(data, { abortEarly: false });
   console.log("fin du middleware validateContract");
   console.log("error", error);

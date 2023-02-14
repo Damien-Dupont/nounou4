@@ -8,7 +8,7 @@ const cors = require("cors");
 const contractsRouter = require("./routers/contracts");
 const kidsRouter = require("./routers/kids");
 const usersRouter = require("./routers/users");
-const userContractsRouter = require("./routers/usercontracts");
+const userContractsRouter = require("./routers/userContracts");
 // const router = require("./--router.--js");
 
 const app = express();

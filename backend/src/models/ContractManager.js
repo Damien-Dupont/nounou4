@@ -4,9 +4,9 @@ class ContractManager extends AbstractManager {
   static table = "contract";
 
   insert(
-    startingDate,
     kidId,
     caregiver,
+    startingDate,
     weeksPerYear,
     mondayStart,
     mondayEnd,
@@ -25,6 +25,7 @@ class ContractManager extends AbstractManager {
     priceMeal,
     priceSnack
   ) {
+    console.log("ContractManager.insert", startingDate);
     return this.connection.query(
       `insert into ${this.table} (starting_date, kid_id, caregiver, weeks_per_year, monday_start, monday_end, tuesday_start, tuesday_end, wednesday_start, wednesday_end, thursday_start, thursday_end, friday_start, friday_end, price_hour, price_over_hour, price_household, price_long_household, price_meal, price_snack)
       values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
