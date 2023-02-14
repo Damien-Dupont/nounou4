@@ -8,7 +8,10 @@ body {
 }
 
 #root {
+  background-attachment: fixed;
+  background: no-repeat url(../../frontend/src/assets/purpleOrangeBack.svg);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 code {

@@ -34,11 +34,14 @@
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.6",
+    "@reduxjs/toolkit": "^1.9.2",
     "axios": "^1.2.2",
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
     "moment": "^2.29.4",
+    "react-redux": "^8.0.5",
     "react-router-dom": "^6.6.1",
-    "react-select": "^5.7.0"
+    "react-select": "^5.7.0",
+    "redux": "^4.2.1"
   }
 }
