@@ -87,15 +87,6 @@ export default function Month() {
     populateDaysOfMonth();
   }, [currentMonth]);
 
-  const heuresNormales = 1;
-  const joursMensualises = 2;
-  const heuresComplementaires = 3;
-  const salaireHoraire = 4;
-  const joursConges = 5;
-
-  const salaireNet = 6;
-  const entretien = 7;
-  const repas = 8;
   return (
     <div className="background">
       <div className="header">
@@ -275,50 +266,62 @@ export default function Month() {
             <button type="submit" className="events-add-button">
               Ajouter un évènement
             </button>
-          </div>
-          <div className="declare">
-            <p className="declare__title">À déclarer ce mois-ci :</p>
-            <div className="declare__hours left">
-              <p>Heures normales</p>
-              <span className="declare__hours value">{heuresNormales} h</span>
-            </div>
-            <div className="declare__daysPerMonth left">
-              <p>Jours mensualisés</p>
-              <span className="declare__daysPerMonth value">
-                {joursMensualises} J
-              </span>
-            </div>
-            <div className="declare__overhours left">
-              <p>Heures complémentaires</p>
-              <span className="declare__overhours value">
-                {heuresComplementaires} h
-              </span>
-            </div>
-            <div className="declare__priceHour left">
-              <p>Salaire Horaire</p>
-              <span className="declare__priceHour value">
-                {salaireHoraire} €
-              </span>
-            </div>
-            <div className="declare__daysoff left">
-              <p>Jours de congés acquis</p>
-              <span className="declare__daysoff value">{joursConges} J</span>
-            </div>
-
-            <div className="declare__salary total">
-              <p>Salaire Net Total:</p>
-              <span className="declare__salary total">{salaireNet} €</span>
-            </div>
-            <div className="declare__household right">
-              Indemnités entretien
-              <span className="declare__household value">{entretien} €</span>
-            </div>
-            <div className="declare__meal right">
-              Indemnités de repas
-              <span className="declare__meal value">{repas} €</span>
-            </div>
+            <Declaration />
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function Declaration() {
+  const heuresNormales = 1;
+  const joursMensualises = 2;
+  const heuresComplementaires = 3;
+  const salaireHoraire = 4;
+  const joursConges = 5;
+
+  const salaireNet = 6;
+  const entretien = 7;
+  const repas = 8;
+  return (
+    <div className="declare">
+      <p className="declare__title">À déclarer ce mois-ci :</p>
+      <div className="declare__hours left">
+        <p>Heures normales</p>
+        <span className="declare__hours value">{heuresNormales} h</span>
+      </div>
+      <div className="declare__daysPerMonth left">
+        <p>Jours mensualisés</p>
+        <span className="declare__daysPerMonth value">
+          {joursMensualises} J
+        </span>
+      </div>
+      <div className="declare__overhours left">
+        <p>Heures complémentaires</p>
+        <span className="declare__overhours value">
+          {heuresComplementaires} h
+        </span>
+      </div>
+      <div className="declare__priceHour left">
+        <p>Salaire Horaire</p>
+        <span className="declare__priceHour value">{salaireHoraire} €</span>
+      </div>
+      <div className="declare__daysoff left">
+        <p>Jours de congés acquis</p>
+        <span className="declare__daysoff value">{joursConges} J</span>
+      </div>
+      <div className="declare__salary total">
+        <p>Salaire Net Total:</p>
+        <span className="declare__salary total">{salaireNet} €</span>
+      </div>
+      <div className="declare__household right">
+        Indemnités entretien
+        <span className="declare__household value">{entretien} €</span>
+      </div>
+      <div className="declare__meal right">
+        Indemnités de repas
+        <span className="declare__meal value">{repas} €</span>
       </div>
     </div>
   );
