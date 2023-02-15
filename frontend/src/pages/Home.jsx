@@ -1,80 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 
-// import CreateContract from "../components/CreateContract";
-// import CreateCycle from "../components/CreateCycle";
-import CreateParent from "../components/CreateParent";
-import CreateKid from "../components/CreateKid";
-// import CreateContract from "../components/CreateContract";
-// import CreateUserContract from "../components/CreateuserContract";
+import { Box, Button } from "@mui/material";
 
 import "./Home.scss";
 import Navbar from "../components/Navbar";
-
-function HorizontalLine() {
-  return (
-    <>
-      <br />
-      <hr style={{ color: "black", backgroundColor: "black", height: 1 }} />
-      <br />
-    </>
-  );
-}
+import logo from "../assets/logow.png";
 
 export default function Home() {
-  const [isOpenParent, setIsOpenParent] = useState(false);
-  const [isOpenKid, setIsOpenKid] = useState(false);
-  // const [isOpenContract, setIsOpenContract] = useState(false);
-  // const [isOpenThree, setIsOpenThree] = useState(false);
-  // const [isOpenFour, setIsOpenFour] = useState(false);
-
-  const toggleKid = () => {
-    setIsOpenKid(!isOpenKid);
-  };
-  const toggleParent = () => {
-    setIsOpenParent(!isOpenParent);
-  };
-  // const toggleContract = () => {
-  //   setIsOpenContract(!isOpenContract);
-  // };
-  // const toggleFour = () => {
-  //   setIsOpenFour(!isOpenFour);
-  // };
   return (
     <>
-      <Navbar />
-
-      <div className={isOpenKid ? "form__open" : "form"}>
-        <button type="button" onClick={toggleKid}>
-          {isOpenKid ? "Close Kid Form" : "Open Kid Form"}
-        </button>
-        <div className="form__content">
-          <br />
-          <CreateKid />
-        </div>
+      <Navbar headTitle="Bienvenue" />
+      <div className="allframe">
+        <Box sx={{ flexGrow: 1 }}>
+          <div className="paper home">
+            <p>Bonjour !</p>
+            <img className="logo" key={logo} src={logo} alt="logo" />
+            <p>Bienvenue sur l'application Nounou et Vous</p>
+            <p>Pour commencer, connectez-vous ou inscrivez-vous</p>
+            <Button variant="contained" type="submit" as={Link} to="/connexion">
+              Me connecter
+            </Button>{" "}
+            <Button
+              as={Link}
+              to="/inscription"
+              variant="contained"
+              type="submit"
+            >
+              Créer un compte
+            </Button>
+          </div>
+        </Box>
       </div>
-
-      <HorizontalLine />
-
-      <div className={isOpenParent ? "form__open" : "form"}>
-        <button type="button" onClick={toggleParent}>
-          {isOpenParent ? "Close Parent Form" : "Open Parent Form"}
-        </button>
-        <div className="form__content">
-          <br />
-          <CreateParent />
-        </div>
-      </div>
-
-      {/*
-      <div className={isOpenContract ? "form__open" : "form"}>
-        <button type="button" onClick={toggleContract}>
-          {isOpenContract ? "Close Contract Form" : "Open Contract Form"}
-        </button>
-        <div className="form__content">
-          <br />
-          <CreateContract />
-        </div>
-      </div> */}
     </>
   );
 }
