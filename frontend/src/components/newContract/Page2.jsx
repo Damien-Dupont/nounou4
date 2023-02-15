@@ -1,69 +1,21 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-// import axios from "axios";
-// import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import Button from "@mui/material/Button";
-import {
-  Grid,
-  Box,
-  TextField,
-  // Select,
-  InputAdornment,
-  //   Switch,
-  // MenuItem,
-  // InputLabel,
-  // FormControl,
-} from "@mui/material";
+import { Grid, Box, TextField, InputAdornment } from "@mui/material";
 
-// import dayjs from "dayjs";
 import "dayjs/locale/fr";
-// import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-// import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { TimePicker } from "@mui/x-date-pickers/TimePicker";
-// // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-
-// import {
-//   setUserId,
-//   setParentFirstname,
-//   setParentLastname,
-//   // setKidList,
-// } from "../redux/parentSlice";
 
 import {
-  // setCaregiver,
-  // setStartingDate,
-  // setWeeksPerYear,
-  //   setMondayStart,
-  //   setMondayEnd,
-  //   setTuesdayStart,
-  //   setTuesdayEnd,
-  //   setWednesdayStart,
-  //   setWednesdayEnd,
-  //   setThursdayStart,
-  //   setThursdayEnd,
-  //   setFridayStart,
-  //   setFridayEnd,
   setPriceHour,
   setPriceOverHour,
   setPriceHousehold,
   setPriceLongHousehold,
   setPriceMeal,
   setPriceSnack,
-  //   setMondayCare,
-  //   setTuesdayCare,
-  //   setWednesdayCare,
-  //   setThursdayCare,
-  //   setFridayCare,
   setPage,
-  // setIsMain,
-  // setKidId,
 } from "../../redux/formSlice";
 
 import "./Contracts.scss";
-// import React from "react";
 
 export default function Page2() {
   const dispatch = useDispatch();

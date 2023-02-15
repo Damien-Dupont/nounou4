@@ -4,8 +4,8 @@ import React, { useState } from "react";
 // import CreateCycle from "../components/CreateCycle";
 import CreateParent from "../components/CreateParent";
 import CreateKid from "../components/CreateKid";
-import CreateContract from "../components/CreateContract";
-import CreateUserContract from "../components/CreateuserContract";
+// import CreateContract from "../components/CreateContract";
+// import CreateUserContract from "../components/CreateuserContract";
 
 import "./Home.scss";
 
@@ -22,7 +22,7 @@ function HorizontalLine() {
 export default function Home() {
   const [isOpenParent, setIsOpenParent] = useState(false);
   const [isOpenKid, setIsOpenKid] = useState(false);
-  const [isOpenContract, setIsOpenContract] = useState(false);
+  // const [isOpenContract, setIsOpenContract] = useState(false);
   // const [isOpenThree, setIsOpenThree] = useState(false);
   // const [isOpenFour, setIsOpenFour] = useState(false);
 
@@ -32,23 +32,14 @@ export default function Home() {
   const toggleParent = () => {
     setIsOpenParent(!isOpenParent);
   };
-  const toggleContract = () => {
-    setIsOpenContract(!isOpenContract);
-  };
+  // const toggleContract = () => {
+  //   setIsOpenContract(!isOpenContract);
+  // };
   // const toggleFour = () => {
   //   setIsOpenFour(!isOpenFour);
   // };
   return (
     <>
-      <HorizontalLine />
-
-      <div className="form__open">
-        <div className="form__content">
-          <br />
-          <CreateUserContract />
-        </div>
-      </div>
-
       <HorizontalLine />
 
       <div className={isOpenKid ? "form__open" : "form"}>
@@ -73,8 +64,7 @@ export default function Home() {
         </div>
       </div>
 
-      <HorizontalLine />
-
+      {/*
       <div className={isOpenContract ? "form__open" : "form"}>
         <button type="button" onClick={toggleContract}>
           {isOpenContract ? "Close Contract Form" : "Open Contract Form"}
@@ -83,10 +73,7 @@ export default function Home() {
           <br />
           <CreateContract />
         </div>
-      </div>
-
-      <HorizontalLine />
-      {/* <CreateCycle /> */}
+      </div> */}
     </>
   );
 }

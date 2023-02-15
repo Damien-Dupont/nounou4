@@ -127,7 +127,6 @@ export default function Page1() {
         />
         <p>S'agit-il du contrat principal de votre enfant ?</p>
         <Switch
-          // classes={switchStyles}
           checked={isMain}
           onChange={(e) => dispatch(setIsMain(e.target.checked))}
         />{" "}
