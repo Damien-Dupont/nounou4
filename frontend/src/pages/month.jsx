@@ -83,7 +83,7 @@ export default function Month() {
         dispatch(setCurrentMonth(11));
         dispatch(setCurrentYear(currentYear - 1));
       } else {
-        setCurrentMonth(currentMonth - 1);
+        dispatch(setCurrentMonth(currentMonth - 1));
       }
     }
   };

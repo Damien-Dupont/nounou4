@@ -6,11 +6,6 @@
   font-style: normal;
 }
 
-.background {
-  min-height: 100vh;
-  // background: no-repeat url(../assets/purpleOrangeBack.svg);
-}
-
 .hidden {
   visibility: hidden;
 }
@@ -22,6 +17,7 @@
 .header {
   height: 60px;
   width: 100%;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   vertical-align: center;
@@ -46,7 +42,7 @@
     vertical-align: center;
     align-items: center;
     justify-content: space-between;
-    margin: 10px 70px 0 0;
+    margin: 0 70px 0 0;
   }
 }
 
@@ -61,39 +57,4 @@
   border: 1px solid gray;
   padding: 10px;
   text-align: center;
-}
-
-.allframe {
-  // height: 765px;
-  // width: 459px;
-  // position: absolute;
-  min-width: 100%;
-
-  .paper {
-    position: relative;
-    top: 0;
-    margin: 0 20px 40px 20px;
-    padding-top: 20px;
-    border-radius: 10px;
-    min-height: 90vh;
-    background-color: rgba(#f0f0f0, 0.7);
-
-    &__contracts {
-      margin-top: 20px;
-      display: flex;
-      flex-direction: row;
-      text-align: center;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      // height: 28px;
-    }
-
-    span .user {
-      font-family: "dumontCursive";
-      font-size: 20px;
-      font-weight: bold;
-      color: #000000;
-    }
-  }
 }
