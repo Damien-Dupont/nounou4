@@ -54,6 +54,7 @@ class UserController {
   };
 
   static add = async (req, res) => {
+    console.log("ici", req.body);
     const { lastname, firstname, roleId, email } = req.body;
     const password = await passwordHash(req.body.password);
 

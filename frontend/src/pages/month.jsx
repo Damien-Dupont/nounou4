@@ -1,8 +1,8 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from "react";
 import "./Month.scss";
+import React, { useState, useEffect } from "react";
 // import React from "react";
 import arrowRightBlue from "../assets/arrowRightBlue.svg";
 import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
@@ -13,7 +13,7 @@ function camelCase(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export default function MonthPage() {
+export default function Month() {
   const now = new Date();
 
   const [daysOfMonth, setDaysOfMonth] = useState([]);

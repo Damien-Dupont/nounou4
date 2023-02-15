@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 // import dayjs from "dayjs";
 import React from "react";
-// import { Routes } from "react-router-dom"; // npm i -S react-router-dom
+// import { Routes, Route } from "react-router-dom"; // npm i -S react-router-dom
 
 import "dayjs/locale/fr";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -11,7 +11,9 @@ import store from "./redux/store";
 // import ExportContextUser from "./contexts/UserContext";
 
 import NewContract from "./pages/Contracts";
-import MonthPage from "./pages/Month";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Month from "./pages/Month";
 import Home from "./pages/Home";
 import "./App.scss";
 
@@ -21,12 +23,17 @@ function App() {
     <div className="App">
       <Provider store={store}>
         <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
-          {/* <Coucou /> */}
+          <SignUp />
+          <SignIn />
           <NewContract />
-          <MonthPage />
+          <Month />
           <Home />
-          {/* <Routes> */}
-          {/* </Routes> */}
+          {/* <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/mescontrats/" element={<NewContract />} />
+            <Route path="/calendrier/" element={<Month />} />
+          </Routes> */}
+          {/* <Coucou /> */}
         </LocalizationProvider>
       </Provider>
     </div>
