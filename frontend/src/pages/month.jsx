@@ -4,18 +4,11 @@
 import "./Month.scss";
 import React, { useState, useEffect } from "react";
 // import React from "react";
+
 import { useSelector, useDispatch } from "react-redux";
+import { setDaysOfMonth } from "../redux/generalSlice";
 
-import arrowRightBlue from "../assets/arrowRightBlue.svg";
-import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
-import logo from "../assets/logow.png";
-// import { useEffect } from "react";
-
-import {
-  setCurrentMonth,
-  setCurrentYear,
-  setDaysOfMonth,
-} from "../redux/generalSlice";
+import Navbar from "../components/Navbar";
 
 function camelCase(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -25,6 +18,7 @@ export default function Month() {
   const now = new Date();
   const dispatch = useDispatch();
 
+  const arrows = true;
   const currentMonth = useSelector((state) => state.general.currentMonth);
   const currentYear = useSelector((state) => state.general.currentYear);
   // const daysOfMonth = useSelector((state) => state.general.daysOfMonth);
@@ -68,25 +62,25 @@ export default function Month() {
     "Dimanche",
   ];
 
-  const handleChangeMonth = (e) => {
-    console.log("e.target.alt", e.target.alt, currentMonth);
-    e.preventDefault();
-    if (e.target.alt === "arrowRight") {
-      if (currentMonth === 11) {
-        dispatch(setCurrentMonth(0));
-        dispatch(setCurrentYear(currentYear + 1));
-      } else {
-        dispatch(setCurrentMonth(currentMonth + 1));
-      }
-    } else if (e.target.alt === "arrowLeft") {
-      if (currentMonth === 0) {
-        dispatch(setCurrentMonth(11));
-        dispatch(setCurrentYear(currentYear - 1));
-      } else {
-        dispatch(setCurrentMonth(currentMonth - 1));
-      }
-    }
-  };
+  // const handleChangeMonth = (e) => {
+  //   console.log("e.target.alt", e.target.alt, currentMonth);
+  //   e.preventDefault();
+  //   if (e.target.alt === "arrowRight") {
+  //     if (currentMonth === 11) {
+  //       dispatch(setCurrentMonth(0));
+  //       dispatch(setCurrentYear(currentYear + 1));
+  //     } else {
+  //       dispatch(setCurrentMonth(currentMonth + 1));
+  //     }
+  //   } else if (e.target.alt === "arrowLeft") {
+  //     if (currentMonth === 0) {
+  //       dispatch(setCurrentMonth(11));
+  //       dispatch(setCurrentYear(currentYear - 1));
+  //     } else {
+  //       dispatch(setCurrentMonth(currentMonth - 1));
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     setLongMonth(
@@ -102,7 +96,8 @@ export default function Month() {
 
   return (
     <div className="background">
-      <div className="header">
+      <Navbar headTitle={longMonth} />
+      {/* <div className="header">
         <img key={logo} className="header__logo" src={logo} alt="logo" />
         <div className="header__month">
           <img
@@ -121,7 +116,7 @@ export default function Month() {
             alt="arrowRight"
           />
         </div>
-      </div>
+      </div> */}
       <div className="allframe">
         <div className="paper">
           <div className="days">

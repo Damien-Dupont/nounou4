@@ -19,6 +19,7 @@ import PostAddIcon from "@mui/icons-material/PostAdd";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 
 import { setPage } from "../redux/formSlice";
+import { setCurrentMonth, setCurrentYear } from "../redux/generalSlice";
 
 import "./stylesheets/Navbar.scss";
 
@@ -28,19 +29,49 @@ import logo from "../assets/logow.png";
 
 export default function Navbar(headTitle) {
   const page = useSelector((state) => state.form.page);
+  const currentMonth = useSelector((state) => state.general.currentMonth);
+  const currentYear = useSelector((state) => state.general.currentYear);
+
   //   const headTitle = useSelector((state) => state.general.headTitle);
   const dispatch = useDispatch();
   if (headTitle === "Connexion" || headTitle === "Inscription") {
     dispatch(setPage(-1));
   }
 
+  const handleChangeMonth = (direction) => {
+    if (direction === "arrowRight") {
+      if (currentMonth === 11) {
+        dispatch(setCurrentMonth(0));
+        dispatch(setCurrentYear(currentYear + 1));
+      } else {
+        dispatch(setCurrentMonth(currentMonth + 1));
+      }
+    } else if (direction === "arrowLeft") {
+      if (currentMonth === 0) {
+        dispatch(setCurrentMonth(11));
+        dispatch(setCurrentYear(currentYear - 1));
+      } else {
+        dispatch(setCurrentMonth(currentMonth - 1));
+      }
+    }
+  };
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (headTitle === "Contrats") {
+      dispatch(setPage(e.target.alt === "arrowLeft" ? -1 : 1));
+    } else {
+      handleChangeMonth(e.target.alt);
+    }
+  };
+
   return (
     <div className="header">
       <MenuLogo />
       <div className="header__month">
         <img
-          onClick={() => {
-            dispatch(setPage(-1));
+          onClick={(e) => {
+            handleClick(e);
           }}
           src={arrowLeftBlue}
           alt="arrowLeft"
