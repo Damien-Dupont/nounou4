@@ -5,6 +5,7 @@ const initialState = {
   userId: undefined,
   parentFirstname: "",
   parentLastname: "",
+  parentEmail: "",
   kidList: [],
 };
 
@@ -24,6 +25,10 @@ const parentSlice = createSlice({
       state.parentLastname = action.payload;
       return state;
     },
+    setParentEmail: (state, action) => {
+      state.parentEmail = action.payload;
+      return state;
+    },
     setKidList: (state, action) => {
       state.kidList = action.payload;
       return state;
@@ -31,7 +36,12 @@ const parentSlice = createSlice({
   },
 });
 
-export const { setUserId, setKidList, setParentFirstname, setParentLastname } =
-  parentSlice.actions;
+export const {
+  setUserId,
+  setKidList,
+  setParentFirstname,
+  setParentLastname,
+  setParentEmail,
+} = parentSlice.actions;
 
 export default parentSlice.reducer;

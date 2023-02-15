@@ -64,24 +64,6 @@ export default function CreateParent() {
     console.log("CreateParent: axios OUT");
   };
 
-  // function verifyPassword(password, passwordConfirm) {
-  //   // const az = /^(?=.*[a-z])/.test(password);
-  //   // const AZ = /^(?=.*[A-Z])/.test(password);
-  //   // const num = /^(?=.*\d)/.test(password);
-  //   // const char = /^(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/.test(password);
-  //   const len = password.length > 7;
-  //   const same = password === passwordConfirm;
-
-  //   setPasswordError({ az: true, AZ: true, num: true, char: true, len, same });
-  //   // let string = "Ajoutez ";
-  //   // az ? (string += "") : (string += "une minuscule, ");
-  //   // AZ ? (string += "") : (string += "une majuscule, ");
-  //   // num ? (string += "") : (string += "un chiffre, ");
-  //   // char ? (string += "") : (string += "un caractère spécial, ");
-
-  //   return passwordError;
-  // }
-
   useEffect(() => {
     if (password === passwordConfirm && password.length > 7) {
       setIsDisabled(false);

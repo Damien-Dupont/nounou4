@@ -65,7 +65,8 @@
     position: relative;
     top: 0;
     margin: 0 20px 40px 20px;
-    border-radius: 6px;
+    padding-top: 20px;
+    border-radius: 10px;
     min-height: 90vh;
     background-color: rgba(#f0f0f0, 0.7);
 
@@ -80,7 +81,7 @@
       // height: 28px;
 
       &__label {
-        border-radius: 6px;
+        border-radius: 10px;
         height: 28px;
         width: 50px;
         // opacity: 100%;
@@ -107,7 +108,7 @@
       // grid-gap: 10px;
 
       &__care {
-        border-radius: 6px;
+        border-radius: 10px;
         padding: 1px;
         text-align: center;
         align-items: center;
@@ -127,7 +128,7 @@
         width: 362px;
 
         &__day {
-          border-radius: 6px;
+          border-radius: 10px;
           height: 50px;
           width: 50px;
 
@@ -153,7 +154,7 @@
       // grid-column-gap: 0.5rem;
       // align-items: center;
       // justify-content: space-between;
-      border-radius: 6px;
+      border-radius: 10px;
       // width: 95%;
       padding-bottom: 0.5rem;
       // margin: 0, 0, 0, 0;
@@ -169,7 +170,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 6px;
+        border-radius: 10px;
         height: 1.5rem;
         width: 50px;
         margin-right: 0.5rem;
@@ -190,7 +191,7 @@
         // justify-content: center;
         // position: relative;
         // top: 0;
-        border-radius: 6px;
+        border-radius: 10px;
         height: 5rem;
         // margin-right: 0.5rem;
         // width: 90%;
@@ -260,7 +261,7 @@
   }
 
   .events-add-button {
-    border-radius: 6px;
+    border-radius: 10px;
     // height: 28px;
     width: 159px;
     background-color: #efefef;

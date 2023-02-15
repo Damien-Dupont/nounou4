@@ -4,6 +4,7 @@
 import axios from "axios";
 // import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
@@ -24,12 +25,9 @@ import { Page3 } from "../components/newContract/Page3";
 // } from "../redux/parentSlice";
 
 import { setPage } from "../redux/formSlice";
+import Navbar from "../components/Navbar";
 
 import "./Contracts.scss";
-
-import arrowRightBlue from "../assets/arrowRightBlue.svg";
-import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
-import logo from "../assets/logow.png";
 
 export default function Contracts() {
   // const [parentId, setParentId] = useState(userId);
@@ -38,7 +36,7 @@ export default function Contracts() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
       <div className="background">
-        <Header />
+        <Navbar headTitle="Contrats" />
         <div className="allframe">
           <div className="paper">
             <div className="paper__contracts">
@@ -52,35 +50,6 @@ export default function Contracts() {
         </div>
       </div>
     </LocalizationProvider>
-  );
-}
-
-function Header() {
-  const page = useSelector((state) => state.form.page);
-  const dispatch = useDispatch();
-  return (
-    <div className="header">
-      <img key={logo} className="header__logo" src={logo} alt="logo" />
-      <div className="header__month">
-        <img
-          onClick={() => {
-            dispatch(setPage(-1));
-          }}
-          src={arrowLeftBlue}
-          alt="arrowLeft"
-          className={page < 2 ? "hidden" : "visible"}
-        />
-        {page === 0 ? "Contrats" : "Nouveau contrat"}
-        <img
-          onClick={() => {
-            dispatch(setPage(1));
-          }}
-          src={arrowRightBlue}
-          alt="arrowRight"
-          className={page < 1 || page > 2 ? "hidden" : "visible"}
-        />
-      </div>
-    </div>
   );
 }
 
@@ -101,24 +70,22 @@ function Listing() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <p>
+      <div>
         <div>
           {parentId === undefined ? (
             <>Vous n'êtes pas connecté</>
           ) : (
             <>
-              <p>Parent employeur: </p>
-              <span className="user">
-                {userFirstname} {userLastname}
-              </span>
+              Bonjour {userFirstname} {userLastname}
               <p className="notyou">
-                (Ce n'est pas vous? <a href="/logout">Se déconnecter</a>)
+                (Ce n'est pas vous?{" "}
+                <Link to="/inscription">Se déconnecter</Link>)
               </p>
             </>
           )}
         </div>
-      </p>
-      <p>Vous n'avez aucun contrat.</p>
+      </div>
+      <p>Vous n'avez aucun contrat enregistré.</p>
       <Button
         variant="contained"
         type="submit"

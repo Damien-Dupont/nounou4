@@ -1,27 +1,33 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from "react";
 import "./Month.scss";
+import React, { useState, useEffect } from "react";
 // import React from "react";
-import arrowRightBlue from "../assets/arrowRightBlue.svg";
-import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
-import logo from "../assets/logow.png";
-// import { useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { setDaysOfMonth } from "../redux/generalSlice";
+
+import Navbar from "../components/Navbar";
 
 function camelCase(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-export default function MonthPage() {
+export default function Month() {
   const now = new Date();
+  const dispatch = useDispatch();
 
-  const [daysOfMonth, setDaysOfMonth] = useState([]);
-  const [currentYear, setCurrentYear] = useState(now.getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(now.getMonth());
+  const currentMonth = useSelector((state) => state.general.currentMonth);
+  const currentYear = useSelector((state) => state.general.currentYear);
+  // const daysOfMonth = useSelector((state) => state.general.daysOfMonth);
+  // const eventsOfMonth = useSelector((state) => state.general.eventsOfMonth);
+  // const [daysOfMonth, setDaysOfMonth] = useState([]);
+  // const [currentYear, setCurrentYear] = useState(now.getFullYear());
+  // const [currentMonth, setCurrentMonth] = useState(now.getMonth());
   const [longMonth, setLongMonth] = useState();
 
-  console.log("daysOfMonth", daysOfMonth);
+  // console.log("daysOfMonth", daysOfMonth);
 
   // TODO: push des cases vides , autant que nécessaires pour ajuster le premier jour du mois
 
@@ -42,7 +48,7 @@ export default function MonthPage() {
           dayStr !== "samedi" && dayStr !== "dimanche" && dayStr !== "mercredi",
       });
     }
-    setDaysOfMonth(daysTemp);
+    dispatch(setDaysOfMonth(daysTemp));
   };
 
   const daysLabel = [
@@ -55,25 +61,25 @@ export default function MonthPage() {
     "Dimanche",
   ];
 
-  const handleChangeMonth = (e) => {
-    console.log("e.target.alt", e.target.alt, currentMonth);
-    e.preventDefault();
-    if (e.target.alt === "arrowRight") {
-      if (currentMonth === 11) {
-        setCurrentMonth(0);
-        setCurrentYear(currentYear + 1);
-      } else {
-        setCurrentMonth(currentMonth + 1);
-      }
-    } else if (e.target.alt === "arrowLeft") {
-      if (currentMonth === 0) {
-        setCurrentMonth(11);
-        setCurrentYear(currentYear - 1);
-      } else {
-        setCurrentMonth(currentMonth - 1);
-      }
-    }
-  };
+  // const handleChangeMonth = (e) => {
+  //   console.log("e.target.alt", e.target.alt, currentMonth);
+  //   e.preventDefault();
+  //   if (e.target.alt === "arrowRight") {
+  //     if (currentMonth === 11) {
+  //       dispatch(setCurrentMonth(0));
+  //       dispatch(setCurrentYear(currentYear + 1));
+  //     } else {
+  //       dispatch(setCurrentMonth(currentMonth + 1));
+  //     }
+  //   } else if (e.target.alt === "arrowLeft") {
+  //     if (currentMonth === 0) {
+  //       dispatch(setCurrentMonth(11));
+  //       dispatch(setCurrentYear(currentYear - 1));
+  //     } else {
+  //       dispatch(setCurrentMonth(currentMonth - 1));
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     setLongMonth(
@@ -87,18 +93,10 @@ export default function MonthPage() {
     populateDaysOfMonth();
   }, [currentMonth]);
 
-  const heuresNormales = 1;
-  const joursMensualises = 2;
-  const heuresComplementaires = 3;
-  const salaireHoraire = 4;
-  const joursConges = 5;
-
-  const salaireNet = 6;
-  const entretien = 7;
-  const repas = 8;
   return (
     <div className="background">
-      <div className="header">
+      <Navbar headTitle={longMonth} />
+      {/* <div className="header">
         <img key={logo} className="header__logo" src={logo} alt="logo" />
         <div className="header__month">
           <img
@@ -117,7 +115,7 @@ export default function MonthPage() {
             alt="arrowRight"
           />
         </div>
-      </div>
+      </div> */}
       <div className="allframe">
         <div className="paper">
           <div className="days">
@@ -275,50 +273,62 @@ export default function MonthPage() {
             <button type="submit" className="events-add-button">
               Ajouter un évènement
             </button>
-          </div>
-          <div className="declare">
-            <p className="declare__title">À déclarer ce mois-ci :</p>
-            <div className="declare__hours left">
-              <p>Heures normales</p>
-              <span className="declare__hours value">{heuresNormales} h</span>
-            </div>
-            <div className="declare__daysPerMonth left">
-              <p>Jours mensualisés</p>
-              <span className="declare__daysPerMonth value">
-                {joursMensualises} J
-              </span>
-            </div>
-            <div className="declare__overhours left">
-              <p>Heures complémentaires</p>
-              <span className="declare__overhours value">
-                {heuresComplementaires} h
-              </span>
-            </div>
-            <div className="declare__priceHour left">
-              <p>Salaire Horaire</p>
-              <span className="declare__priceHour value">
-                {salaireHoraire} €
-              </span>
-            </div>
-            <div className="declare__daysoff left">
-              <p>Jours de congés acquis</p>
-              <span className="declare__daysoff value">{joursConges} J</span>
-            </div>
-
-            <div className="declare__salary total">
-              <p>Salaire Net Total:</p>
-              <span className="declare__salary total">{salaireNet} €</span>
-            </div>
-            <div className="declare__household right">
-              Indemnités entretien
-              <span className="declare__household value">{entretien} €</span>
-            </div>
-            <div className="declare__meal right">
-              Indemnités de repas
-              <span className="declare__meal value">{repas} €</span>
-            </div>
+            <Declaration />
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function Declaration() {
+  const heuresNormales = 1;
+  const joursMensualises = 2;
+  const heuresComplementaires = 3;
+  const salaireHoraire = 4;
+  const joursConges = 5;
+
+  const salaireNet = 6;
+  const entretien = 7;
+  const repas = 8;
+  return (
+    <div className="declare">
+      <p className="declare__title">À déclarer ce mois-ci :</p>
+      <div className="declare__hours left">
+        <p>Heures normales</p>
+        <span className="declare__hours value">{heuresNormales} h</span>
+      </div>
+      <div className="declare__daysPerMonth left">
+        <p>Jours mensualisés</p>
+        <span className="declare__daysPerMonth value">
+          {joursMensualises} J
+        </span>
+      </div>
+      <div className="declare__overhours left">
+        <p>Heures complémentaires</p>
+        <span className="declare__overhours value">
+          {heuresComplementaires} h
+        </span>
+      </div>
+      <div className="declare__priceHour left">
+        <p>Salaire Horaire</p>
+        <span className="declare__priceHour value">{salaireHoraire} €</span>
+      </div>
+      <div className="declare__daysoff left">
+        <p>Jours de congés acquis</p>
+        <span className="declare__daysoff value">{joursConges} J</span>
+      </div>
+      <div className="declare__salary total">
+        <p>Salaire Net Total:</p>
+        <span className="declare__salary total">{salaireNet} €</span>
+      </div>
+      <div className="declare__household right">
+        Indemnités entretien
+        <span className="declare__household value">{entretien} €</span>
+      </div>
+      <div className="declare__meal right">
+        Indemnités de repas
+        <span className="declare__meal value">{repas} €</span>
       </div>
     </div>
   );

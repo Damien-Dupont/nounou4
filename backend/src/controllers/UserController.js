@@ -54,6 +54,7 @@ class UserController {
   };
 
   static add = async (req, res) => {
+    console.log("ici", req.body);
     const { lastname, firstname, roleId, email } = req.body;
     const password = await passwordHash(req.body.password);
 
@@ -76,7 +77,7 @@ class UserController {
         if (rows[0] == null) {
           res.sendStatus(401).send({ message: nope });
         }
-        if (await passwordVerify(rows[0].password, req.body.password)) {
+        if (await passwordVerify(rows[0].hashed_password, req.body.password)) {
           const token = jwtSign(
             { email: rows[0].email, role: rows[0].roleId, id: rows[0].id },
             { expiresIn: "1h" }
@@ -87,7 +88,7 @@ class UserController {
           return res
             .cookie("access_token", token, {
               httpOnly: true,
-              expires: new Date(Date.now() + 60 * 60 * 24),
+              expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
             })
             .status(200)
             .json({ ...rows[0] });
