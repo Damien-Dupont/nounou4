@@ -30,6 +30,9 @@ export default function Navbar(headTitle) {
   const page = useSelector((state) => state.form.page);
   //   const headTitle = useSelector((state) => state.general.headTitle);
   const dispatch = useDispatch();
+  if (headTitle === "Connexion" || headTitle === "Inscription") {
+    dispatch(setPage(-1));
+  }
 
   return (
     <div className="header">

@@ -103,7 +103,7 @@ export default function SignIn() {
                 variant="contained"
                 type="submit"
                 disabled={isDisabled}
-                onClick={() => handleSubmit()}
+                onClick={(e) => handleSubmit(e)}
               >
                 Se connecter
               </Button>
