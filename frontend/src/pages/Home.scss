@@ -1,38 +1,36 @@
-.form {
-  cursor: pointer;
-  width: 100vw;
-  max-width: 1280px;
+.allframe {
+  // height: 765px;
+  // width: 459px;
+  // position: absolute;
+  min-width: 80%;
 
-  &__title {
+  .home {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    padding: 16px 0px;
+    justify-content: center;
 
-    svg {
-      fill: white;
-      transition: transform 0.3s ease-in-out;
+    .logo {
+      width: 25%;
+    }
+    a:link,
+    a:visited,
+    a:hover,
+    a:active {
+      text-decoration: none;
+      margin-top: 20px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #f0f0f0;
     }
   }
 
-  .form__content {
-    padding: 0px 0px 16px;
-    display: none;
-    width: 100%;
-  }
-
-  &__open {
-    @extend .form;
-    .form__title {
-      svg {
-        transform: rotate(180deg);
-      }
-    }
-
-    .form__content {
-      width: 100%;
-      display: block;
-    }
+  .paper {
+    position: relative;
+    top: 0;
+    margin: 0 20px 40px 20px;
+    padding-top: 20px;
+    border-radius: 10px;
+    max-height: 80vh;
+    background-color: rgba(#f0f0f0, 0.7);
   }
 }
