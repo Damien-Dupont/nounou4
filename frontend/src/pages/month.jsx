@@ -18,7 +18,6 @@ export default function Month() {
   const now = new Date();
   const dispatch = useDispatch();
 
-  const arrows = true;
   const currentMonth = useSelector((state) => state.general.currentMonth);
   const currentYear = useSelector((state) => state.general.currentYear);
   // const daysOfMonth = useSelector((state) => state.general.daysOfMonth);

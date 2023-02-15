@@ -29,6 +29,7 @@ import logo from "../assets/logow.png";
 
 export default function Navbar(headTitle) {
   const page = useSelector((state) => state.form.page);
+
   const currentMonth = useSelector((state) => state.general.currentMonth);
   const currentYear = useSelector((state) => state.general.currentYear);
 
@@ -58,7 +59,7 @@ export default function Navbar(headTitle) {
 
   const handleClick = (e) => {
     e.preventDefault();
-    if (headTitle === "Contrats") {
+    if (headTitle.headTitle === "Contrats") {
       dispatch(setPage(e.target.alt === "arrowLeft" ? -1 : 1));
     } else {
       handleChangeMonth(e.target.alt);
