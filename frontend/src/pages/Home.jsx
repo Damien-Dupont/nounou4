@@ -8,6 +8,7 @@ import CreateKid from "../components/CreateKid";
 // import CreateUserContract from "../components/CreateuserContract";
 
 import "./Home.scss";
+import Navbar from "../components/Navbar";
 
 function HorizontalLine() {
   return (
@@ -40,7 +41,7 @@ export default function Home() {
   // };
   return (
     <>
-      <HorizontalLine />
+      <Navbar />
 
       <div className={isOpenKid ? "form__open" : "form"}>
         <button type="button" onClick={toggleKid}>

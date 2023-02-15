@@ -2,6 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import React from "react";
 import Menu from "@mui/material/Menu";
@@ -13,7 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import PersonAdd from "@mui/icons-material/PersonAdd";
 // import Settings from "@mui/icons-material/Settings";
 import LockOpenRoundedIcon from "@mui/icons-material/LockOpenRounded";
-import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+// import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import LoginRoundedIcon from "@mui/icons-material/LoginRounded";
 import PostAddIcon from "@mui/icons-material/PostAdd";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
@@ -152,10 +153,12 @@ function MenuLogo() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <CalendarMonthRoundedIcon />
-          </ListItemIcon>{" "}
-          Gérer mon contrat
+          <Link to="/calendrier/">
+            <ListItemIcon>
+              <CalendarMonthRoundedIcon />
+            </ListItemIcon>{" "}
+            Gérer mon contrat
+          </Link>
         </MenuItem>
         {/* <MenuItem onClick={handleClose}>
           <ListItemIcon>
@@ -165,16 +168,20 @@ function MenuLogo() {
         </MenuItem> */}
         <Divider />
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Ajouter un enfant
+          <Link to="/mesenfants/">
+            <ListItemIcon>
+              <PersonAdd fontSize="small" />
+            </ListItemIcon>
+            Ajouter un enfant
+          </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PostAddIcon fontSize="small" />
-          </ListItemIcon>
-          Ajouter contrat
+          <Link to="/mescontrats/">
+            <ListItemIcon>
+              <PostAddIcon fontSize="small" />
+            </ListItemIcon>
+            Ajouter contrat
+          </Link>
         </MenuItem>
         {/* <MenuItem onClick={handleClose}>
           <ListItemIcon>
@@ -182,23 +189,29 @@ function MenuLogo() {
           </ListItemIcon>
           Settings
         </MenuItem> */}
+        {/* <MenuItem onClick={handleClose}>
+          <Link to="/adios/">
+            <ListItemIcon>
+              <LogoutRoundedIcon fontSize="small" />
+            </ListItemIcon>
+            Déconnexion
+          </Link>
+        </MenuItem> */}
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <LogoutRoundedIcon fontSize="small" />
-          </ListItemIcon>
-          Déconnexion
+          <Link to="/connexion/">
+            <ListItemIcon>
+              <LockOpenRoundedIcon fontSize="small" />
+            </ListItemIcon>
+            Se connecter
+          </Link>
         </MenuItem>
         <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <LockOpenRoundedIcon fontSize="small" />
-          </ListItemIcon>
-          Se connecter
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <LoginRoundedIcon fontSize="small" />
-          </ListItemIcon>
-          S'inscrire
+          <Link to="/inscription/">
+            <ListItemIcon>
+              <LoginRoundedIcon fontSize="small" />
+            </ListItemIcon>
+            S'inscrire
+          </Link>
         </MenuItem>
       </Menu>
     </>

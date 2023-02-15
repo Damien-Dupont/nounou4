@@ -4,6 +4,7 @@
 import axios from "axios";
 // import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Button from "@mui/material/Button";
 import { Box } from "@mui/material";
@@ -75,18 +76,16 @@ function Listing() {
             <>Vous n'êtes pas connecté</>
           ) : (
             <>
-              <p>Parent employeur: </p>
-              <span className="user">
-                {userFirstname} {userLastname}
-              </span>
+              Bonjour {userFirstname} {userLastname}
               <p className="notyou">
-                (Ce n'est pas vous? <a href="/logout">Se déconnecter</a>)
+                (Ce n'est pas vous?{" "}
+                <Link to="/inscription">Se déconnecter</Link>)
               </p>
             </>
           )}
         </div>
       </div>
-      <p>Vous n'avez aucun contrat.</p>
+      <p>Vous n'avez aucun contrat enregistré.</p>
       <Button
         variant="contained"
         type="submit"
