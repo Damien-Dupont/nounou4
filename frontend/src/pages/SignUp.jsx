@@ -13,6 +13,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { useSelector, useDispatch } from "react-redux";
+// import { setHeadTitle } from "../redux/generalSlice";
 import {
   setParentFirstname,
   setParentLastname,
@@ -20,11 +21,15 @@ import {
   setUserId,
 } from "../redux/parentSlice";
 
-import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
-import logo from "../assets/logow.png";
+// import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
+// import logo from "../assets/logow.png";
+
+import Navbar from "../components/Navbar";
 
 export default function Signup() {
   const dispatch = useDispatch();
+
+  const headTitle = "Inscription";
 
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -90,7 +95,7 @@ export default function Signup() {
 
   return (
     <div className="background">
-      <Header />
+      <Navbar headTitle={headTitle} />
       <div className="allframe">
         <div className="paper">
           {/* <div className="paper__contracts"> */}
@@ -211,16 +216,16 @@ export default function Signup() {
   );
 }
 
-function Header() {
-  //   const title = useSelector((state) => state.form.page);
-  return (
-    <div className="header">
-      <img key={logo} className="header__logo" src={logo} alt="logo" />
-      <div className="header__month">
-        <img src={arrowLeftBlue} alt="arrowLeft" className="hidden" />
-        Inscription
-        <img src={arrowLeftBlue} alt="arrowRight" className="hidden" />
-      </div>
-    </div>
-  );
-}
+// function Header() {
+//   //   const title = useSelector((state) => state.form.page);
+//   return (
+//     <div className="header">
+//       <img key={logo} className="header__logo" src={logo} alt="logo" />
+//       <div className="header__month">
+//         <img src={arrowLeftBlue} alt="arrowLeft" className="hidden" />
+//         Inscription
+//         <img src={arrowLeftBlue} alt="arrowRight" className="hidden" />
+//       </div>
+//     </div>
+//   );
+// }
