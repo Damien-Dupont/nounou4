@@ -13,8 +13,7 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
-import logo from "../assets/logow.png";
+import Navbar from "../components/Navbar";
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
@@ -52,7 +51,7 @@ export default function SignIn() {
 
   return (
     <div className="background">
-      <Header />
+      <Navbar headTitle="Connexion" />
       <div className="allframe">
         <div className="paper">
           {/* <div className="paper__contracts"> */}
@@ -111,20 +110,6 @@ export default function SignIn() {
             </div>
           </Box>
         </div>
-      </div>
-    </div>
-  );
-}
-
-function Header() {
-  //   const title = useSelector((state) => state.form.page);
-  return (
-    <div className="header">
-      <img key={logo} className="header__logo" src={logo} alt="logo" />
-      <div className="header__month">
-        <img src={arrowLeftBlue} alt="arrowLeft" className="hidden" />
-        Connexion
-        <img src={arrowLeftBlue} alt="arrowRight" className="hidden" />
       </div>
     </div>
   );

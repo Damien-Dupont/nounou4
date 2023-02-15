@@ -29,8 +29,6 @@ import Navbar from "../components/Navbar";
 export default function Signup() {
   const dispatch = useDispatch();
 
-  const headTitle = "Inscription";
-
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
   const [isDisabled, setIsDisabled] = useState(true);
@@ -95,7 +93,7 @@ export default function Signup() {
 
   return (
     <div className="background">
-      <Navbar headTitle={headTitle} />
+      <Navbar headTitle="Inscription" />
       <div className="allframe">
         <div className="paper">
           {/* <div className="paper__contracts"> */}

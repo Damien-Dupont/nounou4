@@ -4,10 +4,18 @@
 import "./Month.scss";
 import React, { useState, useEffect } from "react";
 // import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import arrowRightBlue from "../assets/arrowRightBlue.svg";
 import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
 import logo from "../assets/logow.png";
 // import { useEffect } from "react";
+
+import {
+  setCurrentMonth,
+  setCurrentYear,
+  setDaysOfMonth,
+} from "../redux/generalSlice";
 
 function camelCase(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -15,13 +23,18 @@ function camelCase(string) {
 
 export default function Month() {
   const now = new Date();
+  const dispatch = useDispatch();
 
-  const [daysOfMonth, setDaysOfMonth] = useState([]);
-  const [currentYear, setCurrentYear] = useState(now.getFullYear());
-  const [currentMonth, setCurrentMonth] = useState(now.getMonth());
+  const currentMonth = useSelector((state) => state.general.currentMonth);
+  const currentYear = useSelector((state) => state.general.currentYear);
+  // const daysOfMonth = useSelector((state) => state.general.daysOfMonth);
+  // const eventsOfMonth = useSelector((state) => state.general.eventsOfMonth);
+  // const [daysOfMonth, setDaysOfMonth] = useState([]);
+  // const [currentYear, setCurrentYear] = useState(now.getFullYear());
+  // const [currentMonth, setCurrentMonth] = useState(now.getMonth());
   const [longMonth, setLongMonth] = useState();
 
-  console.log("daysOfMonth", daysOfMonth);
+  // console.log("daysOfMonth", daysOfMonth);
 
   // TODO: push des cases vides , autant que nécessaires pour ajuster le premier jour du mois
 
@@ -42,7 +55,7 @@ export default function Month() {
           dayStr !== "samedi" && dayStr !== "dimanche" && dayStr !== "mercredi",
       });
     }
-    setDaysOfMonth(daysTemp);
+    dispatch(setDaysOfMonth(daysTemp));
   };
 
   const daysLabel = [
@@ -60,15 +73,15 @@ export default function Month() {
     e.preventDefault();
     if (e.target.alt === "arrowRight") {
       if (currentMonth === 11) {
-        setCurrentMonth(0);
-        setCurrentYear(currentYear + 1);
+        dispatch(setCurrentMonth(0));
+        dispatch(setCurrentYear(currentYear + 1));
       } else {
-        setCurrentMonth(currentMonth + 1);
+        dispatch(setCurrentMonth(currentMonth + 1));
       }
     } else if (e.target.alt === "arrowLeft") {
       if (currentMonth === 0) {
-        setCurrentMonth(11);
-        setCurrentYear(currentYear - 1);
+        dispatch(setCurrentMonth(11));
+        dispatch(setCurrentYear(currentYear - 1));
       } else {
         setCurrentMonth(currentMonth - 1);
       }

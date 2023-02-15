@@ -35,7 +35,7 @@ export default function Contracts() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
       <div className="background">
-        <Navbar />
+        <Navbar headTitle="Contrats" />
         <div className="allframe">
           <div className="paper">
             <div className="paper__contracts">
@@ -51,35 +51,6 @@ export default function Contracts() {
     </LocalizationProvider>
   );
 }
-
-// function Header() {
-//   const page = useSelector((state) => state.form.page);
-//   const dispatch = useDispatch();
-//   return (
-//     <div className="header">
-//       <img key={logo} className="header__logo" src={logo} alt="logo" />
-//       <div className="header__month">
-//         <img
-//           onClick={() => {
-//             dispatch(setPage(-1));
-//           }}
-//           src={arrowLeftBlue}
-//           alt="arrowLeft"
-//           className={page < 2 ? "hidden" : "visible"}
-//         />
-//         {page === 0 ? "Contrats" : "Nouveau contrat"}
-//         <img
-//           onClick={() => {
-//             dispatch(setPage(1));
-//           }}
-//           src={arrowRightBlue}
-//           alt="arrowRight"
-//           className={page < 1 || page > 2 ? "hidden" : "visible"}
-//         />
-//       </div>
-//     </div>
-//   );
-// }
 
 function Listing() {
   const dispatch = useDispatch();
@@ -98,7 +69,7 @@ function Listing() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <p>
+      <div>
         <div>
           {parentId === undefined ? (
             <>Vous n'êtes pas connecté</>
@@ -114,7 +85,7 @@ function Listing() {
             </>
           )}
         </div>
-      </p>
+      </div>
       <p>Vous n'avez aucun contrat.</p>
       <Button
         variant="contained"
