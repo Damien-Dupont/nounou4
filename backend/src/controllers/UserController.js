@@ -77,7 +77,7 @@ class UserController {
         if (rows[0] == null) {
           res.sendStatus(401).send({ message: nope });
         }
-        if (await passwordVerify(rows[0].password, req.body.password)) {
+        if (await passwordVerify(rows[0].hashed_password, req.body.password)) {
           const token = jwtSign(
             { email: rows[0].email, role: rows[0].roleId, id: rows[0].id },
             { expiresIn: "1h" }

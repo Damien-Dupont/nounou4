@@ -3,6 +3,8 @@ import "./Contracts.scss";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 
+import { useDispatch } from "react-redux";
+
 import {
   Box,
   TextField,
@@ -13,9 +15,16 @@ import {
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
+import {
+  setUserId,
+  setParentFirstname,
+  setParentLastname,
+} from "../redux/parentSlice";
+
 import Navbar from "../components/Navbar";
 
 export default function SignIn() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -42,7 +51,12 @@ export default function SignIn() {
           password,
         })
         .then((res) => {
-          console.log("user created:", res);
+          console.log("user authenticated:", res);
+          dispatch(setUserId(res.data.id));
+          dispatch(setParentFirstname(res.data.firstname));
+          dispatch(setParentLastname(res.data.lastname));
+          setPassword("");
+          window.location.href = "/mescontrats";
         });
     } catch (err) {
       console.error(err);
