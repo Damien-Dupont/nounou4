@@ -2,20 +2,12 @@
 import "./Contracts.scss";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
 import "./SignIn.scss";
 
-import {
-  Box,
-  TextField,
-  IconButton,
-  InputAdornment,
-  Button,
-} from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Box, TextField, Button } from "@mui/material";
 
 import {
   setUserId,
@@ -25,18 +17,12 @@ import {
 
 import Navbar from "../components/Navbar";
 
-export default function SignIn() {
+export default function ForgotPassword() {
   const dispatch = useDispatch();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const [isDisabled, setIsDisabled] = useState(true);
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   useEffect(() => {
     password !== "" && email !== ""
@@ -48,7 +34,7 @@ export default function SignIn() {
     event.preventDefault();
     try {
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/login`, {
+        .post(`${import.meta.env.VITE_BACKEND_URL}/`, {
           email,
           password,
         })
@@ -72,8 +58,8 @@ export default function SignIn() {
         <div className="paper">
           {/* <div className="paper__contracts"> */}
           <Box component="form" sx={{ flexGrow: 1 }} onSubmit={handleSubmit}>
-            <div>Bonjour !</div>
-            <p>Merci d'entrer votre email et votre mot de passe</p>
+            <div>Pas de souci !</div>
+            <p>Merci de renseigner votre email et on s'occupe du reste</p>
 
             <TextField
               margin="normal"
@@ -85,34 +71,7 @@ export default function SignIn() {
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
-            <TextField
-              margin="normal"
-              variant="filled"
-              sx={{ width: 300 }}
-              id="password"
-              label="Votre mot de passe"
-              type={showPassword ? "text" : "password"}
-              size="small"
-              value={password}
-              onChange={(event) => {
-                // verifyPassword(event.target.value, passwordConfirm);
-                setPassword(event.target.value);
-              }}
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={handleClickShowPassword}
-                      onMouseDown={handleMouseDownPassword}
-                      edge="end"
-                    >
-                      {showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
+
             <div>
               <br />
               <Button
@@ -123,18 +82,6 @@ export default function SignIn() {
               >
                 Se connecter
               </Button>
-            </div>
-          </Box>
-          <Box className="oops" sx={{ flexGrow: 1 }}>
-            <div>
-              <Link className="notyet" to="/inscription">
-                Pas encore inscrit ?
-              </Link>
-            </div>
-            <div>
-              <Link className="forgot" to="/oops">
-                Mot de passe oublié ?
-              </Link>
             </div>
           </Box>
         </div>

@@ -16,6 +16,7 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import Month from "./pages/Month";
 import Home from "./pages/Home";
+import ForgotPassword from "./pages/ForgotPassword";
 import "./App.scss";
 
 function App() {
@@ -30,12 +31,13 @@ function App() {
           <Month /> */}
           {/* <Home /> */}
           <Routes>
-            <Route path="/" element={<Home />} />
             <Route path="/mescontrats/" element={<NewContract />} />
             {/* <Route path="/mesenfants/" element={<NewKid />} /> */}
             <Route path="/calendrier/" element={<Month />} />
             <Route path="/inscription/" element={<SignUp />} />
             <Route path="/connexion/" element={<SignIn />} />
+            <Route path="/oops/" element={<ForgotPassword />} />
+            <Route path="/" element={<Home />} />
             {/* <Route path="/adios/" element={<SignOut />} /> */}
           </Routes>
           {/* <Coucou /> */}
