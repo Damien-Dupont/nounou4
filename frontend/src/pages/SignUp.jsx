@@ -54,17 +54,22 @@ export default function Signup() {
     const roleId = 2;
     try {
       axios
-        .post(`${import.meta.env.VITE_BACKEND_URL}/user/add`, {
-          lastname,
-          firstname,
-          roleId,
-          email,
-          password,
-        })
+        .post(
+          `${import.meta.env.VITE_BACKEND_URL}/user/add`,
+          {
+            lastname,
+            firstname,
+            roleId,
+            email,
+            password,
+          }
+          // ,{ withCredentials: true }
+        )
         .then((res) => {
           dispatch(setUserId(res.data.id));
           console.log("user created:", res, userId);
         });
+      // .finally((window.location.href = "/"));
     } catch (err) {
       console.error(err);
     }

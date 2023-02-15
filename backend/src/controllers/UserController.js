@@ -88,7 +88,7 @@ class UserController {
           return res
             .cookie("access_token", token, {
               httpOnly: true,
-              expires: new Date(Date.now() + 60 * 60 * 24),
+              expires: new Date(Date.now() + 1000 * 60 * 60 * 24),
             })
             .status(200)
             .json({ ...rows[0] });

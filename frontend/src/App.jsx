@@ -32,6 +32,8 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/mescontrats/" element={<NewContract />} />
             <Route path="/calendrier/" element={<Month />} />
+            <Route path="/user/add" element={<SignUp />} />
+            <Route path="/user/login" element={<SignIn />} />
           </Routes> */}
           {/* <Coucou /> */}
         </LocalizationProvider>

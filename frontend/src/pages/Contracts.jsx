@@ -24,12 +24,9 @@ import { Page3 } from "../components/newContract/Page3";
 // } from "../redux/parentSlice";
 
 import { setPage } from "../redux/formSlice";
+import Navbar from "../components/Navbar";
 
 import "./Contracts.scss";
-
-import arrowRightBlue from "../assets/arrowRightBlue.svg";
-import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
-import logo from "../assets/logow.png";
 
 export default function Contracts() {
   // const [parentId, setParentId] = useState(userId);
@@ -38,7 +35,7 @@ export default function Contracts() {
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
       <div className="background">
-        <Header />
+        <Navbar />
         <div className="allframe">
           <div className="paper">
             <div className="paper__contracts">
@@ -55,34 +52,34 @@ export default function Contracts() {
   );
 }
 
-function Header() {
-  const page = useSelector((state) => state.form.page);
-  const dispatch = useDispatch();
-  return (
-    <div className="header">
-      <img key={logo} className="header__logo" src={logo} alt="logo" />
-      <div className="header__month">
-        <img
-          onClick={() => {
-            dispatch(setPage(-1));
-          }}
-          src={arrowLeftBlue}
-          alt="arrowLeft"
-          className={page < 2 ? "hidden" : "visible"}
-        />
-        {page === 0 ? "Contrats" : "Nouveau contrat"}
-        <img
-          onClick={() => {
-            dispatch(setPage(1));
-          }}
-          src={arrowRightBlue}
-          alt="arrowRight"
-          className={page < 1 || page > 2 ? "hidden" : "visible"}
-        />
-      </div>
-    </div>
-  );
-}
+// function Header() {
+//   const page = useSelector((state) => state.form.page);
+//   const dispatch = useDispatch();
+//   return (
+//     <div className="header">
+//       <img key={logo} className="header__logo" src={logo} alt="logo" />
+//       <div className="header__month">
+//         <img
+//           onClick={() => {
+//             dispatch(setPage(-1));
+//           }}
+//           src={arrowLeftBlue}
+//           alt="arrowLeft"
+//           className={page < 2 ? "hidden" : "visible"}
+//         />
+//         {page === 0 ? "Contrats" : "Nouveau contrat"}
+//         <img
+//           onClick={() => {
+//             dispatch(setPage(1));
+//           }}
+//           src={arrowRightBlue}
+//           alt="arrowRight"
+//           className={page < 1 || page > 2 ? "hidden" : "visible"}
+//         />
+//       </div>
+//     </div>
+//   );
+// }
 
 function Listing() {
   const dispatch = useDispatch();
