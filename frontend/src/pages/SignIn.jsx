@@ -70,8 +70,8 @@ export default function SignIn() {
         <div className="paper">
           {/* <div className="paper__contracts"> */}
           <Box component="form" sx={{ flexGrow: 1 }} onSubmit={handleSubmit}>
-            <div>Bonjour !</div>
-            <p>Merci d'entre votre email et votre mot de passe</p>
+            <div>Merci d'entre votre email</div>
+            <div>et votre mot de passe</div>
 
             <TextField
               margin="normal"

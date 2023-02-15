@@ -10,7 +10,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 export default function CreateParent() {
   const [lastname, setLastname] = useState("");
   const [firstname, setFirstname] = useState("");
-  const [role, setRole] = useState("parent" || "nounou" || "admin");
+  // const [role, setRole] = useState("parent" || "nounou" || "admin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
@@ -28,12 +28,6 @@ export default function CreateParent() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("CreateParent: handleSubmit IN");
-    console.log("CreateParent: lastname:", lastname);
-    console.log("CreateParent: firstname:", firstname);
-    console.log("CreateParent: role:", role);
-    console.log("CreateParent: email:", email);
-    console.log("CreateParent: password:", password);
     // const roleId = role === "parent" ? 2 : 3;
     const roleId = 2;
     try {
@@ -58,7 +52,7 @@ export default function CreateParent() {
     } finally {
       setLastname("");
       setFirstname("");
-      setRole("");
+      // setRole("");
       setEmail("");
     }
     console.log("CreateParent: axios OUT");

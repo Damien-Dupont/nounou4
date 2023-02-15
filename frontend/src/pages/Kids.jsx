@@ -1,7 +1,8 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import axios from "axios";
-
+// import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -12,19 +13,25 @@ import "dayjs/locale/fr";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 
-import Navbar from "../components/Navbar";
 import { Page1 } from "../components/newContract/Page1";
 import { Page2 } from "../components/newContract/Page2";
 import { Page3 } from "../components/newContract/Page3";
 
+// import {
+//   setUserId,
+//   setParentFirstname,
+//   setParentLastname,
+//   // setKidList,
+// } from "../redux/parentSlice";
+
 import { setPage } from "../redux/formSlice";
+import Navbar from "../components/Navbar";
 
 import "./Contracts.scss";
 
 export default function Contracts() {
   // const [parentId, setParentId] = useState(userId);
   const page = useSelector((state) => state.form.page);
-  const kidList = useSelector((state) => state.parent.kidList);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale="fr">
@@ -33,8 +40,7 @@ export default function Contracts() {
         <div className="allframe">
           <div className="paper">
             <div className="paper__contracts">
-              {kidList.length === 0 && <NoKid />}
-              {page === 0 && kidList.length > 0 && <Listing />}
+              {page === 0 && <Listing />}
               {page === 1 && <Page1 />}
               {page === 2 && <Page2 />}
               {page === 3 && <Page3 />}
@@ -47,55 +53,20 @@ export default function Contracts() {
   );
 }
 
-function NoKid() {
-  const parentId = useSelector((state) => state.parent.userId) || undefined;
-  const userLastname =
-    useSelector((state) => state.parent.parentLastname) || undefined;
-  const userFirstname =
-    useSelector((state) => state.parent.parentFirstname) || undefined;
-
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <div>
-        <div>
-          {parentId === undefined ? (
-            <>Vous n'êtes pas connecté</>
-          ) : (
-            <>
-              Bonjour {userFirstname} {userLastname}
-              <p className="notyou">
-                (Ce n'est pas vous?{" "}
-                <Link to="/inscription">Se déconnecter</Link>)
-              </p>
-            </>
-          )}
-        </div>
-      </div>
-      <p>Vous n'avez pas renseigné d'enfant.</p>
-      <p>Commençons par là !</p>
-
-      <Button
-        className="button"
-        variant="contained"
-        type="submit"
-        as={Link}
-        to="/mesenfants"
-      >
-        Enregistrer un enfant
-      </Button>
-    </Box>
-  );
-}
-
 function Listing() {
   const dispatch = useDispatch();
-  const parentId = useSelector((state) => state.parent.userId) || undefined;
+  const parentId =
+    localStorage.getItem("userId") ||
+    useSelector((state) => state.parent.userId);
+  // const [parentId, setParentId] = useState(userId);
   const userLastname =
-    useSelector((state) => state.parent.parentLastname) || undefined;
+    useSelector((state) => state.parent.parentLastname) ||
+    localStorage.getItem("lastname") ||
+    undefined;
   const userFirstname =
-    useSelector((state) => state.parent.parentFirstname) || undefined;
-
-  const kidList = useSelector((state) => state.parent.kidList);
+    useSelector((state) => state.parent.parentFirstname) ||
+    localStorage.getItem("firstname") ||
+    undefined;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -115,14 +86,6 @@ function Listing() {
         </div>
       </div>
       <p>Vous n'avez aucun contrat enregistré.</p>
-
-      {kidList.length === 0 && (
-        <>
-          <p>Vous n'avez pas encore enregistré d'enfant.</p>
-          <Button>Ajouter un enfant</Button>
-        </>
-      )}
-
       <Button
         variant="contained"
         type="submit"
@@ -243,8 +206,6 @@ function SendContract() {
       return null;
     } finally {
       dispatch(setPage(0));
-      // TODO add a success message
-      // TODO add an automatic link to quit page
     }
   };
   return <>Waiting</>;

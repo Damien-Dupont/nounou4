@@ -19,36 +19,36 @@
   visibility: visible;
 }
 
-.header {
-  height: 60px;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  vertical-align: center;
-  font-size: 36px;
-  font-family: Arial, Helvetica, sans-serif;
-  line-height: auto;
-  color: #000000;
+// .header {
+//   height: 60px;
+//   width: 100%;
+//   display: flex;
+//   flex-direction: row;
+//   vertical-align: center;
+//   font-size: 36px;
+//   font-family: Arial, Helvetica, sans-serif;
+//   line-height: auto;
+//   color: #000000;
 
-  &__logo {
-    align-items: left;
-    height: 50px;
-    width: 50px;
-    margin: 10px;
-  }
+//   &__logo {
+//     align-items: left;
+//     height: 50px;
+//     width: 50px;
+//     margin: 10px;
+//   }
 
-  &__month {
-    font-family: "dumontCursive";
-    height: 73px;
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    vertical-align: center;
-    align-items: center;
-    justify-content: space-between;
-    margin: 10px 70px 0 0;
-  }
-}
+//   &__month {
+//     font-family: "dumontCursive";
+//     height: 73px;
+//     width: 100%;
+//     display: flex;
+//     flex-direction: row;
+//     vertical-align: center;
+//     align-items: center;
+//     justify-content: space-between;
+//     margin: 10px 70px 0 0;
+//   }
+// }
 
 .container {
   display: grid;

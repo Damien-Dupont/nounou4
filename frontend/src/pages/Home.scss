@@ -10,8 +10,25 @@
     align-items: center;
     justify-content: center;
 
-    .logo {
-      width: 25%;
+    .logotitle {
+      font-family: "dumontCursive";
+      font-size: 45px;
+      display: flex;
+      margin-top: 30px;
+      margin-bottom: 30px;
+      .logo {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        height: 60px;
+        padding-right: 5px;
+        &__nounou {
+          color: #d60093;
+        }
+        &__nous {
+          color: #f27200;
+        }
+      }
     }
     a:link,
     a:visited,

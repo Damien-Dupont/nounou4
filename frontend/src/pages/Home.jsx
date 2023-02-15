@@ -14,10 +14,17 @@ export default function Home() {
       <div className="allframe">
         <Box sx={{ flexGrow: 1 }}>
           <div className="paper home">
-            <p>Bonjour !</p>
-            <img className="logo" key={logo} src={logo} alt="logo" />
-            <p>Bienvenue sur l'application Nounou et Vous</p>
-            <p>Pour commencer, connectez-vous ou inscrivez-vous</p>
+            <p>Bienvenue sur l'application </p>
+            <div className="logotitle">
+              <div className="logo__nounou">Nounou</div>
+              <img className="logo" key={logo} src={logo} alt="logo" />
+              <div className="logo__nous">Nous</div>
+            </div>
+            <p>
+              Pour commencer,
+              <br />
+              connectez-vous ou inscrivez-vous
+            </p>
             <Button variant="contained" type="submit" as={Link} to="/connexion">
               Me connecter
             </Button>{" "}

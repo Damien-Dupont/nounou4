@@ -35,7 +35,6 @@ const parentSlice = createSlice({
     },
   },
 });
-
 export const {
   setUserId,
   setKidList,
