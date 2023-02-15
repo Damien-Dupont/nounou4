@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from "react";
-// import React from "react";
 import "./Month.scss";
+// import React from "react";
 import arrowRightBlue from "../assets/arrowRightBlue.svg";
 import arrowLeftBlue from "../assets/arrowLeftBlue.svg";
 import logo from "../assets/logow.png";
